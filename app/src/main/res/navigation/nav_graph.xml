@@ -4,17 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/subscriptionFragment">
-
-    <fragment
-        android:id="@+id/campaignFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CampaignFragment"
-        android:label="@string/campaign"
-        tools:layout="@layout/fragment_campaign" />
-    <fragment
-        android:id="@+id/addAdsFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.AddAdsFragment"
-        android:label="@string/add_ads"
-        tools:layout="@layout/fragment_add_ads" />
     <fragment
         android:id="@+id/subscriptionFragment"
         android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.SubscriptionFragment"
@@ -30,6 +19,19 @@
         android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CoinsFragment"
         android:label="@string/currency"
         tools:layout="@layout/fragment_coins" />
+    <fragment
+        android:id="@+id/campaignFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CampaignFragment"
+        android:label="@string/campaign"
+        tools:layout="@layout/fragment_campaign" />
+    <fragment
+        android:id="@+id/addAdsFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.AddAdsFragment"
+        android:label="@string/add_ads"
+        tools:layout="@layout/fragment_add_ads" />
+
+
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.ProfileFragment"

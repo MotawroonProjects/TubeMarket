@@ -3,6 +3,74 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/bottom_nav.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/circle_primary.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/circle_white.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/custom_bg.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_add.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_calendar.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_call.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_camera.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_cart.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_chat.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_clock.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_close.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_close2.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_coin2.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_coins.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_coupon.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_crown.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_dolar.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_dollar.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_down_arrow.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_empty_heart.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_faq.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_fill_heart.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_filter.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_gallery.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_google.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_img_chooser.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_info.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_info2.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_language.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_left_arrow.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_lock.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_logout.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_mail.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_mic.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_minus.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_nav_home.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_nav_menu.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_nav_more.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_nav_notification.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_nav_user.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_notification.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_phone.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_pin.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_play.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_plus.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_right_arrow.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_right_double_arrow.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_search2.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_send.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_share.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_share_friends.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_shield.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/ic_star.xml" value="0.15364583333333334" />
+        <entry key="..\:/TubeMarket/app/src/main/res/drawable/rounded_white.xml" value="0.27692307692307694" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/activity_faq.xml" value="0.18568840579710144" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/activity_login.xml" value="0.1983695652173913" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/activity_splash.xml" value="0.1983695652173913" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/activity_web_view.xml" value="0.19202898550724637" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/dialog_alert.xml" value="0.19202898550724637" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/fragment_add_subscriptions.xml" value="0.19202898550724637" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/fragment_campaign.xml" value="0.12892603850050657" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/fragment_coins.xml" value="0.33" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/fragment_subscription.xml" value="0.19202898550724637" />
+        <entry key="..\:/TubeMarket/app/src/main/res/layout/fragment_views.xml" value="0.19202898550724637" />
+        <entry key="..\:/TubeMarket/app/src/main/res/menu/bottom_nav_menu.xml" value="0.26510416666666664" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/bottom_nav.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/ic_add.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/ic_dollar.xml" value="0.1921875" />
