@@ -102,5 +102,16 @@
     <string name="seconds">ثوانى</string>
     <string name="activate_the_channel_s_profit_in_a_week">تفعيل ربح القناة في أسبوع</string>
     <string name="advertise_your_channel_in_the_app_and_specify_the_number_of_subscribers_and_views_you_want_to_get">أعلن عن قناتك في التطبيق وحدد عدد المشتركين والمشاهدات التي تريد الحصول عليها</string>
+    <string name="ads_channel">إعلن عن قناتك</string>
+    <string name="please_select_type_of_ads">حدد نوع الاعلان من فضلك</string>
+    <string name="get_subscribers">الحصول على مشتركين</string>
+    <string name="get_views">الحصول على مشاهدات</string>
+    <string name="get_subscribers_abd_views">الحصول علي مشتركين ومشاهدات</string>
+    <string name="get_likes">الحصول على إعجاب</string>
+    <string name="enter_number_of_subscribers">Enter number of subscribers</string>
+    <string name="estimated_subscribers_interval_time_per_day">Estimated subscribers interval time per day</string>
+    <string name="total_amount">Total amount:</string>
+    <string name="usd">USD</string>
+    <string name="enter_channel_link">Enter channel link</string>
 
 </resources>

@@ -23,6 +23,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
+
 
 public class ViewsFragment extends Fragment {
 
@@ -31,6 +33,7 @@ public class ViewsFragment extends Fragment {
     private UserModel userModel;
     private Preferences preferences;
     private String videoId = "";
+    private String lang="";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +53,11 @@ public class ViewsFragment extends Fragment {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
+        Paper.init(activity);
+        lang = Paper.book().read("lang","ar");
+        binding.setLang(lang);
         videoId="QPaI8xVWBjY";
+
 //        //binding.youtubePlayerView.enableBackgroundPlayback(true);
 //        //getLifecycle().addObserver(binding.youtubePlayerView);
 //     //   binding.youtubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {

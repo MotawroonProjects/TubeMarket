@@ -109,31 +109,7 @@
         </FrameLayout>
 
 
-        <!--        <androidx.cardview.widget.CardView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:cardElevation="3dp"-->
-        <!--            app:cardCornerRadius="5dp"-->
-        <!--            app:cardBackgroundColor="@color/white"-->
-        <!--            android:layout_marginStart="12dp"-->
-        <!--            android:layout_marginBottom="5dp"-->
-        <!--            android:layout_marginEnd="12dp"-->
-        <!--            android:layout_marginTop="5dp"-->
-        <!--            app:contentPadding="8dp"-->
-        <!--            >-->
-        <!--            <TextView-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:textSize="14sp"-->
-        <!--                android:textColor="@color/black"-->
-        <!--                android:text="@string/do_not_unsubscribe_or_like_them_we_will_pan_your_account_and_any_subscriptions_made_if_you_unsubscribe_or_like_other_channels"-->
-        <!--                android:lineHeight="26dp"-->
-        <!--                android:padding="5dp"-->
-        <!--                />-->
 
-
-        <!--        </androidx.cardview.widget.CardView>-->
         <FrameLayout
             android:id="@+id/flSubscribe"
             android:layout_width="wrap_content"
@@ -229,39 +205,11 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:rotation='@{lang.equals("ar")?180:0}'
-
                     android:src="@drawable/ic_right_double_arrow"
                     app:tint="@color/black" />
 
             </LinearLayout>
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_gravity="center"-->
-            <!--                android:layout_marginStart="12dp"-->
-            <!--                android:layout_marginTop="38dp"-->
-            <!--                android:layout_marginEnd="12dp"-->
-            <!--                android:layout_marginBottom="20dp"-->
-            <!--                android:gravity="center_vertical"-->
-            <!--                android:orientation="horizontal">-->
 
-            <!--                <Space-->
-            <!--                    android:layout_width="50dp"-->
-            <!--                    android:layout_height="0dp" />-->
-
-            <!--                <Button-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="40dp"-->
-            <!--                    android:layout_margin="8dp"-->
-            <!--                    android:background="@drawable/next_btn"-->
-            <!--                    android:paddingStart="16dp"-->
-            <!--                    android:paddingEnd="16dp"-->
-            <!--                    android:text="@string/next"-->
-            <!--                    android:textColor="@color/white"-->
-            <!--                    android:textSize="15sp"-->
-
-            <!--                    />-->
-            <!--            </LinearLayout>-->
         </FrameLayout>
 
         <Space

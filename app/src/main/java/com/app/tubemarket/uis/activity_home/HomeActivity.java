@@ -132,6 +132,10 @@ public class HomeActivity extends AppCompatActivity {
 
         });
 
+        binding.cardAdAds.setOnClickListener(v -> {
+            navController.navigate(R.id.addAdsFragment);
+        });
+
         binding.navView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             switch (id) {

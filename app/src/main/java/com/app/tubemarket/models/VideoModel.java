@@ -27,7 +27,7 @@ public class VideoModel implements Serializable {
         return id;
     }
 
-    public static class Default implements Serializable{
+    public static class Default implements Serializable {
         private String url;
         private int width;
         private int height;
@@ -45,7 +45,7 @@ public class VideoModel implements Serializable {
         }
     }
 
-    public static class Thumbnails implements Serializable{
+    public static class Thumbnails implements Serializable {
         @SerializedName("default")
         private Default def;
         private Default medium;
@@ -73,7 +73,8 @@ public class VideoModel implements Serializable {
             return maxres;
         }
     }
-    public static class Localized implements Serializable{
+
+    public static class Localized implements Serializable {
         private String title;
         private String description;
 
@@ -86,7 +87,7 @@ public class VideoModel implements Serializable {
         }
     }
 
-    public static class Snippet implements Serializable{
+    public static class Snippet implements Serializable {
         private String publishedAt;
         private String channelId;
         private String title;
@@ -135,8 +136,7 @@ public class VideoModel implements Serializable {
     }
 
 
-
-    public static class ContentDetails implements Serializable{
+    public static class ContentDetails implements Serializable {
         private String duration;
         private String dimension;
         private String definition;
@@ -170,17 +170,12 @@ public class VideoModel implements Serializable {
     }
 
 
-
-    public static class Item implements Serializable{
+    public static class Item implements Serializable {
         private String kind;
-        private
-        String etag;
-        private
-        String id;
-        private
-        Snippet snippet;
-        private
-        ContentDetails contentDetails;
+        private String etag;
+        private String id;
+        private Snippet snippet;
+        private ContentDetails contentDetails;
 
         public String getKind() {
             return kind;
@@ -202,8 +197,6 @@ public class VideoModel implements Serializable {
             return contentDetails;
         }
     }
-
-
 
 
 }

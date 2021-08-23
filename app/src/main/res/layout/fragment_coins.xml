@@ -223,7 +223,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     app:cardBackgroundColor="@color/gray18"
                     app:cardCornerRadius="5dp"
@@ -235,6 +235,8 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -254,12 +256,9 @@
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:layout_weight="1"
+                            android:lineHeight="24dp"
                             />
 
-<!--                        <Space-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="0dp"-->
-<!--                            android:layout_weight="1" />-->
 
                         <ImageView
                             android:layout_width="24dp"
@@ -306,11 +305,6 @@
                             android:layout_weight="1"
                             />
 
-<!--                        <Space-->
-<!--                            -->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="0dp"-->
-<!--                            android:layout_weight="1" />-->
 
                         <ImageView
                             android:layout_width="24dp"
@@ -321,107 +315,6 @@
                             app:tint="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
-                <!--                <androidx.cardview.widget.CardView-->
-                <!--                    android:id="@+id/cardInvite"-->
-
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="60dp"-->
-                <!--                    app:cardBackgroundColor="@color/gray18"-->
-                <!--                    app:cardCornerRadius="5dp"-->
-                <!--                    app:cardElevation="3dp"-->
-                <!--                    -->
-                <!--                    android:layout_margin="5dp"-->
-                <!--                    >-->
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:orientation="horizontal"-->
-                <!--                        android:layout_gravity="center_vertical"-->
-                <!--                        android:gravity="center_vertical"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        >-->
-                <!--                        <ImageView-->
-                <!--                            android:layout_width="24dp"-->
-                <!--                            android:layout_height="24dp"-->
-                <!--                            android:src="@drawable/ic_share"-->
-                <!--                            app:tint="@color/colorAccent"-->
-                <!--                            android:padding="3dp"-->
-                <!--                            />-->
-                <!--                        <TextView-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:textColor="@color/black"-->
-                <!--                            android:textSize="16sp"-->
-                <!--                            android:text="@string/invite_friends"-->
-                <!--                            android:layout_marginStart="8dp"-->
-                <!--                            android:layout_marginEnd="8dp"-->
-                <!--                            />-->
-                <!--                        <Space-->
-                <!--                            android:layout_width="0dp"-->
-                <!--                            android:layout_height="0dp"-->
-                <!--                            android:layout_weight="1"/>-->
-                <!--                        <ImageView-->
-                <!--                            android:layout_width="24dp"-->
-                <!--                            android:layout_height="24dp"-->
-                <!--                            android:src="@drawable/ic_right_arrow"-->
-                <!--                            app:tint="@color/black"-->
-                <!--                            android:padding="3dp"-->
-                <!--                            android:rotation='@{lang.equals("ar")?180:0}'-->
-                <!--                            />-->
-                <!--                    </LinearLayout>-->
-                <!--                </androidx.cardview.widget.CardView>-->
-
-                <!--                <androidx.cardview.widget.CardView-->
-                <!--                    android:id="@+id/cardCode"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="60dp"-->
-                <!--                    app:cardBackgroundColor="@color/gray18"-->
-                <!--                    app:cardCornerRadius="5dp"-->
-                <!--                    app:cardElevation="3dp"-->
-                <!--                    android:layout_margin="5dp"-->
-                <!--                    >-->
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:orientation="horizontal"-->
-                <!--                        android:layout_gravity="center_vertical"-->
-                <!--                        android:gravity="center_vertical"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        >-->
-                <!--                        <ImageView-->
-                <!--                            android:layout_width="24dp"-->
-                <!--                            android:layout_height="24dp"-->
-                <!--                            android:src="@drawable/ic_share_friends"-->
-                <!--                            app:tint="@color/colorAccent"-->
-                <!--                            android:padding="3dp"-->
-                <!--                            />-->
-                <!--                        <TextView-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:textColor="@color/black"-->
-                <!--                            android:textSize="16sp"-->
-                <!--                            android:text="@string/enter_an_invitation_code"-->
-                <!--                            android:layout_marginStart="8dp"-->
-                <!--                            android:layout_marginEnd="8dp"-->
-                <!--                            />-->
-                <!--                        <Space-->
-                <!--                            android:layout_width="0dp"-->
-                <!--                            android:layout_height="0dp"-->
-                <!--                            android:layout_weight="1"/>-->
-                <!--                        <ImageView-->
-                <!--                            android:layout_width="24dp"-->
-                <!--                            android:layout_height="24dp"-->
-                <!--                            android:src="@drawable/ic_right_arrow"-->
-                <!--                            app:tint="@color/black"-->
-                <!--                            android:padding="3dp"-->
-                <!--                            android:rotation='@{lang.equals("ar")?180:0}'-->
-                <!--                            />-->
-                <!--                    </LinearLayout>-->
-                <!--                </androidx.cardview.widget.CardView>-->
-
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardCoupon"

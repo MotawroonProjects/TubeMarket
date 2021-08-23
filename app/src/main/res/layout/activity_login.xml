@@ -9,13 +9,13 @@
         android:background="@drawable/bg"
         tools:context=".uis.activity_login.LoginActivity">
 
-        <FrameLayout
+        <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="195dp"
+            android:layout_height="230dp"
             android:background="@drawable/login_back"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"/>
 
-        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/cardview"
@@ -23,12 +23,12 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:gravity="center"
-
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".15">
+            app:layout_constraintTop_toBottomOf="@id/view"
+            app:layout_constraintBottom_toBottomOf="@id/view"
+
+            >
 
             <ImageView
                 android:layout_width="match_parent"

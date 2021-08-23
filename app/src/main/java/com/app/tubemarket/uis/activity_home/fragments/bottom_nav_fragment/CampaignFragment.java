@@ -66,8 +66,6 @@ public class CampaignFragment extends Fragment {
             binding.expandedLayout.collapse(true);
             binding.rbVideo.setChecked(false);
             binding.rbSubscribe.setChecked(false);
-            binding.fab.clearAnimation();
-            binding.fab.animate().rotation(0).setDuration(500).start();
 
             new Handler(Looper.myLooper())
                     .postDelayed(() -> {
@@ -96,7 +94,6 @@ public class CampaignFragment extends Fragment {
                 degree = 45;
             }
 
-            binding.fab.animate().rotation(degree).setDuration(500).start();
 
         });
     }

@@ -72,15 +72,6 @@ public class CoinsFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.goldProfileFragment);
         });
 
-//        binding.cardInvite.setOnClickListener(v -> {
-//            Navigation.findNavController(v).navigate(R.id.inviteFragment);
-//        });
-//
-//        binding.cardCode.setOnClickListener(v -> {
-//           binding.flDialog.clearAnimation();
-//           binding.flDialog.startAnimation(animation);
-//
-//        });
 
         binding.cardCoupon.setOnClickListener(v -> {
             binding.flDialog.clearAnimation();

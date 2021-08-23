@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/addAdsFragment"
         android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.AddAdsFragment"
-        android:label="@string/add_ads"
+        android:label="@string/ads_channel"
         tools:layout="@layout/fragment_add_ads" />
 
 
@@ -78,4 +78,9 @@
         android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.LanguageFragment"
         android:label="@string/ch_lang"
         tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/getSubscribersFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.GetSubscribersFragment"
+        android:label="@string/get_subscribers"
+        tools:layout="@layout/fragment_get_subscribers" />
 </navigation>

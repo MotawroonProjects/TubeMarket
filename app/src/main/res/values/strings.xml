@@ -105,4 +105,15 @@
     <string name="seconds">Seconds</string>
     <string name="activate_the_channel_s_profit_in_a_week">Activate The Channel\'s Profit In A Week</string>
     <string name="advertise_your_channel_in_the_app_and_specify_the_number_of_subscribers_and_views_you_want_to_get">Advertise Your Channel In The App And Specify The Number Of Subscribers And Views You Want To Get</string>
+    <string name="ads_channel">Advertise Your Channel</string>
+    <string name="please_select_type_of_ads">Please select type of ads</string>
+    <string name="get_subscribers">Get subscribers</string>
+    <string name="get_views">Get views</string>
+    <string name="get_subscribers_abd_views">Get subscribers and views</string>
+    <string name="get_likes">Get likes</string>
+    <string name="enter_number_of_subscribers">Enter number of subscribers</string>
+    <string name="estimated_subscribers_interval_time_per_day">Estimated subscribers interval time per day</string>
+    <string name="total_amount">Total amount:</string>
+    <string name="usd">USD</string>
+    <string name="enter_channel_link">Enter channel link</string>
 </resources>
