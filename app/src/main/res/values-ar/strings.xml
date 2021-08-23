@@ -108,10 +108,10 @@
     <string name="get_views">الحصول على مشاهدات</string>
     <string name="get_subscribers_abd_views">الحصول علي مشتركين ومشاهدات</string>
     <string name="get_likes">الحصول على إعجاب</string>
-    <string name="enter_number_of_subscribers">Enter number of subscribers</string>
-    <string name="estimated_subscribers_interval_time_per_day">Estimated subscribers interval time per day</string>
-    <string name="total_amount">Total amount:</string>
-    <string name="usd">USD</string>
-    <string name="enter_channel_link">Enter channel link</string>
+    <string name="enter_number_of_subscribers">أدخل عدد المشتركين</string>
+    <string name="estimated_subscribers_interval_time_per_day">الوقت المطلوب(يوم)</string>
+    <string name="total_amount">الاجمالي:</string>
+    <string name="usd">دولار</string>
+    <string name="enter_channel_link">أدخل رابط القناة</string>
 
 </resources>
