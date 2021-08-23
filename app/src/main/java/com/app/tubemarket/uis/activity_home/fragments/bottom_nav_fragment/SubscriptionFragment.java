@@ -23,6 +23,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.paperdb.Paper;
+
 
 public class SubscriptionFragment extends Fragment {
 
@@ -31,6 +33,7 @@ public class SubscriptionFragment extends Fragment {
     private UserModel userModel;
     private Preferences preferences;
     private String videoId="";
+    private String lang;
 
 
     @Override
@@ -46,10 +49,12 @@ public class SubscriptionFragment extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         videoId = "QPaI8xVWBjY";
+        Paper.init(activity);
+        lang = Paper.book().read("lang","ar");
+        binding.setLang(lang);
 
 
-
-        binding.btnSubscribe.setOnClickListener(v -> {
+        binding.flSubscribe.setOnClickListener(v -> {
             String vidUrl ="https://youtu.be/"+videoId;
             String url = "https://accounts.google.com/ServiceLogin?service=youtube";
             Bundle bundle = new Bundle();

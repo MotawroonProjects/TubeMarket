@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/campaignFragment"
-        android:title="@string/campaign"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_plus"
-
-        />
-    <item android:id="@+id/addAdsFragment"
-        android:title="@string/add_ads"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_add"
-        />
     <item android:id="@+id/subscriptionFragment"
         android:title="@string/subscribes"
         app:showAsAction="ifRoom"
@@ -28,4 +17,18 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_coins"
         />
+    <item android:id="@+id/campaignFragment"
+        android:title="@string/campaign"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_plus"
+
+        />
+<!--    <item android:id="@+id/addAdsFragment"-->
+<!--        android:title="@string/add_ads"-->
+<!--        app:showAsAction="ifRoom"-->
+<!--        android:icon="@drawable/ic_add"-->
+<!--        />-->
+
+
+
 </menu>

@@ -51,19 +51,19 @@ public class ViewsFragment extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         videoId="QPaI8xVWBjY";
-        binding.youtubePlayerView.enableBackgroundPlayback(true);
-        getLifecycle().addObserver(binding.youtubePlayerView);
-        binding.youtubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-            @Override
-            public void onReady(YouTubePlayer youTubePlayer) {
-                youTubePlayer.loadVideo(videoId,0);
-                youTubePlayer.pause();
-            }
-
-            @Override
-            public void onCurrentSecond(YouTubePlayer youTubePlayer, float second) {
-            }
-        });
+//        //binding.youtubePlayerView.enableBackgroundPlayback(true);
+//        //getLifecycle().addObserver(binding.youtubePlayerView);
+//     //   binding.youtubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+//            @Override
+//            public void onReady(YouTubePlayer youTubePlayer) {
+//                youTubePlayer.loadVideo(videoId,0);
+//                youTubePlayer.pause();
+//            }
+//
+//            @Override
+//            public void onCurrentSecond(YouTubePlayer youTubePlayer, float second) {
+//            }
+//        });
 
 
 

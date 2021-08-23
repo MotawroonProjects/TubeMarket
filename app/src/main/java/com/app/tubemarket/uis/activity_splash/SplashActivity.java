@@ -40,6 +40,7 @@ public class SplashActivity extends AppCompatActivity {
         userModel = preferences.getUserData(this);
         new Handler().postDelayed(() -> {
             if (userModel==null){
+               // navigateToHomeActivity();
                 navigateToLoginActivity();
             }else {
                 navigateToHomeActivity();

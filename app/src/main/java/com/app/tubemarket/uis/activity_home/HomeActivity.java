@@ -124,7 +124,7 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+        binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.white), PorterDuff.Mode.SRC_ATOP);
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             String name = destination.getLabel().toString();
             binding.toolBar.setTitle("");

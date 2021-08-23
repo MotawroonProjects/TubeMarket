@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="lang"
             type="String" />
 
     </data>
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,100 +24,101 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="3dp"
                     android:layout_margin="5dp"
-                    >
+                    app:cardBackgroundColor="@color/gray18"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_coin2"
-                            app:tint="@color/gray12"
                             android:padding="3dp"
-                            />
+                            android:src="@drawable/ic_coins"
+                            app:tint="@color/colorAccent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:text="@string/buy_coin"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            />
+                            android:text="@string/buy_coin"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_right_arrow"
-                            app:tint="@color/black"
                             android:padding="3dp"
                             android:rotation='@{lang.equals("ar")?180:0}'
-                            />
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="3dp"
                     android:layout_margin="5dp"
-                    >
+                    app:cardBackgroundColor="@color/gray18"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_mail"
-                            app:tint="@color/gray12"
                             android:padding="3dp"
-                            />
+                            android:src="@drawable/ic_mail"
+                            app:tint="@color/colorAccent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:text="@string/buy_messages"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            />
+                            android:text="@string/buy_messages"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_right_arrow"
-                            app:tint="@color/black"
                             android:padding="3dp"
                             android:rotation='@{lang.equals("ar")?180:0}'
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/black"
 
                             />
                     </LinearLayout>
@@ -124,245 +128,343 @@
                     android:id="@+id/cardGoldenAccount"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="3dp"
                     android:layout_margin="5dp"
-                    >
+                    app:cardBackgroundColor="@color/gray18"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_crown"
-                            app:tint="@color/gray12"
                             android:padding="3dp"
-                            />
+                            android:src="@drawable/ic_star"
+                            app:tint="@color/colorAccent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:text="@string/subscribe_to_golden_account"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            />
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_right_arrow"
-                            app:tint="@color/black"
                             android:padding="3dp"
                             android:rotation='@{lang.equals("ar")?180:0}'
-                            />
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="3dp"
                     android:layout_margin="5dp"
-                    >
+                    app:cardBackgroundColor="@color/gray18"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_coin2"
-                            app:tint="@color/gray12"
                             android:padding="3dp"
-                            />
+                            android:src="@drawable/ic_coins"
+                            app:tint="@color/colorAccent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:text="@string/withdrawal"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            />
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_right_arrow"
-                            app:tint="@color/black"
                             android:padding="3dp"
                             android:rotation='@{lang.equals("ar")?180:0}'
-                            />
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardInvite"
-
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="3dp"
                     android:layout_margin="5dp"
-                    >
+                    app:cardBackgroundColor="@color/gray18"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_share"
-                            app:tint="@color/gray12"
                             android:padding="3dp"
-                            />
+                            android:src="@drawable/ic_advirtise"
+                            app:tint="@color/colorAccent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:text="@string/invite_friends"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            />
+                            android:text="@string/advertise_your_channel_in_the_app_and_specify_the_number_of_subscribers_and_views_you_want_to_get"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_right_arrow"
-                            app:tint="@color/black"
                             android:padding="3dp"
                             android:rotation='@{lang.equals("ar")?180:0}'
-                            />
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardCode"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="3dp"
                     android:layout_margin="5dp"
-                    >
+                    app:cardBackgroundColor="@color/gray18"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_share_friends"
-                            app:tint="@color/gray12"
                             android:padding="3dp"
-                            />
+                            android:src="@drawable/ic_advirtise"
+                            app:tint="@color/colorAccent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:text="@string/enter_an_invitation_code"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            />
+                            android:text="@string/activate_the_channel_s_profit_in_a_week"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_right_arrow"
-                            app:tint="@color/black"
                             android:padding="3dp"
                             android:rotation='@{lang.equals("ar")?180:0}'
-                            />
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <!--                <androidx.cardview.widget.CardView-->
+                <!--                    android:id="@+id/cardInvite"-->
+
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="60dp"-->
+                <!--                    app:cardBackgroundColor="@color/gray18"-->
+                <!--                    app:cardCornerRadius="5dp"-->
+                <!--                    app:cardElevation="3dp"-->
+                <!--                    -->
+                <!--                    android:layout_margin="5dp"-->
+                <!--                    >-->
+                <!--                    <LinearLayout-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:orientation="horizontal"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:gravity="center_vertical"-->
+                <!--                        android:layout_marginStart="5dp"-->
+                <!--                        android:layout_marginEnd="5dp"-->
+                <!--                        >-->
+                <!--                        <ImageView-->
+                <!--                            android:layout_width="24dp"-->
+                <!--                            android:layout_height="24dp"-->
+                <!--                            android:src="@drawable/ic_share"-->
+                <!--                            app:tint="@color/colorAccent"-->
+                <!--                            android:padding="3dp"-->
+                <!--                            />-->
+                <!--                        <TextView-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:textColor="@color/black"-->
+                <!--                            android:textSize="16sp"-->
+                <!--                            android:text="@string/invite_friends"-->
+                <!--                            android:layout_marginStart="8dp"-->
+                <!--                            android:layout_marginEnd="8dp"-->
+                <!--                            />-->
+                <!--                        <Space-->
+                <!--                            android:layout_width="0dp"-->
+                <!--                            android:layout_height="0dp"-->
+                <!--                            android:layout_weight="1"/>-->
+                <!--                        <ImageView-->
+                <!--                            android:layout_width="24dp"-->
+                <!--                            android:layout_height="24dp"-->
+                <!--                            android:src="@drawable/ic_right_arrow"-->
+                <!--                            app:tint="@color/black"-->
+                <!--                            android:padding="3dp"-->
+                <!--                            android:rotation='@{lang.equals("ar")?180:0}'-->
+                <!--                            />-->
+                <!--                    </LinearLayout>-->
+                <!--                </androidx.cardview.widget.CardView>-->
+
+                <!--                <androidx.cardview.widget.CardView-->
+                <!--                    android:id="@+id/cardCode"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="60dp"-->
+                <!--                    app:cardBackgroundColor="@color/gray18"-->
+                <!--                    app:cardCornerRadius="5dp"-->
+                <!--                    app:cardElevation="3dp"-->
+                <!--                    android:layout_margin="5dp"-->
+                <!--                    >-->
+                <!--                    <LinearLayout-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:orientation="horizontal"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:gravity="center_vertical"-->
+                <!--                        android:layout_marginStart="5dp"-->
+                <!--                        android:layout_marginEnd="5dp"-->
+                <!--                        >-->
+                <!--                        <ImageView-->
+                <!--                            android:layout_width="24dp"-->
+                <!--                            android:layout_height="24dp"-->
+                <!--                            android:src="@drawable/ic_share_friends"-->
+                <!--                            app:tint="@color/colorAccent"-->
+                <!--                            android:padding="3dp"-->
+                <!--                            />-->
+                <!--                        <TextView-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:textColor="@color/black"-->
+                <!--                            android:textSize="16sp"-->
+                <!--                            android:text="@string/enter_an_invitation_code"-->
+                <!--                            android:layout_marginStart="8dp"-->
+                <!--                            android:layout_marginEnd="8dp"-->
+                <!--                            />-->
+                <!--                        <Space-->
+                <!--                            android:layout_width="0dp"-->
+                <!--                            android:layout_height="0dp"-->
+                <!--                            android:layout_weight="1"/>-->
+                <!--                        <ImageView-->
+                <!--                            android:layout_width="24dp"-->
+                <!--                            android:layout_height="24dp"-->
+                <!--                            android:src="@drawable/ic_right_arrow"-->
+                <!--                            app:tint="@color/black"-->
+                <!--                            android:padding="3dp"-->
+                <!--                            android:rotation='@{lang.equals("ar")?180:0}'-->
+                <!--                            />-->
+                <!--                    </LinearLayout>-->
+                <!--                </androidx.cardview.widget.CardView>-->
 
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardCoupon"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="3dp"
                     android:layout_margin="5dp"
-                    >
+                    app:cardBackgroundColor="@color/gray18"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_coupon"
                             android:padding="3dp"
-                            />
+                            android:src="@drawable/ic_precent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:text="@string/coupons"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
 
                             />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_right_arrow"
-                            app:tint="@color/black"
                             android:padding="3dp"
                             android:rotation='@{lang.equals("ar")?180:0}'
-                            />
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -370,98 +472,100 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="3dp"
                     android:layout_margin="5dp"
-                    >
+                    app:cardBackgroundColor="@color/gray18"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
+                            android:padding="3dp"
                             android:src="@drawable/ic_play"
-                            android:padding="3dp"
-                            app:tint="@color/gray12"
-                            />
+                            app:tint="@color/colorAccent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:text="@string/watch_video_ads"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
+                            android:text="@string/watch_video_ads"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
 
                             />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_right_arrow"
-                            app:tint="@color/black"
                             android:padding="3dp"
                             android:rotation='@{lang.equals("ar")?180:0}'
-                            />
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="3dp"
                     android:layout_margin="5dp"
-                    >
+                    app:cardBackgroundColor="@color/gray18"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_support"
                             android:padding="3dp"
-                            app:tint="@color/gray12"
-                            />
+                            android:src="@drawable/ic_user_lestien"
+                            app:tint="@color/colorAccent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:text="@string/support"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
+                            android:text="@string/support"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
 
                             />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_right_arrow"
-                            app:tint="@color/black"
                             android:padding="3dp"
                             android:rotation='@{lang.equals("ar")?180:0}'
-                            />
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -473,76 +577,77 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/trans_black"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                >
+                android:layout_gravity="center">
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardDialog"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="50dp"
-                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_marginBottom="5dp"
-                    app:cardElevation="5dp"
                     app:cardCornerRadius="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:cardElevation="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    >
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
                         android:layout_marginEnd="8dp"
-                        >
+                        android:layout_marginBottom="12dp"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="@string/enter_code"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:text="@string/enter_code"
 
                             />
+
                         <EditText
                             android:id="@+id/edtCode"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
-                            android:background="@drawable/small_rounded_strokk_gray"
+                            android:layout_marginStart="8dp"
                             android:layout_marginTop="30dp"
+                            android:layout_marginEnd="8dp"
                             android:layout_marginBottom="20dp"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
+                            android:background="@drawable/small_rounded_strokk_gray"
+                            android:hint="@string/enter_code"
                             android:paddingStart="5dp"
                             android:paddingEnd="5dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:hint="@string/enter_code"
-                            android:textSize="14sp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray4"
+                            android:textSize="14sp"
 
                             />
+
                         <Button
                             android:id="@+id/btnConfirm"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
-                            android:background="@drawable/small_rounded_primary"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"
-                            android:text="@string/confirm"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:layout_marginBottom="2dp"
-                            />
+                            android:background="@drawable/small_rounded_primary"
+                            android:text="@string/confirm"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -551,23 +656,23 @@
                     android:id="@+id/cardClose"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    app:cardElevation="5dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardBackgroundColor="@color/colorred"
                     android:layout_margin="3dp"
-                    app:layout_constraintStart_toStartOf="@id/cardDialog"
-                    app:layout_constraintEnd_toEndOf="@id/cardDialog"
-                    app:layout_constraintTop_toTopOf="@id/cardDialog"
+                    app:cardBackgroundColor="@color/colorred"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
                     app:layout_constraintBottom_toTopOf="@id/cardDialog"
+                    app:layout_constraintEnd_toEndOf="@id/cardDialog"
+                    app:layout_constraintStart_toStartOf="@id/cardDialog"
+                    app:layout_constraintTop_toTopOf="@id/cardDialog"
 
                     >
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_close2"
                         android:padding="5dp"
-                        app:tint="@color/white"
-                        />
+                        android:src="@drawable/ic_close2"
+                        app:tint="@color/white" />
                 </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

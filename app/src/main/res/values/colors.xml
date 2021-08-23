@@ -6,6 +6,8 @@
 
     <color name="color1">#ffea94</color>
     <color name="color2">#97A5B7</color>
+    <color name="color3">#FFA000</color>
+
     <color name="colorPrimaryTrans">#88FF0D10</color>
 
 
@@ -29,10 +31,7 @@
     <color name="gray15">#e3e3e3</color>
     <color name="gray16">#A5A5A5</color>
     <color name="gray17">#707070</color>
-
-
-
-
+    <color name="gray18">#E5E8EC</color>
 
 
     <color name="book_trans">#99000000</color>
