@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/account"
+
+        >
+        <item android:id="@+id/profile"
+            android:title="@string/account"
+            >
+            <menu>
+                <item android:id="@+id/profileFragment"
+                    android:title="@string/profile"
+                    android:icon="@drawable/ic_user"
+                    />
+                <item android:id="@+id/goldProfileFragment"
+                    android:title="@string/gold_profile"
+                    android:icon="@drawable/ic_crown"
+                    />
+            </menu>
+        </item>
+        <item android:id="@+id/contact"
+            android:title="@string/contact"
+            >
+            <menu>
+                <item android:id="@+id/invite"
+                    android:title="@string/invite_friends"
+                    android:icon="@drawable/ic_share"
+                    />
+
+            </menu>
+        </item>
+        <item android:id="@+id/others"
+            android:title="@string/contact"
+            >
+            <menu>
+                <item android:id="@+id/faq"
+                    android:title="@string/faq"
+                    android:icon="@drawable/ic_faq"
+                    />
+                <item android:id="@+id/rateApp"
+                    android:title="@string/rate_app"
+                    android:icon="@drawable/ic_star"
+                    />
+                <item android:id="@+id/policy"
+                    android:title="@string/privacy_policy"
+                    android:icon="@drawable/ic_shield"
+                    />
+
+                <item android:id="@+id/changeLang"
+                    android:title="@string/change_language"
+                    android:icon="@drawable/ic_language"
+                    />
+
+
+            </menu>
+        </item>
+        <item android:id="@+id/logout"
+            android:title="@string/logout"
+            android:icon="@drawable/ic_user"
+            />
+
+
+    </group>
+</menu>

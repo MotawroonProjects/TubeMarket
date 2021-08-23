@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/bottom_nav.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/ic_add.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/ic_dollar.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/ic_nav_menu.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/inset_dialog.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/next_btn.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/rb_dialog.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_gray.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_primary.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_stroke.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_strokk_gray.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_white.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_stroke_primary.xml" value="0.25" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_faq.xml" value="0.1" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_home.xml" value="0.18" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_splash.xml" value="0.12092391304347826" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_web_view.xml" value="0.13677536231884058" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/dialog_video.xml" value="0.22" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_add_ads.xml" value="0.1" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_add_subscriptions.xml" value="0.14" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_campaign.xml" value="0.16" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_campign.xml" value="0.1" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_coins.xml" value="0.25" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_gold_profile.xml" value="0.22" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_invite.xml" value="0.2" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_language.xml" value="0.1" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_new_addition.xml" value="0.22" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_new_addition_set_up.xml" value="0.25" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_subscription.xml" value="0.22" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_views.xml" value="0.15" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/navigation_view_header.xml" value="0.25" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/spinner_row.xml" value="0.1" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/spinner_row2.xml" value="0.1" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1398148148148148" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/menu/slide_menu.xml" value="0.1398148148148148" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

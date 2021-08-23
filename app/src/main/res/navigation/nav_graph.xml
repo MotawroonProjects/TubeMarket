@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/subscriptionFragment">
+
+    <fragment
+        android:id="@+id/campaignFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CampaignFragment"
+        android:label="@string/campaign"
+        tools:layout="@layout/fragment_campaign" />
+    <fragment
+        android:id="@+id/addAdsFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.AddAdsFragment"
+        android:label="@string/add_ads"
+        tools:layout="@layout/fragment_add_ads" />
+    <fragment
+        android:id="@+id/subscriptionFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.SubscriptionFragment"
+        android:label="@string/subscribes"
+        tools:layout="@layout/fragment_subscription" />
+    <fragment
+        android:id="@+id/viewsFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.ViewsFragment"
+        android:label="@string/views"
+        tools:layout="@layout/fragment_views" />
+    <fragment
+        android:id="@+id/coinsFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CoinsFragment"
+        android:label="@string/currency"
+        tools:layout="@layout/fragment_coins" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/goldProfileFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.GoldProfileFragment"
+        android:label="@string/gold_profile"
+        tools:layout="@layout/fragment_gold_profile" />
+    <fragment
+        android:id="@+id/inviteFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.InviteFragment"
+        android:label="@string/invite_friends"
+        tools:layout="@layout/fragment_invite" />
+
+    <activity
+        android:id="@+id/faqActivity"
+        android:name="com.app.tubemarket.uis.activity_faq.FaqActivity"
+        android:label="@string/faq"
+        />
+    <fragment
+        android:id="@+id/newAdditionFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.NewAdditionFragment"
+        android:label="@string/new_addition"
+        tools:layout="@layout/fragment_new_addition" />
+    <fragment
+        android:id="@+id/addSubscriptionsFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.AddSubscriptionsFragment"
+        android:label="@string/subscribes"
+        tools:layout="@layout/fragment_add_subscriptions" />
+    <fragment
+        android:id="@+id/newAdditionSetUpFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.NewAdditionSetUpFragment"
+        android:label="@string/create_campaign"
+        tools:layout="@layout/fragment_new_addition_set_up" />
+
+    <activity
+        android:id="@+id/webView"
+        android:name="com.app.tubemarket.uis.activity_web_view.WebViewActivity"
+        />
+    <fragment
+        android:id="@+id/changeLang"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.LanguageFragment"
+        android:label="@string/ch_lang"
+        tools:layout="@layout/fragment_language" />
+</navigation>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "553396693662",
+    "project_id": "tubemarket-321811",
+    "storage_bucket": "tubemarket-321811.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553396693662:android:246e73c554450a8a54a98f",
+        "android_client_info": {
+          "package_name": "com.app.tubemarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553396693662-1iksbmve3e8g1tec797oji6tbv3i5kq3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.tubemarket",
+            "certificate_hash": "7b552dd45a17d41d57b3d3dedd9c4b6814f63960"
+          }
+        },
+        {
+          "client_id": "553396693662-ie88vk8u3chf8fqh6pdqvrc5h3kkbrj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiOCEfkik_IEC8lVpgtxoUzPwlMOalQcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553396693662-ie88vk8u3chf8fqh6pdqvrc5h3kkbrj0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
