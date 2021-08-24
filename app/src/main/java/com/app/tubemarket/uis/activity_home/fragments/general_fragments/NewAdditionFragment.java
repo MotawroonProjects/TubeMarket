@@ -1,4 +1,4 @@
-package com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment;
+package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
 
 import android.os.Bundle;
 

@@ -52,7 +52,32 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/estimated_subscribers_interval_time_per_day"
+                android:text="@string/enter_number_of_view"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/small_rounded_strokk_gray"
+                android:inputType="number"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/choose_watch_time"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -65,7 +90,33 @@
                 android:background="@drawable/small_rounded_strokk_gray">
 
                 <Spinner
-                    android:id="@+id/spinnerSubscriptions"
+                    android:id="@+id/spinnerSeconds"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:backgroundTint="@color/black" />
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/estimated_views_interval_time_per_day"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/small_rounded_strokk_gray">
+
+                <Spinner
+                    android:id="@+id/spinnerDays"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:backgroundTint="@color/black" />
@@ -113,89 +164,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/small_rounded_strokk_gray"
-                android:hint="@string/enter_channel_link"
+                android:hint="@string/enter_video_url_here"
                 android:inputType="textUri"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:singleLine="true"
-                android:textSize="14sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                />
-
-            <Button
-                android:id="@+id/btnConfirm"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:minWidth="200dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/next_btn"
-                android:textColor="@color/white"
                 android:textSize="14sp"
-                android:text="@string/confirm"
-                android:layout_gravity="center_horizontal"
                 />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="5dp"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="3dp"
-                app:contentPadding="12dp"
-                app:layout_constraintTop_toBottomOf="@id/btnAdd">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        channel_image="@{model.url}"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/ic_youtube" />
-
-                    <Space
-                        android:layout_width="12dp"
-                        android:layout_height="0dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:singleLine="true"
-                            android:text='@{model!=null?model.title:@string/channel_name,default=@string/channel_name}'
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:singleLine="true"
-                            android:text='@{model!=null?model.id:@string/channel_code,default=@string/channel_code}'
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-
-                            />
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/btnAdd"

@@ -1,4 +1,4 @@
-package com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment;
+package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
 
 import android.os.Bundle;
 
@@ -43,6 +43,17 @@ public class AddAdsFragment extends Fragment {
 
         binding.cardGetSubscribers.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.getSubscribersFragment);
+        });
+
+        binding.cardGetViews.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.getViewsFragment);
+        });
+
+        binding.cardGetSubscribersViews.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.getSubscribersViewsFragment);
+        });
+        binding.cardGetLikes.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.getLikesFragment);
         });
 
 

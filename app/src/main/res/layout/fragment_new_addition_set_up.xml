@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        tools:context=".uis.activity_home.fragments.bottom_nav_fragment.AddSubscriptionsFragment"
+        tools:context=".uis.activity_home.fragments.general_fragments.AddSubscriptionsFragment"
         android:background="@color/gray0">
 
         <LinearLayout

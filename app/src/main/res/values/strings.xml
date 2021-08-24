@@ -116,4 +116,8 @@
     <string name="total_amount">Total amount:</string>
     <string name="usd">USD</string>
     <string name="enter_channel_link">Enter channel link</string>
+    <string name="enter_number_of_view">Enter number of views</string>
+    <string name="choose_watch_time">Choose watch time</string>
+    <string name="estimated_views_interval_time_per_day">Estimated views interval time per day</string>
+    <string name="enter_number_of_likes">Enter number of likes</string>
 </resources>

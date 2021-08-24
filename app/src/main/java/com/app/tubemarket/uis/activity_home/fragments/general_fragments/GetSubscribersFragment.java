@@ -1,4 +1,4 @@
-package com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment;
+package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.tubemarket.R;
+import com.app.tubemarket.adapters.SpinnerCountAdapter;
 import com.app.tubemarket.adapters.SpinnerInterestsAdapter;
 import com.app.tubemarket.databinding.FragmentGetSubscribersBinding;
 import com.app.tubemarket.databinding.FragmentProfileBinding;
@@ -38,6 +39,8 @@ public class GetSubscribersFragment extends Fragment {
     private UserModel userModel;
     private Preferences preferences;
     private VideoModel channelModel = null;
+    private SpinnerCountAdapter secondsAdapter;
+    private List<String> secondsList;
 
 
 
@@ -53,6 +56,22 @@ public class GetSubscribersFragment extends Fragment {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
+        secondsList = new ArrayList<>();
+        for (int index=1;index<9;index++)
+        {
+            if (index==1){
+                secondsList.add("45");
+            }else {
+                int second = index*30;
+                secondsList.add(second+"");
+
+
+
+            }
+        }
+        secondsAdapter = new SpinnerCountAdapter(secondsList,activity);
+        binding.spinnerSubscriptions.setAdapter(secondsAdapter);
+
         binding.btnConfirm.setOnClickListener(v -> {
             String url = binding.edtUrl.getText().toString().trim();
             String channelId = extractChannelId(url);
