@@ -1,5 +1,6 @@
 package com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -9,11 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.app.tubemarket.R;
 import com.app.tubemarket.adapters.SpinnerInterestsAdapter;
 import com.app.tubemarket.databinding.FragmentProfileBinding;
 import com.app.tubemarket.models.InterestsModel;
+import com.app.tubemarket.models.LoginRegisterModel;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.preferences.Preferences;
@@ -21,6 +25,7 @@ import com.app.tubemarket.remote.Api;
 import com.app.tubemarket.share.Common;
 import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
+import com.app.tubemarket.uis.activity_login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,14 +43,14 @@ public class ProfileFragment extends Fragment {
     private HomeActivity activity;
     private UserModel userModel;
     private Preferences preferences;
-    private VideoModel channelModel = null;
-
+    private VideoModel videoModel, channelModel = null;
+    private int interests_id = 0;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profile,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         initView();
         return binding.getRoot();
     }
@@ -54,33 +59,91 @@ public class ProfileFragment extends Fragment {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
-        binding.setModel(userModel.getChannelModel());
-        list = new ArrayList<>();
-        list.add(new InterestsModel(0,getString(R.string.choose)));
-        list.add(new InterestsModel(1,getString(R.string.sports)));
-        list.add(new InterestsModel(2,getString(R.string.games)));
-        list.add(new InterestsModel(3,getString(R.string.cooks)));
-        list.add(new InterestsModel(4,getString(R.string.writes)));
-        adapter = new SpinnerInterestsAdapter(list,activity);
-        binding.spinner.setAdapter(adapter);
-        binding.btnAdd.setOnClickListener(v -> {
-            String url = binding.edtUrl.getText().toString().trim();
-            if (!url.isEmpty()){
-                String vidId = extractYTId(url);
-                if (vidId!=null){
-                    Common.CloseKeyBoard(activity,binding.edtUrl);
-                    getVideoById(vidId);
-                }
+
+
+
+        if (userModel.getInterestsModel() != null) {
+            interests_id = userModel.getInterestsModel().getId();
+            String interests = "";
+            switch (userModel.getInterestsModel().getId()) {
+                case 1:
+                    interests = getString(R.string.sports);
+                    break;
+                case 2:
+                    interests = getString(R.string.games);
+
+                    break;
+                case 3:
+                    interests = getString(R.string.cooks);
+
+                    break;
+                case 4:
+                    interests = getString(R.string.writes);
+
+                    break;
+
             }
-        });
+
+            InterestsModel interestsModel = userModel.getInterestsModel();
+            interestsModel.setName(interests);
+            userModel.setInterestsModel(interestsModel);
+
+        }else {
+
+            list = new ArrayList<>();
+            list.add(new InterestsModel(0, getString(R.string.choose)));
+            list.add(new InterestsModel(1, getString(R.string.sports)));
+            list.add(new InterestsModel(2, getString(R.string.games)));
+            list.add(new InterestsModel(3, getString(R.string.cooks)));
+            list.add(new InterestsModel(4, getString(R.string.writes)));
+            adapter = new SpinnerInterestsAdapter(list, activity);
+            binding.spinner.setAdapter(adapter);
+            binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (position != 0) {
+                        interests_id = list.get(position).getId();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            binding.btnAdd.setOnClickListener(v -> {
+                String url = binding.edtUrl.getText().toString().trim();
+                if (!url.isEmpty()) {
+                    String vidId = extractYTId(url);
+                    if (vidId != null) {
+                        Common.CloseKeyBoard(activity, binding.edtUrl);
+                        getVideoById(vidId);
+                    }
+                }
+            });
+            binding.btnUpdate.setOnClickListener(v -> {
+                if (channelModel != null) {
+                    UserModel.ChannelModel model = new UserModel.ChannelModel(channelModel.getId(), channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(), channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(), channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
+                    userModel.setChannelModel(model);
+                    preferences.create_update_userdata(activity, userModel);
+                }
+
+            });
+        }
+        binding.setModel(userModel.getChannelModel());
+        binding.setUserModel(userModel);
+
+        Log.e("ddd", userModel.getId()+"__"+userModel.getGoogle_id()+"__"+userModel.getToken());
+
         binding.btnUpdate.setOnClickListener(v -> {
-            if (channelModel!=null){
-                UserModel.ChannelModel model = new UserModel.ChannelModel(channelModel.getId(),channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(),channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(),channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
-                userModel.setChannelModel(model);
-                preferences.create_update_userdata(activity,userModel);
+            if ((videoModel!=null&&channelModel!=null)|interests_id!=0){
+                updateProfile();
             }
 
         });
+
+
+
     }
 
     private void getVideoById(String vidId) {
@@ -91,14 +154,15 @@ public class ProfileFragment extends Fragment {
                 .enqueue(new Callback<VideoModel>() {
                     @Override
                     public void onResponse(Call<VideoModel> call, Response<VideoModel> response) {
-                        if (response.isSuccessful()&&response.body()!=null){
-                            if (response.body().getItems()!=null&&response.body().getItems().size()>0){
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getItems() != null && response.body().getItems().size() > 0) {
+                                videoModel = response.body();
                                 getChannelById(response.body().getItems().get(0).getSnippet().getChannelId());
-                            }else {
+                            } else {
                                 binding.cardView.setCardElevation(3);
 
                             }
-                        }else {
+                        } else {
                             binding.cardView.setCardElevation(3);
 
                         }
@@ -122,11 +186,11 @@ public class ProfileFragment extends Fragment {
                         binding.flLoading.setVisibility(View.GONE);
                         binding.cardView.setCardElevation(3);
 
-                        if (response.isSuccessful()&&response.body()!=null){
-                            if (response.body().getItems()!=null&&response.body().getItems().size()>0){
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getItems() != null && response.body().getItems().size() > 0) {
 
                                 channelModel = response.body();
-                                UserModel.ChannelModel model = new UserModel.ChannelModel(channelModel.getItems().get(0).getId(),channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(),channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(),channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
+                                UserModel.ChannelModel model = new UserModel.ChannelModel(channelModel.getItems().get(0).getId(), channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(), channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(), channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
                                 binding.setModel(model);
 
                             }
@@ -148,9 +212,110 @@ public class ProfileFragment extends Fragment {
         Pattern pattern = Pattern.compile("^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
                 Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(ytUrl);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             vId = matcher.group(1);
         }
         return vId;
     }
+
+    private void updateProfile() {
+        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        String channel_id ="";
+        String channel_name="";
+        String channel_desc="";
+        String channel_image="";
+        String video_id ="";
+        String video_name="";
+        String video_desc="";
+        String video_image="";
+
+        if (userModel.getChannelModel()!=null){
+            channel_id = userModel.getChannelModel().getId();
+            channel_name = userModel.getChannelModel().getTitle();
+            channel_desc = userModel.getChannelModel().getDescriptions();
+            channel_image = userModel.getChannelModel().getUrl();
+
+        }else if (channelModel!=null){
+
+            channel_id = channelModel.getItems().get(0).getId();
+            channel_name =  channelModel.getItems().get(0).getSnippet().getTitle();
+            channel_desc = channelModel.getItems().get(0).getSnippet().getDescription();
+            channel_image = channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl();
+        }
+
+        if (userModel.getVideoModel()!=null){
+            video_id    = userModel.getVideoModel().getId();
+            video_name  = userModel.getVideoModel().getTitle();
+            video_desc  = userModel.getVideoModel().getDescriptions();
+            video_image = userModel.getVideoModel().getUrl();
+        }else if (videoModel!=null){
+
+            video_id    = videoModel.getItems().get(0).getId();
+            video_name  =  videoModel.getItems().get(0).getSnippet().getTitle();
+            video_desc  = videoModel.getItems().get(0).getSnippet().getDescription();
+            video_image = videoModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl();
+
+
+
+        }
+
+        Log.e("video_id", video_id+"_");
+        Log.e("video_name", video_name+"_");
+        Log.e("video_desc", video_desc+"_");
+        Log.e("video_image", video_image+"_");
+        Log.e("channel_id", channel_id+"_");
+        Log.e("channel_name", channel_name+"_");
+        Log.e("channel_desc", channel_desc+"_");
+        Log.e("channel_image", channel_image+"_");
+
+
+        Api.getService(Tags.base_url)
+                .updateProfile("Bearer " + userModel.getToken(), userModel.getId(), userModel.getGoogle_id(),video_name ,video_image ,video_desc ,video_id ,channel_id ,channel_id ,channel_name,channel_image , channel_desc,String.valueOf(interests_id))
+                .enqueue(new Callback<LoginRegisterModel>() {
+                    @Override
+                    public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getStatus() == 200) {
+                                LoginRegisterModel model = response.body();
+
+                                UserModel.ChannelModel channelModel = null;
+                                UserModel.VideoModel videoModel = null;
+                                InterestsModel interestsModel = null;
+                                if (model.getData().getChannel_id() != null) {
+                                    channelModel = new UserModel.ChannelModel(model.getData().getChannel_id(), model.getData().getChannel_name(), model.getData().getChannel_description(), model.getData().getChannel_image());
+
+                                }
+
+                                if (model.getData().getChannel_video_link() != null) {
+                                    videoModel = new UserModel.VideoModel(model.getData().getChannel_video_link(), model.getData().getChannel_video_name(), model.getData().getChannel_video_description(), model.getData().getChannel_video_image());
+
+                                }
+
+                                if (model.getData().getInterested() != 0) {
+                                    interestsModel = new InterestsModel(model.getData().getInterested(), "");
+
+                                }
+
+
+                                userModel = new UserModel(model.getData().getId(), model.getData().getGoogle_id(), model.getData().getEmail(), model.getData().getName(), model.getData().getImage(), model.getData().getCoins(), model.getData().getCode(), model.getData().getUser_type(), model.getData().getIs_vip(), model.getData().getToken(), channelModel, videoModel, interestsModel);
+                                binding.setUserModel(userModel);
+                                preferences.create_update_userdata(activity, userModel);
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginRegisterModel> call, Throwable t) {
+                        dialog.dismiss();
+
+                    }
+                });
+    }
+
+
 }

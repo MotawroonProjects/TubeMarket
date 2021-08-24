@@ -6,8 +6,13 @@
     >
     <data>
         <variable
+            name="userModel"
+            type="com.app.tubemarket.models.UserModel" />
+        <variable
             name="model"
             type="com.app.tubemarket.models.UserModel.ChannelModel" />
+
+        <import type="android.view.View"/>
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -83,7 +88,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/ic_youtube"
-                        channel_image="@{model.url}"
+                        channel_image='@{userModel.channelModel==null?model.url:userModel.channelModel.url}'
                         />
                     <Space
                         android:layout_width="12dp"
@@ -103,7 +108,8 @@
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:singleLine="true"
-                            android:text='@{model!=null?model.title:@string/channel_name,default=@string/channel_name}'
+                            android:text='@{userModel.channelModel==null?(model!=null?model.title:@string/channel_name):userModel.channelModel.title}'
+
                             />
 
                         <TextView
@@ -113,7 +119,7 @@
                             android:textSize="14sp"
                             android:singleLine="true"
                             android:layout_marginTop="8dp"
-                            android:text='@{model!=null?model.id:@string/channel_code,default=@string/channel_code}'
+                            android:text='@{userModel.channelModel==null?(model!=null?model.id:@string/channel_code):userModel.channelModel.id}'
 
                             />
                     </LinearLayout>
@@ -158,13 +164,15 @@
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
                         android:singleLine="true"
-                        android:visibility="gone"
+                        android:visibility='@{userModel.interestsModel==null?View.GONE:View.VISIBLE,default=gone}'
+                        android:text='@{userModel.interestsModel!=null?userModel.interestsModel.name:""}'
                         />
                     <Spinner
                         android:id="@+id/spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:backgroundTint="@color/black"
+                        android:visibility='@{userModel.interestsModel==null?View.VISIBLE:View.GONE,default=gone}'
                         />
 
                 </FrameLayout>

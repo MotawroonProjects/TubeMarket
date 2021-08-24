@@ -2,8 +2,7 @@ package com.app.tubemarket.tags;
 
 public class Tags {
 
-    public static String base_url = "";
-    public static final String IMAGE_URL= base_url+"storage/uploads/";
+    public static String base_url = "http://tube-market.sray.live/";
     public static final String session_login = "login";
     public static final String session_logout = "logout";
     public static final String not_tag = "tube_not_tag";
