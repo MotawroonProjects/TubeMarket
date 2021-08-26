@@ -39,7 +39,7 @@
     <string name="sign_in_with_google">Sign In With Google</string>
     <string name="campaign">Campaign</string>
     <string name="subscribes">Subscriptions</string>
-    <string name="views">Watch</string>
+    <string name="views">Views</string>
     <string name="currency">Coins</string>
     <string name="account">Account</string>
     <string name="gold_profile">Gold profile</string>
@@ -62,7 +62,7 @@
     <string name="writes">Writes</string>
     <string name="choose_campaign_type">Choose campaign type</string>
     <string name="get_video_view">Get video view</string>
-    <string name="get_subscribers_and_fans_for_your_channel">Get subscribers and fans for your channel</string>
+    <string name="get_subscribers_and_fans_for_your_channel">Get subscribers for your channel</string>
     <string name="new_addition">New addition</string>
     <string name="paste_link"><![CDATA[Paste the link from any video on your channel that you want to boost subscribers or views.People will watch the video and subscribe to your channel.you can get the link by opening your video on youtube<share button> Copy link]]></string>
     <string name="new_campaigns_reviewed">New campaigns are being reviewed, please wait a few hours</string>
@@ -120,4 +120,7 @@
     <string name="choose_watch_time">Choose watch time</string>
     <string name="estimated_views_interval_time_per_day">Estimated views interval time per day</string>
     <string name="enter_number_of_likes">Enter number of likes</string>
+    <string name="suc">Success!</string>
+    <string name="admin_review">PPlease wait for the admin to review your video</string>
+    <string name="alert">Alert</string>
 </resources>

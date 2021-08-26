@@ -1,6 +1,10 @@
 package com.app.tubemarket.services;
 
+import com.app.tubemarket.models.CoinsDataModel;
 import com.app.tubemarket.models.LoginRegisterModel;
+import com.app.tubemarket.models.StatusResponse;
+import com.app.tubemarket.models.SubscribeSecondsModel;
+import com.app.tubemarket.models.VideoDataModel;
 import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.models.ViewsSecondsModel;
 
@@ -55,9 +59,65 @@ public interface Service {
 
     );
 
-    @GET("list-of-views-and-seconds")
-    Call<ViewsSecondsModel> getViewSeconds();
+    @GET("api/list-of-views-and-seconds")
+    Call<ViewsSecondsModel> getViewSeconds(@Header("Authorization") String token);
 
+    @FormUrlEncoded
+    @POST("api/calculate-coins")
+    Call<CoinsDataModel> calculateCoin(@Header("Authorization") String token,
+                                       @Field("views_number") String views_number,
+                                       @Field("second_number") String second_number
+    );
+
+    @FormUrlEncoded
+    @POST("api/add-video")
+    Call<StatusResponse> addVideo(@Header("Authorization") String token,
+                                  @Field("user_id") String user_id,
+                                  @Field("link") String link,
+                                  @Field("timer_limit") String timer_limit,
+                                  @Field("view_limit") String view_limit,
+                                  @Field("campaign_coins") String campaign_coins,
+                                  @Field("profit_coins") String profit_coins,
+                                  @Field("have_discount") String have_discount,
+                                  @Field("discount_coins") String discount_coins
+
+
+    );
+
+    @GET("api/list-of-subscriptions-and-seconds")
+    Call<SubscribeSecondsModel> getSubscribeSeconds(@Header("Authorization") String token);
+
+    @FormUrlEncoded
+    @POST("api/calculate-channel-coins")
+    Call<CoinsDataModel> calculateChannelCoin(@Header("Authorization") String token,
+                                              @Field("subscriptions_number") String subscriptions_number,
+                                              @Field("second_number") String second_number
+    );
+
+    @FormUrlEncoded
+    @POST("api/add-channel")
+    Call<StatusResponse> addVideoSubscribes(@Header("Authorization") String token,
+                                            @Field("user_id") String user_id,
+                                            @Field("link") String link,
+                                            @Field("timer_limit") String timer_limit,
+                                            @Field("view_limit") String view_limit,
+                                            @Field("subscription_limit") String subscription_limit,
+                                            @Field("campaign_coins") String campaign_coins,
+                                            @Field("profit_coins") String profit_coins,
+                                            @Field("have_discount") String have_discount,
+                                            @Field("discount_coins") String discount_coins
+
+
+    );
+
+    @GET("api/list-of-videos")
+    Call<VideoDataModel> getViewsVideo(@Header("Authorization") String token,
+                                       @Query("user_id") String user_id,
+                                       @Query("pagination_status") String pagination_status,
+                                       @Query("per_link_") String per_link_,
+                                       @Query("orderBy") String orderBy,
+                                       @Query("page") int page
+    );
 
 }
 

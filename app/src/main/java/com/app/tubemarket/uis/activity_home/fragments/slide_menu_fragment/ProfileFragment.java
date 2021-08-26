@@ -27,6 +27,7 @@ import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
 import com.app.tubemarket.uis.activity_login.LoginActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -271,6 +272,14 @@ public class ProfileFragment extends Fragment {
         Log.e("channel_desc", channel_desc+"_");
         Log.e("channel_image", channel_image+"_");
 
+        if (video_desc.length()>450){
+            video_desc = video_desc.substring(0,450);
+        }
+
+        if (channel_desc.length()>450){
+            channel_desc = channel_desc.substring(0,450);
+        }
+
 
         Api.getService(Tags.base_url)
                 .updateProfile("Bearer " + userModel.getToken(), userModel.getId(), userModel.getGoogle_id(),video_name ,video_image ,video_desc ,video_id ,channel_id ,channel_id ,channel_name,channel_image , channel_desc,String.valueOf(interests_id))
@@ -295,8 +304,27 @@ public class ProfileFragment extends Fragment {
 
                                 }
 
-                                if (model.getData().getInterested() != 0) {
-                                    interestsModel = new InterestsModel(model.getData().getInterested(), "");
+                                if (interests_id != 0) {
+                                    String interests = "";
+                                    switch (userModel.getInterestsModel().getId()) {
+                                        case 1:
+                                            interests = getString(R.string.sports);
+                                            break;
+                                        case 2:
+                                            interests = getString(R.string.games);
+
+                                            break;
+                                        case 3:
+                                            interests = getString(R.string.cooks);
+
+                                            break;
+                                        case 4:
+                                            interests = getString(R.string.writes);
+
+                                            break;
+
+                                    }
+                                    interestsModel = new InterestsModel(model.getData().getInterested(), interests);
 
                                 }
 
@@ -306,13 +334,19 @@ public class ProfileFragment extends Fragment {
                                 preferences.create_update_userdata(activity, userModel);
 
                             }
+                        }else {
+                            try {
+                                Log.e("code",response.code()+"__"+response.errorBody().string()+"__");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LoginRegisterModel> call, Throwable t) {
                         dialog.dismiss();
-
+                        Log.e("error",t.getMessage()+"_");
                     }
                 });
     }

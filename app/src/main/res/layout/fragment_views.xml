@@ -13,6 +13,14 @@
             name="lang"
             type="String" />
 
+        <variable
+            name="second"
+            type="String" />
+
+        <variable
+            name="coins"
+            type="String" />
+
     </data>
 
     <ScrollView
@@ -28,15 +36,14 @@
             android:orientation="vertical">
 
 
-            <!--            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
-            <!--                android:id="@+id/youtube_player_view"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="300dp"-->
-            <!--                app:autoPlay="false"-->
-            <!--                app:showFullScreenButton="false"-->
-            <!--                app:showSeekBar="false"-->
-            <!--                -->
-            <!--                app:showYouTubeButton="false" />-->
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtube_player_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:autoPlay="false"
+                app:showFullScreenButton="false"
+                app:showSeekBar="false"
+                app:showYouTubeButton="false" />
 
             <Space
                 android:layout_width="0dp"
@@ -99,13 +106,14 @@
                     android:orientation="horizontal">
 
                     <TextView
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:text='@{second}'
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="40sp" />
 
                     <View
                         android:layout_width="1dp"
@@ -118,9 +126,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="0"
+                        android:text='@{coins}'
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="40sp" />
                 </LinearLayout>
             </FrameLayout>
 
@@ -168,23 +176,15 @@
                 android:layout_weight="1" />
 
 
-            <!--            <Button-->
-            <!--                android:id="@+id/btnNext"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="40dp"-->
-            <!--                android:layout_gravity="center_horizontal"-->
-            <!--                android:layout_marginTop="15dp"-->
-            <!--                android:background="@drawable/next_btn"-->
-            <!--                android:minWidth="200dp"-->
-            <!--                android:text="@string/next"-->
-            <!--                android:textColor="@color/white"-->
-            <!--                android:textSize="14sp" />-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/llNext"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+
+                >
 
 
                 <TextView
@@ -222,6 +222,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                />
 
 
         </LinearLayout>

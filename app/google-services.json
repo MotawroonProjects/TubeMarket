@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "553396693662-1iksbmve3e8g1tec797oji6tbv3i5kq3.apps.googleusercontent.com",
+          "client_id": "553396693662-0g6k465tlh27euv4vv6jsm5840a1d99o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.app.tubemarket",
@@ -22,23 +22,22 @@
           }
         },
         {
-          "client_id": "553396693662-ie88vk8u3chf8fqh6pdqvrc5h3kkbrj0.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "553396693662-iou8835t99bjqgfpqqpr6e587berf738.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.tubemarket",
+            "certificate_hash": "0b354f3a0c02eaba29510595124a7d68aea8edf3"
+          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCiOCEfkik_IEC8lVpgtxoUzPwlMOalQcg"
+          "current_key": "AIzaSyDkEpMyktZjHwDeK4jXOWhzo8Ju8xNwVbA"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "553396693662-ie88vk8u3chf8fqh6pdqvrc5h3kkbrj0.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

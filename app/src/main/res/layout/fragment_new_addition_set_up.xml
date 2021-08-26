@@ -8,6 +8,9 @@
         <variable
             name="value"
             type="String" />
+        <variable
+            name="coins"
+            type="String" />
 
     </data>
     <ScrollView
@@ -160,6 +163,7 @@
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    android:text='@{coins??""}'
                     />
             </LinearLayout>
 
@@ -188,9 +192,13 @@
                 android:text="@string/warning_donot_create"
                 android:layout_marginBottom="10dp"
                 android:lineHeight="26dp"
-
+                android:visibility="gone"
                 />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                />
 
         </LinearLayout>
 

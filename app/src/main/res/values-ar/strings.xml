@@ -61,7 +61,7 @@
     <string name="writes">كتابة</string>
     <string name="choose_campaign_type">إختر نوع الحملة</string>
     <string name="get_video_view">الحصول على مشاهدات للفيديو</string>
-    <string name="get_subscribers_and_fans_for_your_channel">الحصول على مشتركين ومعجبين</string>
+    <string name="get_subscribers_and_fans_for_your_channel">الحصول على مشتركين </string>
     <string name="new_addition">إضافة جديدة</string>
     <string name="paste_link">الصق الرابط من اي فيديو على قناتك التي تريد تعزيز المشتركين او المشاهدات سيقوم الاشخاص بمشاهدة الفيديو او الاشتراك في قناتك يمكنك الحصول على الرابط من فتح الفيديو الخاص بك على اليوتيوب زر المشاركة نسخ الرابط</string>
     <string name="new_campaigns_reviewed">يتم مراجعة الحملات الجديدة, يرجى انتظار بعض الساعات</string>
@@ -117,5 +117,8 @@
     <string name="choose_watch_time">إختر وقت المشاهدة</string>
     <string name="estimated_views_interval_time_per_day">الوقت المطلوب للمشاهدة في يوم</string>
     <string name="enter_number_of_likes">أدخل عدد الاعجاب</string>
+    <string name="suc">تم بنجاح!</string>
+    <string name="admin_review">انتظر حتي تقوم الادارة بمراجعة الفيديو الخاص بسيادتكم</string>
+    <string name="alert">تنبية</string>
 
 </resources>
