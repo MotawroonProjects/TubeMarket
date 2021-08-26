@@ -63,15 +63,18 @@ public class CampaignFragment extends Fragment {
         });
 
         binding.btnSelect.setOnClickListener(v -> {
-            binding.expandedLayout.collapse(true);
-            binding.rbVideo.setChecked(false);
-            binding.rbSubscribe.setChecked(false);
+            if(type!=0){
+                binding.expandedLayout.collapse(true);
+                binding.rbVideo.setChecked(false);
+                binding.rbSubscribe.setChecked(false);
+
+            }
 
             new Handler(Looper.myLooper())
                     .postDelayed(() -> {
                         if (type==1){
                             Navigation.findNavController(v).navigate(R.id.newAdditionFragment);
-                        }else {
+                        }else if (type==2){
                             Navigation.findNavController(v).navigate(R.id.addSubscriptionsFragment);
 
                         }
@@ -83,15 +86,12 @@ public class CampaignFragment extends Fragment {
         });
         binding.fab.setOnClickListener(v -> {
             binding.fab.clearAnimation();
-            float degree;
             if (binding.expandedLayout.isExpanded()){
                 binding.expandedLayout.collapse(true);
                 binding.rbVideo.setChecked(false);
                 binding.rbSubscribe.setChecked(false);
-                degree = 0;
             }else {
                 binding.expandedLayout.expand(true);
-                degree = 45;
             }
 
 

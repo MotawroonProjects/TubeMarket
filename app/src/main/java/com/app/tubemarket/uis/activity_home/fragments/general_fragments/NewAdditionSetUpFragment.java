@@ -17,7 +17,10 @@ import com.app.tubemarket.R;
 import com.app.tubemarket.adapters.SpinnerCountAdapter;
 import com.app.tubemarket.databinding.FragmentNewAdditionSetUpBinding;
 import com.app.tubemarket.models.UserModel;
+import com.app.tubemarket.models.VideoModel;
+import com.app.tubemarket.models.ViewsSecondsModel;
 import com.app.tubemarket.preferences.Preferences;
+import com.app.tubemarket.remote.Api;
 import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
@@ -27,6 +30,10 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.You
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class NewAdditionSetUpFragment extends Fragment {
@@ -63,25 +70,25 @@ public class NewAdditionSetUpFragment extends Fragment {
         viewsList = new ArrayList<>();
         secondsList = new ArrayList<>();
 
-        viewsList.add("10");
+       /* viewsList.add("10");
         secondsList.add("45");
 
         for (int index = 1;index<21;index++){
             int c = 50*index;
             viewsList.add(c+"");
-        }
+        }*/
         viewsAdapter = new SpinnerCountAdapter(viewsList,activity);
         binding.spinnerViews.setAdapter(viewsAdapter);
 
 
-        for (int index = 2;index<31;index++){
+      /*  for (int index = 2;index<31;index++){
             int c;
             c = 30*index;
             secondsList.add(c+"");
         }
         secondsList.add("1200");
         secondsList.add("1500");
-        secondsList.add("1800");
+        secondsList.add("1800");*/
 
         secondsAdapter = new SpinnerCountAdapter(secondsList,activity);
         binding.spinnerSeconds.setAdapter(secondsAdapter);
@@ -106,9 +113,41 @@ public class NewAdditionSetUpFragment extends Fragment {
 
         });
 
+        getViewSecond();
+
 
     }
 
+    private void getViewSecond(){
+        Api.getService(Tags.tube_base_url)
+                .getViewSeconds()
+                .enqueue(new Callback<ViewsSecondsModel>() {
+                    @Override
+                    public void onResponse(Call<ViewsSecondsModel> call, Response<ViewsSecondsModel> response) {
+
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getData() != null ) {
+
+                                activity.runOnUiThread(() -> {
+                                    viewsList.clear();
+                                    viewsList.addAll(response.body().getData().getVideo_view_numbers());
+                                    viewsAdapter.notifyDataSetChanged();
+
+                                    secondsList.clear();
+                                    secondsList.addAll(response.body().getData().getSeconds());
+                                    secondsAdapter.notifyDataSetChanged();
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ViewsSecondsModel> call, Throwable t) {
+
+
+                    }
+                });
+    }
 
 
 

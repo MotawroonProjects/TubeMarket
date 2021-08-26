@@ -2,6 +2,7 @@ package com.app.tubemarket.services;
 
 import com.app.tubemarket.models.LoginRegisterModel;
 import com.app.tubemarket.models.VideoModel;
+import com.app.tubemarket.models.ViewsSecondsModel;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -37,7 +38,7 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("api/update-profile")
-    Call<LoginRegisterModel> updateProfile(@Header ("Authorization") String token,
+    Call<LoginRegisterModel> updateProfile(@Header("Authorization") String token,
                                            @Field("user_id") String user_id,
                                            @Field("google_id") String google_id,
                                            @Field("channel_video_name") String channel_video_name,
@@ -52,9 +53,10 @@ public interface Service {
                                            @Field("interested") String interested
 
 
-
-
     );
+
+    @GET("list-of-views-and-seconds")
+    Call<ViewsSecondsModel> getViewSeconds();
 
 
 }
