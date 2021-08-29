@@ -10,6 +10,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.app.tubemarket.models.MyVideosModel" />
     </data>
 
     <LinearLayout
@@ -50,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="256"
+                        android:text='@{model.profit_coins}'
                         android:textColor="@color/black"
                         android:textSize="15sp"
 
@@ -79,35 +82,36 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
-                <!--                <Space-->
-                <!--                    android:layout_width="30dp"-->
-                <!--                    android:layout_height="0dp"-->
-                <!--                    />-->
-                <ImageView
+
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:src="@drawable/avatar" />
-                <!--                <Space-->
-                <!--                    android:layout_width="10dp"-->
-                <!--                    android:layout_height="0dp"-->
-                <!--                    />-->
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/white"
+                    app:civ_circle_background_color="@color/white"
+                    channel_image="@{model.user_fk.channel_image}"
+                    />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:text="Mamdouh NasrAllah"
+                    android:text="@{model.user_fk.channel_name}"
                     android:textColor="@color/white"
                     android:textSize="20sp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:lines="2"
+
 
                     />
 
             </LinearLayout>
         </FrameLayout>
-
 
 
         <FrameLayout
@@ -174,9 +178,10 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/llNext"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:orientation="horizontal">
 

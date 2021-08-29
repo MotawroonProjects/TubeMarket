@@ -119,5 +119,46 @@ public interface Service {
                                        @Query("page") int page
     );
 
+    @GET("api/list-of-channels")
+    Call<VideoDataModel> getChannel(@Header("Authorization") String token,
+                                    @Query("user_id") String user_id,
+                                    @Query("pagination_status") String pagination_status,
+                                    @Query("per_link_") String per_link_,
+                                    @Query("orderBy") String orderBy,
+                                    @Query("page") int page
+    );
+
+    @GET("api/get-profile")
+    Call<LoginRegisterModel> getProfile(@Header("Authorization") String token,
+                                        @Query("user_id") String user_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/view-one-video")
+    Call<StatusResponse> view(@Header("Authorization") String token,
+                              @Field("user_id") String user_id,
+                              @Field("campaign_id") String campaign_id,
+                              @Field("profit_coins") String profit_coins,
+                              @Field("timer_limit") String timer_limit
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/like-one-video")
+    Call<StatusResponse> like(@Header("Authorization") String token,
+                              @Field("user_id") String user_id,
+                              @Field("campaign_id") String campaign_id,
+                              @Field("profit_coins") String profit_coins
+    );
+
+    @FormUrlEncoded
+    @POST("api/subscription-one-video")
+    Call<StatusResponse> subscribe(@Header("Authorization") String token,
+                                   @Field("user_id") String user_id,
+                                   @Field("campaign_id") String campaign_id,
+                                   @Field("profit_coins") String profit_coins
+    );
+
+
 }
 

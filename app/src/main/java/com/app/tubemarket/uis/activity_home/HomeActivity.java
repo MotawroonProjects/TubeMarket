@@ -40,8 +40,12 @@ import android.widget.Toast;
 import com.app.tubemarket.R;
 import com.app.tubemarket.databinding.ActivityHomeBinding;
 import com.app.tubemarket.language.Language;
+import com.app.tubemarket.models.InterestsModel;
+import com.app.tubemarket.models.LoginRegisterModel;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.preferences.Preferences;
+import com.app.tubemarket.remote.Api;
+import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CoinsFragment;
 import com.app.tubemarket.uis.activity_login.LoginActivity;
 import com.app.tubemarket.uis.activity_splash.SplashActivity;
@@ -82,6 +86,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -115,10 +122,8 @@ public class HomeActivity extends AppCompatActivity {
         tvName = headerView.findViewById(R.id.tvName);
         tvEmail = headerView.findViewById(R.id.tvEmail);
         tvCoins = headerView.findViewById(R.id.tvCoins);
-        Picasso.get().load(Uri.parse(userModel.getImage())).into(imageView);
-        tvName.setText(userModel.getName());
-        tvEmail.setText(userModel.getEmail());
-        tvCoins.setText(userModel.getCoins());
+
+        updateUi();
         setSupportActionBar(binding.toolBar);
         navController = Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
@@ -195,6 +200,13 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    private void updateUi() {
+        Picasso.get().load(Uri.parse(userModel.getImage())).into(imageView);
+        tvName.setText(userModel.getName());
+        tvEmail.setText(userModel.getEmail());
+        tvCoins.setText(userModel.getCoins());
+    }
+
     private void navigateToSignInActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
@@ -254,4 +266,58 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (userModel!=null){
+            getUserProfile();
+        }
+    }
+
+    public void getUserProfile() {
+        Api.getService(Tags.base_url)
+                .getProfile("Bearer "+userModel.getToken(), userModel.getId())
+                .enqueue(new Callback<LoginRegisterModel>() {
+                    @Override
+                    public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getStatus() == 200) {
+                                LoginRegisterModel model = response.body();
+                                UserModel.ChannelModel channelModel = null;
+                                UserModel.VideoModel videoModel = null;
+                                InterestsModel interestsModel = null;
+                                if (model.getData().getChannel_id() != null) {
+                                    channelModel = new UserModel.ChannelModel(model.getData().getChannel_id(), model.getData().getChannel_name(), model.getData().getChannel_description(), model.getData().getChannel_image());
+
+                                }
+
+                                if (model.getData().getChannel_video_link() != null) {
+                                    videoModel = new UserModel.VideoModel(model.getData().getChannel_video_link(), model.getData().getChannel_video_name(), model.getData().getChannel_video_description(), model.getData().getChannel_video_image());
+
+                                }
+
+                                if (model.getData().getInterested() != 0) {
+                                    interestsModel = new InterestsModel(model.getData().getInterested(), "");
+
+                                }
+
+                                UserModel userModel = new UserModel(model.getData().getId(), model.getData().getGoogle_id(), model.getData().getEmail(), model.getData().getName(), model.getData().getImage(), model.getData().getCoins(), model.getData().getCode(), model.getData().getUser_type(), model.getData().getIs_vip(), model.getData().getToken(), channelModel, videoModel, interestsModel);
+                                preferences.create_update_userdata(HomeActivity.this, userModel);
+
+                                updateUi();
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginRegisterModel> call, Throwable t) {
+
+                    }
+                });
+
+    }
+
+
 }

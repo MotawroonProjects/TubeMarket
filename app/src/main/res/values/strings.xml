@@ -77,8 +77,6 @@
     <string name="total_coins">Total coins</string>
     <string name="create_campaign">Create campaign</string>
     <string name="warning_donot_create">Warning, do not create many videos campaigns,and for youtube,it does not count repeated views from same IP in a short period. The length of the video must be at least 45 seconds. Youtube takes 72 hours to update your view history</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loading">Loading...</string>
     <string name="when_you_subscribe">When you subscribe to the golden account, you will get a 10% discount from the campaign cost.you will get a change th channel link permanently</string>
     <string name="other_payment_methods">Other payment methods</string>
