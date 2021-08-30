@@ -97,15 +97,14 @@
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <FrameLayout
                     android:id="@+id/cardAdAds"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="72dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center"
-                    app:cardBackgroundColor="@color/color3"
-                    app:cardCornerRadius="10dp"
+                    android:background="@drawable/small_rounded_gray4"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
@@ -120,9 +119,9 @@
                         android:textColor="@color/white"
                         android:textSize="16sp"
 
-
+                        android:layout_marginBottom="5dp"
                         />
-                </androidx.cardview.widget.CardView>
+                </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.navigation.NavigationView
@@ -133,6 +132,7 @@
                 app:headerLayout="@layout/navigation_view_header"
                 app:itemIconTint="@color/gray12"
                 app:menu="@menu/slide_menu" />
+
         </androidx.drawerlayout.widget.DrawerLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

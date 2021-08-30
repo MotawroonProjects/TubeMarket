@@ -217,7 +217,8 @@ public class WebViewActivity extends AppCompatActivity {
         binding.viewLayer.setFocusable(false);
     }
 
-    private void likeDislike(String status){
+    private void likeDislike(String status)
+    {
         Api.getService(Tags.base_url)
                 .like("Bearer "+userModel.getToken(), userModel.getId(),myVideosModel.getId(),myVideosModel.getProfit_coins())
                 .enqueue(new Callback<StatusResponse>() {

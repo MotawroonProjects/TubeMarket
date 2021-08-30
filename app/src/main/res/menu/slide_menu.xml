@@ -18,7 +18,7 @@
             </menu>
         </item>
         <item android:id="@+id/contact"
-            android:title="@string/contact"
+            android:title="@string/invitation"
             >
             <menu>
                 <item android:id="@+id/invite"

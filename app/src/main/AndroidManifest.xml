@@ -57,9 +57,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="tubemarket.com"
+                    android:host="tube-market.sray.live"
                     android:pathPrefix="/code/"
-                    android:scheme="https" />
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity

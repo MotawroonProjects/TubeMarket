@@ -16,17 +16,25 @@
            android:layout_height="wrap_content"
            android:orientation="vertical"
            >
-           <TextView
-               android:layout_width="wrap_content"
+           <FrameLayout
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:textColor="@color/black"
-               android:textSize="14sp"
-               android:text="@string/when_you_subscribe"
                android:layout_marginStart="8dp"
                android:layout_marginEnd="8dp"
                android:layout_marginTop="20dp"
-               android:lineHeight="26dp"
-               />
+               android:background="@drawable/small_rounded_color5"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="@color/black"
+                   android:textSize="14sp"
+                   android:text="@string/when_you_subscribe"
+                   android:lineHeight="26dp"
+                   android:layout_margin="5dp"
+                   />
+           </FrameLayout>
+
            <androidx.recyclerview.widget.RecyclerView
                android:id="@+id/recView"
                android:layout_width="match_parent"
@@ -45,46 +53,16 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_gravity="center_vertical"
-                   android:layout_marginStart="8dp"
-                   android:layout_marginEnd="8dp"
+                   android:layout_marginStart="16dp"
+                   android:layout_marginEnd="16dp"
                    android:textColor="@color/black"
                    android:textSize="15sp"
                    android:text="@string/other_payment_methods"
 
                    />
            </androidx.cardview.widget.CardView>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textColor="@color/black"
-               android:textSize="14sp"
-               android:text="@string/note_subscriptions"
-               android:layout_marginStart="8dp"
-               android:layout_marginEnd="8dp"
-               android:layout_marginTop="15dp"
-               android:lineHeight="26dp"
-
-               />
-           <Space
-               android:layout_width="0dp"
-               android:layout_height="0dp"
-               android:layout_weight="1"
-               />
-
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textColor="@color/colorPrimary"
-               android:textSize="12sp"
-               android:text="@string/contact_us_if_you_have_special_requests_or_if_you_have_a_problem_with_the_application_or_want_to_purchase_from_the_application_on_the_e_mail"
-               android:layout_marginStart="8dp"
-               android:layout_marginEnd="8dp"
-               android:layout_marginTop="20dp"
-               android:layout_marginBottom="8dp"
-               android:lineHeight="26dp"
 
 
-               />
            <View
                android:layout_width="match_parent"
                android:layout_height="60dp"

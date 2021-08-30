@@ -12,6 +12,12 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_views"
         />
+
+    <item android:id="@+id/empty"
+        android:title=""
+        app:showAsAction="ifRoom"
+        />
+
     <item android:id="@+id/coinsFragment"
         android:title="@string/currency"
         app:showAsAction="ifRoom"

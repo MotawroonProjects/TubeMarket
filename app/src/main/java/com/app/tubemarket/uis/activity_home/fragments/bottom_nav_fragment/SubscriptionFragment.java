@@ -1,5 +1,8 @@
 package com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment;
 
+import android.animation.ValueAnimator;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -49,7 +52,6 @@ public class SubscriptionFragment extends Fragment {
     private int index = 0;
     private int page =1;
     private MyVideosModel myVideosModel;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,7 +118,6 @@ public class SubscriptionFragment extends Fragment {
                                 page = newPage;
                                 list.addAll(response.body().getData().getData());
                                 index = newIndex;
-                                Log.e("index", index+"__");
                                 loadVideo(list.get(index));
 
                             }
@@ -144,9 +145,31 @@ public class SubscriptionFragment extends Fragment {
         this.myVideosModel = myVideosModel;
         videoId = myVideosModel.getLink();
         binding.setModel(myVideosModel);
+        binding.tvCoins.setText(myVideosModel.getProfit_coins());
+        binding.tvCoins.measure(0,0);
+
+        int w =binding.tvCoins.getMeasuredWidth();
+
+        int width = (pxToDp(w)*2);
+        startAnimation(0,width);
 
     }
 
+    private void startAnimation(int width,int reqWidth){
+        ValueAnimator animator = ValueAnimator.ofInt(width,reqWidth);
+        animator.addUpdateListener(animation -> {
+            int value = (int) animation.getAnimatedValue();
+            ViewGroup.LayoutParams params = binding.tvCoins.getLayoutParams();
+            params.width = value;
+            binding.tvCoins.requestLayout();
+        });
+        animator.setDuration(200);
+        animator.start();
+    }
+
+    private int pxToDp(int px){
+        return (int) (px/getResources().getDisplayMetrics().density);
+    }
 
 
 }

@@ -16,6 +16,7 @@ public class UserModel extends StatusResponse implements Serializable {
     private ChannelModel channelModel;
     private VideoModel videoModel;
     private InterestsModel interestsModel;
+    private String firebaseToken="";
 
     public UserModel(String id, String google_id, String email, String name, String image, String coins, String code, String user_type, String is_vip, String token, ChannelModel channelModel, VideoModel videoModel, InterestsModel interestsModel) {
         this.id = id;
@@ -135,6 +136,14 @@ public class UserModel extends StatusResponse implements Serializable {
 
     public void setInterestsModel(InterestsModel interestsModel) {
         this.interestsModel = interestsModel;
+    }
+
+    public void setFirebase_token(String token) {
+        this.firebaseToken =token;
+    }
+
+    public String getFirebaseToken() {
+        return firebaseToken;
     }
 
     public static class ChannelModel implements Serializable{

@@ -30,51 +30,48 @@
 
             >
 
-            <FrameLayout
-                android:layout_width="70dp"
-                android:layout_height="30dp"
+            <LinearLayout
+                android:id="@+id/llCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_margin="5dp"
-                android:background="@drawable/rounded_white"
                 android:gravity="center"
-
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                android:padding="3dp"
+                android:background="@drawable/rounded_white"
 
                 >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvCoins"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:text='@{model.profit_coins}'
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text='@{model.profit_coins}'
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-
-                        />
-
-                    <Space
-                        android:layout_width="5dp"
-                        android:layout_height="wrap_content"
-
-                        />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:src="@drawable/ic_dolar" />
+                    />
 
 
-                </LinearLayout>
-            </FrameLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgCoin"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/ic_dolar" />
+
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -1,28 +1,13 @@
 package com.app.tubemarket.interfaces;
 
 
+import com.app.tubemarket.models.VipModel;
+
 public interface Listeners {
 
-    interface BackListener
-    {
-        void back();
+    interface VipListener {
+        void onVipPay(VipModel model);
     }
-
-    interface SignUpListener {
-
-        void openSheet();
-
-        void closeSheet();
-
-        void checkDataValid();
-
-        void checkReadPermission();
-
-        void checkCameraPermission();
-    }
-
-
-
 
 
 }

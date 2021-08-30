@@ -18,17 +18,19 @@
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/inset_dialog.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/next_btn.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/rb_dialog.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_color4.xml" value="0.1843718079673136" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_gray.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_gray4.xml" value="0.1843718079673136" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_primary.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_stroke.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_strokk_gray.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_white.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_stroke_primary.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_faq.xml" value="0.1" />
-        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_home.xml" value="0.18" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_home.xml" value="0.16" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_login.xml" value="0.18" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_splash.xml" value="0.12092391304347826" />
-        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_web_view.xml" value="0.13677536231884058" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_web_view.xml" value="0.21" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/dialog_coins.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/dialog_video.xml" value="0.22" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_add_ads.xml" value="0.15" />
@@ -40,17 +42,18 @@
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_get_subscribers.xml" value="0.2" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_get_subscribers_views.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_get_views.xml" value="0.22" />
-        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_gold_profile.xml" value="0.22" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_gold_profile.xml" value="0.2" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_invite.xml" value="0.2" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_language.xml" value="0.1" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_new_addition.xml" value="0.22" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_new_addition_set_up.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
-        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_subscription.xml" value="0.18" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_subscription.xml" value="0.2475795297372061" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_views.xml" value="0.16770833333333332" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/navigation_view_header.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/spinner_row.xml" value="0.1" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/spinner_row2.xml" value="0.1" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/vip_pay.xml" value="0.22" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1398148148148148" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/menu/slide_menu.xml" value="0.1398148148148148" />
       </map>

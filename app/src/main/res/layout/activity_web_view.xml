@@ -66,21 +66,42 @@
         <LinearLayout
             android:id="@+id/llCounter"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:visibility="gone"
+            android:orientation="horizontal"
             >
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:text='@{coins+" "+@string/currency}'
+                android:orientation="vertical"
                 android:gravity="center"
-                />
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="40sp"
+                    android:text='@{coins}'
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+
+                    android:src="@drawable/ic_dolar" />
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btnConfirm"
                 android:layout_width="150dp"
@@ -91,15 +112,35 @@
                 android:text="@string/confirm"
                 android:visibility="gone"
                 />
-            <TextView
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:text='@{seconds}'
+                android:orientation="vertical"
                 android:gravity="center"
-                />
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="40sp"
+                    android:text='@{seconds}'
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_clock" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 </layout>

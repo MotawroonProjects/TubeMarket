@@ -17,6 +17,7 @@ import android.Manifest;
 import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -42,9 +43,11 @@ import com.app.tubemarket.databinding.ActivityHomeBinding;
 import com.app.tubemarket.language.Language;
 import com.app.tubemarket.models.InterestsModel;
 import com.app.tubemarket.models.LoginRegisterModel;
+import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.preferences.Preferences;
 import com.app.tubemarket.remote.Api;
+import com.app.tubemarket.share.Common;
 import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CoinsFragment;
 import com.app.tubemarket.uis.activity_login.LoginActivity;
@@ -72,6 +75,7 @@ import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.youtube.YouTubeScopes;
 import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.ChannelListResponse;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -111,7 +115,17 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setLifecycleOwner(this);
+        getDataFromIntent();
         initView();
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent.getData()!=null){
+            String inviteCode = intent.getData().getLastPathSegment();
+            Log.e("code", inviteCode);
+
+        }
     }
 
     private void initView() {
@@ -129,7 +143,10 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        binding.bottomNav.getMenu().findItem(R.id.empty).setEnabled(false);
+
         binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             String name = destination.getLabel().toString();
             binding.toolBar.setTitle("");
@@ -182,13 +199,12 @@ public class HomeActivity extends AppCompatActivity {
                     break;
 
                 case R.id.logout:
-                    preferences.clear(this);
                     new Handler(Looper.myLooper())
-                            .postDelayed(() -> navigateToSignInActivity(), 500);
+                            .postDelayed(this::logout, 500);
                     break;
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START);
-            return false;
+            return true;
         });
 
         if (userModel == null) {
@@ -197,6 +213,7 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         }
 
+        updateFirebaseToken();
 
     }
 
@@ -270,14 +287,14 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (userModel!=null){
+        if (userModel != null) {
             getUserProfile();
         }
     }
 
     public void getUserProfile() {
         Api.getService(Tags.base_url)
-                .getProfile("Bearer "+userModel.getToken(), userModel.getId())
+                .getProfile("Bearer " + userModel.getToken(), userModel.getId())
                 .enqueue(new Callback<LoginRegisterModel>() {
                     @Override
                     public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
@@ -314,6 +331,107 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<LoginRegisterModel> call, Throwable t) {
 
+                    }
+                });
+
+    }
+
+    private void updateFirebaseToken() {
+        FirebaseMessaging.getInstance()
+                .getToken()
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        String token = task.getResult();
+                        try {
+                            Api.getService(Tags.base_url)
+                                    .updateFirebaseToken("Bearer " + userModel.getToken(), userModel.getId(), token, "android")
+                                    .enqueue(new Callback<StatusResponse>() {
+                                        @Override
+                                        public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+                                            if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 200) {
+                                                userModel.setFirebase_token(token);
+                                                preferences.create_update_userdata(HomeActivity.this, userModel);
+
+                                                Log.e("token", "updated successfully");
+                                            } else {
+                                                try {
+
+                                                    Log.e("errorToken", response.code() + "_" + response.errorBody().string());
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<StatusResponse> call, Throwable t) {
+                                            try {
+
+                                                if (t.getMessage() != null) {
+                                                    Log.e("errorToken2", t.getMessage());
+
+                                                }
+
+                                            } catch (Exception e) {
+                                            }
+                                        }
+                                    });
+                        } catch (Exception e) {
+
+                        }
+                    }
+                });
+    }
+
+    public void logout() {
+
+        Log.e("ddd", "fff");
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .logout("Bearer " + userModel.getToken(), userModel.getId(), userModel.getFirebaseToken())
+                .enqueue(new Callback<StatusResponse>() {
+                    @Override
+                    public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            if (response.body() != null && response.body().getStatus() == 200) {
+                                NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                manager.cancel(Tags.not_tag,Tags.not_id);
+                                preferences.clear(HomeActivity.this);
+                                navigateToSignInActivity();
+                            }
+
+                        } else {
+                            dialog.dismiss();
+                            try {
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (response.code() == 500) {
+                            } else {
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<StatusResponse> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+                                Log.e("error", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                } else {
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
                     }
                 });
 

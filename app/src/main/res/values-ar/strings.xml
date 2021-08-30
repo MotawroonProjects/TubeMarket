@@ -48,7 +48,7 @@
     <string name="rate_app">تقييم التطبيق</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
     <string name="change_language">تغيير اللغة</string>
-    <string name="add_ads">إنشاء إعلان</string>
+    <string name="add_ads">إنشاء\nإعلان</string>
     <string name="enter_video_url_here">ادخل رابط الفيديو هنا...</string>
     <string name="add">إضافة</string>
     <string name="channel_name">إسم القناة</string>
@@ -86,7 +86,7 @@
     <string name="next">التالي</string>
     <string name="ch_lang">تغيير اللغة</string>
     <string name="invitation">دعوة</string>
-    <string name="invite_your_friend_earn">ادع صديقك واكسب 1000 عملة لكل احالة عن طريق زر احالة الرابط(هو ايطا سيحصل على 1000 عملة)</string>
+    <string name="invite_your_friend_earn">ادع صديقك واكسب 1000 عملة لكل احالة عن طريق زر احالة الرابط(هو ايضا سيحصل على 1000 عملة)</string>
     <string name="the_number_friends">عدد اصدقاؤك المشتركين من خلال رابط الدعوة الخاصة بك</string>
     <string name="copy_link">نسخ الرابط</string>
     <string name="copied">تم النسخ</string>
@@ -120,5 +120,6 @@
     <string name="suc">تم بنجاح!</string>
     <string name="admin_review">انتظر حتي تقوم الادارة بمراجعة الفيديو الخاص بسيادتكم</string>
     <string name="alert">تنبية</string>
+    <string name="day">يوم</string>
 
 </resources>

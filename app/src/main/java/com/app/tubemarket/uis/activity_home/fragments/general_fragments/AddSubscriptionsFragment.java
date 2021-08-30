@@ -106,8 +106,6 @@ public class AddSubscriptionsFragment extends Fragment {
 
     private void getSubscribeSecond(){
 
-        Log.e("token",userModel.getToken());
-
         Api.getService(Tags.base_url)
                 .getSubscribeSeconds("Bearer "+userModel.getToken())
                 .enqueue(new Callback<SubscribeSecondsModel>() {

@@ -20,6 +20,9 @@ import android.widget.Toast;
 import com.app.tubemarket.R;
 import com.app.tubemarket.databinding.FragmentInviteBinding;
 import com.app.tubemarket.databinding.FragmentLanguageBinding;
+import com.app.tubemarket.models.UserModel;
+import com.app.tubemarket.preferences.Preferences;
+import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
 
 import io.paperdb.Paper;
@@ -29,6 +32,8 @@ public class InviteFragment extends Fragment {
 
     private FragmentInviteBinding binding;
     private HomeActivity activity;
+    private UserModel userModel;
+    private Preferences preferences;
 
 
     @Override
@@ -41,6 +46,13 @@ public class InviteFragment extends Fragment {
 
     private void initView() {
         activity = (HomeActivity) getActivity();
+        preferences = Preferences.getInstance();
+        userModel = preferences.getUserData(activity);
+
+        String shareLink = Tags.base_url+"code/"+userModel.getCode();
+
+        binding.tvLink.setText(shareLink);
+
         binding.tvLink.setOnClickListener(v -> {
             String link = binding.tvLink.getText().toString();
             if (!link.isEmpty()) {

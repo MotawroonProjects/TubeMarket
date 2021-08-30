@@ -7,6 +7,7 @@ import com.app.tubemarket.models.SubscribeSecondsModel;
 import com.app.tubemarket.models.VideoDataModel;
 import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.models.ViewsSecondsModel;
+import com.app.tubemarket.models.VipDataModel;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -160,5 +161,24 @@ public interface Service {
     );
 
 
+    @GET("api/list-of-vip")
+    Call<VipDataModel> getVipPay(@Header("Authorization") String token,
+                                 @Query("orderBy") String orderBy
+    );
+
+    @FormUrlEncoded
+    @POST("api/logout")
+    Call<StatusResponse> logout(@Header("Authorization") String bearer_token,
+                                @Field("user_id") String user_id,
+                                @Field("phone_token") String firebase_token
+                                );
+
+    @FormUrlEncoded
+    @POST("api/firebase-tokens")
+    Call<StatusResponse> updateFirebaseToken(@Header("Authorization") String bearer_token,
+                                             @Field("user_id") String user_id,
+                                             @Field("phone_token") String firebase_token,
+                                             @Field("software_type") String software_type
+    );
 }
 
