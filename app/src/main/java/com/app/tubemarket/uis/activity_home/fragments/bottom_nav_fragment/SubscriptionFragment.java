@@ -1,10 +1,18 @@
 package com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -25,6 +33,7 @@ import com.app.tubemarket.remote.Api;
 import com.app.tubemarket.share.Common;
 import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
+import com.app.tubemarket.uis.activity_web_view.WebViewActivity;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
@@ -52,6 +61,7 @@ public class SubscriptionFragment extends Fragment {
     private int index = 0;
     private int page =1;
     private MyVideosModel myVideosModel;
+    private ActivityResultLauncher<Intent> launcher;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +69,21 @@ public class SubscriptionFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_subscription,container,false);
         initView();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode()== Activity.RESULT_OK){
+                    index = 0;
+                    page = 1;
+                    getVideos(page, index);
+                }
+            }
+        });
     }
 
     private void initView()
@@ -80,7 +105,11 @@ public class SubscriptionFragment extends Fragment {
             bundle.putString("vidUrl",vidUrl);
             bundle.putSerializable("data", myVideosModel);
 
-            Navigation.findNavController(v).navigate(R.id.webView,bundle);
+
+            Intent intent = new Intent(activity, WebViewActivity.class);
+            intent.putExtras(bundle);
+            launcher.launch(intent);
+
         });
 
         binding.llNext.setOnClickListener(view -> {
@@ -103,6 +132,7 @@ public class SubscriptionFragment extends Fragment {
     }
     private void getVideos(int newPage, int newIndex)
     {
+        binding.setModel(null);
         binding.llNext.setVisibility(View.INVISIBLE);
         binding.flSubscribe.setVisibility(View.INVISIBLE);
         Api.getService(Tags.base_url)

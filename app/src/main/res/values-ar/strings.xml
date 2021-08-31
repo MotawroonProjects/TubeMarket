@@ -121,5 +121,11 @@
     <string name="admin_review">انتظر حتي تقوم الادارة بمراجعة الفيديو الخاص بسيادتكم</string>
     <string name="alert">تنبية</string>
     <string name="day">يوم</string>
+    <string name="should_view">يجب مشاهدة الفيديو اولا</string>
+    <string name="repeatition">تكرار</string>
+    <string name="delete">حذف</string>
+    <string name="camp_details">تفاصيل الحملة</string>
+    <string name="viewers_list">قائمة المشاهدين</string>
+    <string name="open_app">فتح التطبيق</string>
 
 </resources>

@@ -200,8 +200,9 @@ public class ViewsFragment extends Fragment {
                         if (response.isSuccessful() && response.body() != null) {
                             Log.e("ddd", response.body().getStatus()+"__");
                             if (response.body().getStatus() == 200) {
-                                createDialog(myVideosModel.getProfit_coins());
                                 activity.getUserProfile();
+
+                                createDialog(myVideosModel.getProfit_coins());
                             }
                         }else {
                             try {

@@ -1,7 +1,9 @@
 package com.app.tubemarket.services;
 
+import com.app.tubemarket.models.CampaignDataModel;
 import com.app.tubemarket.models.CoinsDataModel;
 import com.app.tubemarket.models.LoginRegisterModel;
+import com.app.tubemarket.models.SingleCampaign;
 import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.SubscribeSecondsModel;
 import com.app.tubemarket.models.VideoDataModel;
@@ -140,7 +142,7 @@ public interface Service {
                               @Field("user_id") String user_id,
                               @Field("campaign_id") String campaign_id,
                               @Field("profit_coins") String profit_coins,
-                              @Field("timer_limit") String timer_limit
+                              @Field("seconds") String seconds
 
     );
 
@@ -149,7 +151,8 @@ public interface Service {
     Call<StatusResponse> like(@Header("Authorization") String token,
                               @Field("user_id") String user_id,
                               @Field("campaign_id") String campaign_id,
-                              @Field("profit_coins") String profit_coins
+                              @Field("profit_coins") String profit_coins,
+                              @Field("type") String type
     );
 
     @FormUrlEncoded
@@ -171,7 +174,7 @@ public interface Service {
     Call<StatusResponse> logout(@Header("Authorization") String bearer_token,
                                 @Field("user_id") String user_id,
                                 @Field("phone_token") String firebase_token
-                                );
+    );
 
     @FormUrlEncoded
     @POST("api/firebase-tokens")
@@ -180,5 +183,26 @@ public interface Service {
                                              @Field("phone_token") String firebase_token,
                                              @Field("software_type") String software_type
     );
+
+
+    @GET("api/list-of-campaigns")
+    Call<CampaignDataModel> getMyCampaign(@Header("Authorization") String token,
+                                          @Query("user_id") String user_id,
+                                          @Query("orderBy") String orderBy
+    );
+
+    @GET("api/one-campaign")
+    Call<SingleCampaign> getSingleCampaign(@Header("Authorization") String token,
+                                           @Query("user_id") String user_id,
+                                           @Query("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("api/delete-campaign")
+    Call<StatusResponse> deleteCampaign(@Header("Authorization") String bearer_token,
+                                        @Field("id") String user_id
+
+    );
+
 }
 

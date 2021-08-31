@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.ClientCertRequest;
 import android.webkit.HttpAuthHandler;
@@ -89,6 +90,7 @@ public class WebViewActivity extends AppCompatActivity {
         myVideosModel = (MyVideosModel) intent.getExtras().getSerializable("data");
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void initView() {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
@@ -162,7 +164,7 @@ public class WebViewActivity extends AppCompatActivity {
 
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/like/dislike")) {
                     Log.e("response", "disLike");
-                    likeDislike("dislike");
+                    likeDislike("remove_like");
 
                 }
                 return null;
@@ -180,6 +182,12 @@ public class WebViewActivity extends AppCompatActivity {
 
         });
 
+        binding.viewLayer.setOnClickListener(v->Toast.makeText(this, R.string.should_view, Toast.LENGTH_SHORT).show());
+
+        binding.btnConfirm.setOnClickListener(v -> {
+            setResult(RESULT_OK);
+            finish();
+        });
 
     }
 
@@ -215,12 +223,15 @@ public class WebViewActivity extends AppCompatActivity {
     private void onCounterFinished() {
         binding.viewLayer.setClickable(false);
         binding.viewLayer.setFocusable(false);
+        binding.llCoins.setVisibility(View.INVISIBLE);
+        binding.llSeconds.setVisibility(View.INVISIBLE);
+        binding.btnConfirm.setVisibility(View.VISIBLE);
     }
 
     private void likeDislike(String status)
     {
         Api.getService(Tags.base_url)
-                .like("Bearer "+userModel.getToken(), userModel.getId(),myVideosModel.getId(),myVideosModel.getProfit_coins())
+                .like("Bearer "+userModel.getToken(), userModel.getId(),myVideosModel.getId(),myVideosModel.getProfit_coins(),status)
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {

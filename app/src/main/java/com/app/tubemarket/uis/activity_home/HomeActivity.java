@@ -299,8 +299,10 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
                         if (response.isSuccessful() && response.body() != null) {
+                            Log.e("code", response.body().getStatus()+"_");
                             if (response.body().getStatus() == 200) {
                                 LoginRegisterModel model = response.body();
+
                                 UserModel.ChannelModel channelModel = null;
                                 UserModel.VideoModel videoModel = null;
                                 InterestsModel interestsModel = null;
@@ -319,7 +321,8 @@ public class HomeActivity extends AppCompatActivity {
 
                                 }
 
-                                UserModel userModel = new UserModel(model.getData().getId(), model.getData().getGoogle_id(), model.getData().getEmail(), model.getData().getName(), model.getData().getImage(), model.getData().getCoins(), model.getData().getCode(), model.getData().getUser_type(), model.getData().getIs_vip(), model.getData().getToken(), channelModel, videoModel, interestsModel);
+                                userModel = new UserModel(model.getData().getId(), model.getData().getGoogle_id(), model.getData().getEmail(), model.getData().getName(), model.getData().getImage(), model.getData().getCoins(), model.getData().getCode(), model.getData().getUser_type(), model.getData().getIs_vip(), model.getData().getToken(), channelModel, videoModel, interestsModel);
+
                                 preferences.create_update_userdata(HomeActivity.this, userModel);
 
                                 updateUi();

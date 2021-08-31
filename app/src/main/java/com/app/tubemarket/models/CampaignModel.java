@@ -1,8 +1,9 @@
 package com.app.tubemarket.models;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class MyVideosModel implements Serializable {
+public class CampaignModel implements Serializable {
     private String id;
     private String type;
     private String user_id;
@@ -19,8 +20,10 @@ public class MyVideosModel implements Serializable {
     private String discount_coins;
     private String profit_coins;
     private String campaign_coins;
-    private LoginRegisterModel.Data user_fk;
-    private OperationModel user_operations_fk;
+    private String created_at;
+    private UserFkModel user_fk;
+    private List<OperationModel> operations_fk;
+
 
     public String getId() {
         return id;
@@ -86,12 +89,15 @@ public class MyVideosModel implements Serializable {
         return campaign_coins;
     }
 
-    public LoginRegisterModel.Data getUser_fk() {
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public UserFkModel getUser_fk() {
         return user_fk;
     }
 
-    public OperationModel getUser_operations_fk() {
-        return user_operations_fk;
+    public List<OperationModel> getOperations_fk() {
+        return operations_fk;
     }
-
 }

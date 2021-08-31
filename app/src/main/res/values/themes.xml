@@ -16,4 +16,8 @@
         <item name="android:windowEnterAnimation">@anim/dialog_congratulation_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_congratulation_exit</item>
     </style>
+
+    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:itemBackground">@color/gray2</item>
+    </style>
 </resources>

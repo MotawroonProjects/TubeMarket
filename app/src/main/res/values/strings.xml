@@ -122,4 +122,10 @@
     <string name="admin_review">PPlease wait for the admin to review your video</string>
     <string name="alert">Alert</string>
     <string name="day">Day</string>
+    <string name="should_view">You should view video first</string>
+    <string name="repeatition">Repetition</string>
+    <string name="delete">Delete</string>
+    <string name="camp_details">Campaign details</string>
+    <string name="viewers_list">Viewers list</string>
+    <string name="open_app">Open app</string>
 </resources>

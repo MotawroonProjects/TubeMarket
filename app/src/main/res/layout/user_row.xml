@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="model"
+            type="com.app.tubemarket.models.OperationModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:gravity="center_vertical"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            user_image="@{model.user_fk.image}"
+            />
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="0dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:singleLine="true"
+               android:textColor="@color/black"
+               android:textSize="13sp"
+               android:text="@{model.user_fk.name}"
+               />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="12dp"
+                android:text='@{model.seconds+" "+@string/seconds}'
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

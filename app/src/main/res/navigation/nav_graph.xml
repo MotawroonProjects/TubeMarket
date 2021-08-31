@@ -69,10 +69,7 @@
         android:label="@string/create_campaign"
         tools:layout="@layout/fragment_new_addition_set_up" />
 
-    <activity
-        android:id="@+id/webView"
-        android:name="com.app.tubemarket.uis.activity_web_view.WebViewActivity"
-        />
+
     <fragment
         android:id="@+id/changeLang"
         android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.LanguageFragment"
@@ -98,4 +95,9 @@
         android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.GetLikesFragment"
         android:label="@string/get_likes"
         tools:layout="@layout/fragment_get_likes" />
+    <fragment
+        android:id="@+id/campaignDetailsFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.CampaignDetailsFragment"
+        android:label="@string/camp_details"
+        tools:layout="@layout/fragment_campaign_details" />
 </navigation>

@@ -74,6 +74,7 @@
             android:orientation="horizontal"
             >
             <LinearLayout
+                android:id="@+id/llCoins"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -109,11 +110,13 @@
                 android:background="@drawable/small_rounded_primary"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:text="@string/confirm"
+                android:text="@string/open_app"
                 android:visibility="gone"
+
                 />
 
             <LinearLayout
+                android:id="@+id/llSeconds"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

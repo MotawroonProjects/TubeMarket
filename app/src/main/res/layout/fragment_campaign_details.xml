@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="model"
+            type="com.app.tubemarket.models.CampaignModel" />
+    </data>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="16dp"
+        tools:context=".uis.activity_home.fragments.general_fragments.CampaignDetailsFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                channel_image="@{model.user_fk.channel_image}"
+                />
+
+            <ProgressBar
+                android:id="@+id/progBar"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_marginTop="24dp"
+                android:progressDrawable="@drawable/horizontal_progress"
+                android:indeterminate="false"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                >
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_loading"
+                    android:padding="3dp"
+                    app:tint="@color/colorPrimary"
+                    android:layout_gravity="center_vertical"
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:singleLine="true"
+                    android:layout_gravity="center_vertical"
+                    android:text='@{model.view_count+"/"+model.view_limit+" "+@string/views}'
+
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:singleLine="true"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:text="@string/viewers_list"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

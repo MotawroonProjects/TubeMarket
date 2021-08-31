@@ -61,6 +61,7 @@ public class ProfileFragment extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
 
+        updateUI();
 
 
         if (userModel.getInterestsModel() != null) {
@@ -145,6 +146,25 @@ public class ProfileFragment extends Fragment {
 
 
 
+    }
+
+    private void updateUI() {
+        if (userModel.getChannelModel()==null){
+            binding.edtUrl.setEnabled(true);
+            binding.btnAdd.setEnabled(true);
+            binding.btnUpdate.setEnabled(true);
+        }else {
+            if (userModel.getIs_vip().equals("no")){
+                binding.edtUrl.setEnabled(false);
+                binding.btnAdd.setEnabled(false);
+                binding.btnUpdate.setEnabled(false);
+            }else{
+                binding.edtUrl.setEnabled(true);
+                binding.btnAdd.setEnabled(true);
+                binding.btnUpdate.setEnabled(true);
+
+            }
+        }
     }
 
     private void getVideoById(String vidId) {
@@ -333,6 +353,7 @@ public class ProfileFragment extends Fragment {
                                 binding.setUserModel(userModel);
                                 preferences.create_update_userdata(activity, userModel);
 
+                                updateUI();
                             }
                         }else {
                             try {
