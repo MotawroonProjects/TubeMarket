@@ -349,12 +349,12 @@ public class ProfileFragment extends Fragment {
                                             break;
 
                                     }
-                                    interestsModel = new InterestsModel(model.getData().getInterested(), interests);
 
                                 }else {
                                     interests = getString(R.string.un_defined);
                                 }
 
+                                interestsModel = new InterestsModel(model.getData().getInterested(), interests);
 
 
 
