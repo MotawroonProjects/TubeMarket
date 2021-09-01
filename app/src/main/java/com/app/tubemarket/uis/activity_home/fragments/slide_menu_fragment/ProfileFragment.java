@@ -325,28 +325,39 @@ public class ProfileFragment extends Fragment {
                                 }
 
                                 String interests = "";
-                                switch (model.getData().getInterested()) {
-                                    case 1:
-                                        interests = getString(R.string.sports);
-                                        break;
-                                    case 2:
-                                        interests = getString(R.string.games);
 
-                                        break;
-                                    case 3:
-                                        interests = getString(R.string.cooks);
+                                if (model.getData().getInterested()!=0){
 
-                                        break;
-                                    case 4:
-                                        interests = getString(R.string.writes);
+                                    switch (model.getData().getInterested()) {
+                                        case 1:
+                                            interests = getString(R.string.sports);
+                                            break;
+                                        case 2:
+                                            interests = getString(R.string.games);
 
-                                        break;
-                                    default:
-                                        interests = getString(R.string.un_defined);
-                                        break;
+                                            break;
+                                        case 3:
+                                            interests = getString(R.string.cooks);
 
+                                            break;
+                                        case 4:
+                                            interests = getString(R.string.writes);
+
+                                            break;
+                                        default:
+                                            interests = getString(R.string.un_defined);
+                                            break;
+
+                                    }
+                                    interestsModel = new InterestsModel(model.getData().getInterested(), interests);
+
+                                }else {
+                                    interests = getString(R.string.un_defined);
                                 }
-                                interestsModel = new InterestsModel(model.getData().getInterested(), interests);
+
+
+
+
 
 
 
