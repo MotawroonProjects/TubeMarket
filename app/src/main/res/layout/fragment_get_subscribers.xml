@@ -8,6 +8,9 @@
         <variable
             name="model"
             type="com.app.tubemarket.models.UserModel.ChannelModel" />
+        <variable
+            name="cost"
+            type="String" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -94,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
-                    android:text="0"
+                    android:text="@{cost}"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -106,6 +109,21 @@
                     android:textColor="@color/gray12"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/tvCalc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp"
+                    android:text="@string/get_total"
+                    android:visibility="gone"
+                    />
             </LinearLayout>
 
             <EditText

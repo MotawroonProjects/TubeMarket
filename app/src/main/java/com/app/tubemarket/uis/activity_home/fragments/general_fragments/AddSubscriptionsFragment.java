@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,6 +65,13 @@ public class AddSubscriptionsFragment extends Fragment {
         secondsList = new ArrayList<>();
         binding.setModel(userModel.getChannelModel());
 
+        if (userModel.getChannelModel()==null){
+            binding.btnCreateCampaign.setEnabled(false);
+            Toast.makeText(activity, R.string.to_create_campaign, Toast.LENGTH_SHORT).show();
+        }else {
+            binding.btnCreateCampaign.setEnabled(true);
+
+        }
         subscriptionsAdapter = new SpinnerCountAdapter(subscriptionsList,activity);
         binding.spinnerSubscriptions.setAdapter(subscriptionsAdapter);
         secondsAdapter = new SpinnerCountAdapter(secondsList,activity);

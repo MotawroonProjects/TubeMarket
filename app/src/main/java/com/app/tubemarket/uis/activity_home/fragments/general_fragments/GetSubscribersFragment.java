@@ -1,10 +1,13 @@
 package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import com.app.tubemarket.adapters.SpinnerCountAdapter;
 import com.app.tubemarket.adapters.SpinnerInterestsAdapter;
 import com.app.tubemarket.databinding.FragmentGetSubscribersBinding;
 import com.app.tubemarket.databinding.FragmentProfileBinding;
+import com.app.tubemarket.models.CostResultModel;
 import com.app.tubemarket.models.InterestsModel;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.models.VideoModel;
@@ -24,6 +28,7 @@ import com.app.tubemarket.share.Common;
 import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -41,13 +46,13 @@ public class GetSubscribersFragment extends Fragment {
     private VideoModel channelModel = null;
     private SpinnerCountAdapter secondsAdapter;
     private List<String> secondsList;
-
+    private String subscribe_num = "0";
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_get_subscribers,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_get_subscribers, container, false);
         initView();
         return binding.getRoot();
     }
@@ -57,31 +62,63 @@ public class GetSubscribersFragment extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         secondsList = new ArrayList<>();
-        for (int index=1;index<9;index++)
-        {
-            if (index==1){
-                secondsList.add("45");
-            }else {
-                int second = index*30;
-                secondsList.add(second+"");
+        binding.setCost("0");
+        binding.tvCalc.setPaintFlags(binding.tvCalc.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 
+        for (int index = 1; index < 9; index++) {
+            if (index == 1) {
+                secondsList.add("45");
+            } else {
+                int second = index * 30;
+                secondsList.add(second + "");
 
 
             }
         }
-        secondsAdapter = new SpinnerCountAdapter(secondsList,activity);
+        secondsAdapter = new SpinnerCountAdapter(secondsList, activity);
         binding.spinnerSubscriptions.setAdapter(secondsAdapter);
+
+        binding.edtNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().isEmpty()){
+                    subscribe_num =s.toString();
+                    binding.tvCalc.setVisibility(View.VISIBLE);
+
+                }else{
+                    subscribe_num = "0";
+                    binding.tvCalc.setVisibility(View.GONE);
+                    binding.setCost("0");
+                }
+
+            }
+        });
+
+        binding.tvCalc.setOnClickListener(v -> {
+            if (!subscribe_num.equals("0")){
+                calculateCost();
+            }
+        });
 
         binding.btnConfirm.setOnClickListener(v -> {
             String url = binding.edtUrl.getText().toString().trim();
             String channelId = extractChannelId(url);
-            if (channelId!=null){
+            if (channelId != null) {
                 binding.btnConfirm.setEnabled(false);
                 getChannelById(channelId);
 
             }
         });
-
 
 
     }
@@ -94,11 +131,11 @@ public class GetSubscribersFragment extends Fragment {
                     @Override
                     public void onResponse(Call<VideoModel> call, Response<VideoModel> response) {
                         binding.btnConfirm.setEnabled(true);
-                        if (response.isSuccessful()&&response.body()!=null){
-                            if (response.body().getItems()!=null&&response.body().getItems().size()>0){
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getItems() != null && response.body().getItems().size() > 0) {
 
                                 channelModel = response.body();
-                                UserModel.ChannelModel model = new UserModel.ChannelModel(channelModel.getItems().get(0).getId(),channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(),channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(),channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
+                                UserModel.ChannelModel model = new UserModel.ChannelModel(channelModel.getItems().get(0).getId(), channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(), channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(), channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
                                 binding.setModel(model);
 
                             }
@@ -113,16 +150,45 @@ public class GetSubscribersFragment extends Fragment {
                 });
     }
 
-    private String extractChannelId(String url){
+    private String extractChannelId(String url) {
         String channelId = null;
         Pattern pattern = Pattern.compile("^https?://.*(?:youtube\\.com/channel/)([^#&?]*)$",
                 Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(url);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             channelId = matcher.group(1);
         }
 
         return channelId;
 
     }
+
+    private void calculateCost(){
+        Api.getService(Tags.base_url)
+                .calculateSubscribeCost("Bearer "+userModel.getToken(),subscribe_num+"")
+                .enqueue(new Callback<CostResultModel>() {
+                    @Override
+                    public void onResponse(Call<CostResultModel> call, Response<CostResultModel> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getData() != null ) {
+                                binding.setCost(response.body().getData());
+                            }
+                        }else {
+                            try {
+                                Log.e("error",response.code()+"__"+response.errorBody().string()+"_");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CostResultModel> call, Throwable t) {
+
+                        Log.e("failed", t.getMessage()+"__");
+
+                    }
+                });
+    }
+
 }

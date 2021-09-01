@@ -245,6 +245,12 @@ public interface Service {
                                              @Query("orderBy") String orderBy
     );
 
+    @FormUrlEncoded
+    @POST("api/calculate-get-subscriptions")
+    Call<CostResultModel> calculateSubscribeCost(@Header("Authorization") String token,
+                                                 @Field("subscriptions_number") String subscriptions_number
+    );
+
 
 }
 

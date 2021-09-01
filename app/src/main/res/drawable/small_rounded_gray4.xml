@@ -17,6 +17,7 @@
         android:height="33dp"
         android:top="34dp"
         android:left="1dp"
+        android:right="1dp"
         >
         <shape android:shape="rectangle">
             <corners android:bottomLeftRadius="10dp" android:bottomRightRadius="10dp" />
@@ -28,6 +29,7 @@
         android:width="60dp"
         android:height="60dp"
         android:left="6dp"
+        android:right="6dp"
         >
         <shape android:shape="rectangle">
             <corners android:radius="10dp" />
