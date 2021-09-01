@@ -326,7 +326,7 @@ public class ProfileFragment extends Fragment {
 
                                 if (interests_id != 0) {
                                     String interests = "";
-                                    switch (userModel.getInterestsModel().getId()) {
+                                    switch (model.getData().getInterested()) {
                                         case 1:
                                             interests = getString(R.string.sports);
                                             break;
@@ -342,9 +342,15 @@ public class ProfileFragment extends Fragment {
                                             interests = getString(R.string.writes);
 
                                             break;
+                                        default:
+                                            interests = getString(R.string.un_defined);
+                                            break;
 
                                     }
                                     interestsModel = new InterestsModel(model.getData().getInterested(), interests);
+
+                                }else {
+                                    interestsModel = new InterestsModel(model.getData().getInterested(), getString(R.string.un_defined));
 
                                 }
 

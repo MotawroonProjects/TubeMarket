@@ -130,5 +130,6 @@
     <string name="open_app">Open app</string>
     <string name="get_total">Get total</string>
     <string name="to_create_campaign">To create campaign please add your channel in profile first</string>
+    <string name="un_defined">Undefined</string>
 
 </resources>
