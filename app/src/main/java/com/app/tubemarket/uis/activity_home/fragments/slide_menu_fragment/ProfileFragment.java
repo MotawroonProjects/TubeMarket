@@ -149,7 +149,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateUI() {
-       /* if (userModel.getChannelModel()==null){
+        if (userModel.getChannelModel()==null){
             binding.edtUrl.setEnabled(true);
             binding.btnAdd.setEnabled(true);
             binding.btnUpdate.setEnabled(true);
@@ -164,7 +164,7 @@ public class ProfileFragment extends Fragment {
                 binding.btnUpdate.setEnabled(true);
 
             }
-        }*/
+        }
     }
 
     private void getVideoById(String vidId) {
