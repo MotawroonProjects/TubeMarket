@@ -175,13 +175,13 @@ public class SubscriptionFragment extends Fragment {
         this.myVideosModel = myVideosModel;
         videoId = myVideosModel.getLink();
         binding.setModel(myVideosModel);
-        binding.tvCoins.setText(myVideosModel.getProfit_coins());
+        /*binding.tvCoins.setText(myVideosModel.getProfit_coins());
         binding.tvCoins.measure(0,0);
 
         int w =binding.tvCoins.getMeasuredWidth();
 
         int width = (pxToDp(w)*2);
-        startAnimation(0,width);
+        startAnimation(0,width);*/
 
     }
 
