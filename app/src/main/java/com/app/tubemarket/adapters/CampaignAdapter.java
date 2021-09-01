@@ -73,9 +73,8 @@ public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ContextThemeWrapper ctw = new ContextThemeWrapper(context, R.style.PopupMenu);
 
         PopupMenu popupMenu = new PopupMenu(ctw,view);
-        popupMenu.getMenu().add(Menu.NONE,1,2, R.string.delete);
-        popupMenu.getMenu().add(Menu.NONE,2,3, R.string.details);
-
+        popupMenu.getMenu().add(Menu.NONE,1,1, R.string.delete);
+        popupMenu.getMenu().add(Menu.NONE,2,2, R.string.details);
         popupMenu.show();
 
         popupMenu.setOnMenuItemClickListener(item -> {

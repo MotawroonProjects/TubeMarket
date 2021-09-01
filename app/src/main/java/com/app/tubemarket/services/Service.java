@@ -1,7 +1,11 @@
 package com.app.tubemarket.services;
 
+import com.app.tubemarket.models.AdCostDataModel;
 import com.app.tubemarket.models.CampaignDataModel;
+import com.app.tubemarket.models.CoinDataModel;
 import com.app.tubemarket.models.CoinsDataModel;
+import com.app.tubemarket.models.CostResultModel;
+import com.app.tubemarket.models.GoldCostDataModel;
 import com.app.tubemarket.models.LoginRegisterModel;
 import com.app.tubemarket.models.SingleCampaign;
 import com.app.tubemarket.models.StatusResponse;
@@ -10,6 +14,7 @@ import com.app.tubemarket.models.VideoDataModel;
 import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.models.ViewsSecondsModel;
 import com.app.tubemarket.models.VipDataModel;
+import com.app.tubemarket.models.WithdrawDataModel;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -203,6 +208,43 @@ public interface Service {
                                         @Field("id") String user_id
 
     );
+
+    @GET("api/advertisement-view-costs")
+    Call<AdCostDataModel> getViewsCost(@Header("Authorization") String token
+    );
+
+    @FormUrlEncoded
+    @POST("api/calculate-get-views")
+    Call<CostResultModel> calculateViewCost(@Header("Authorization") String token,
+                                            @Field("views_number") String views_number,
+                                            @Field("watch_time") String watch_time
+    );
+
+
+    @FormUrlEncoded
+    @POST("api/calculate-get-subscription-and-views")
+    Call<CostResultModel> calculateSubViewCost(@Header("Authorization") String token,
+                                               @Field("views_number") String views_number,
+                                               @Field("watch_time") String watch_time,
+                                               @Field("subscriptions_number") String subscriptions_number
+    );
+
+    @FormUrlEncoded
+    @POST("api/calculate-get-likes")
+    Call<CostResultModel> calculateLikeCost(@Header("Authorization") String token,
+                                            @Field("likes_number") String likes_number
+    );
+
+    @GET("api/buy-coins")
+    Call<CoinDataModel> getCoins(@Header("Authorization") String token,
+                                 @Query("orderBy") String orderBy
+    );
+
+    @GET("api/exchange")
+    Call<WithdrawDataModel> getWithdrawCoins(@Header("Authorization") String token,
+                                             @Query("orderBy") String orderBy
+    );
+
 
 }
 

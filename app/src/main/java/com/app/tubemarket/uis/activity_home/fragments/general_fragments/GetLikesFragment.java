@@ -1,10 +1,13 @@
 package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import com.app.tubemarket.R;
 import com.app.tubemarket.adapters.SpinnerCountAdapter;
 import com.app.tubemarket.databinding.FragmentGetLikesBinding;
 import com.app.tubemarket.databinding.FragmentGetViewsBinding;
+import com.app.tubemarket.models.CostResultModel;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.preferences.Preferences;
@@ -40,6 +44,7 @@ public class GetLikesFragment extends Fragment {
     private VideoModel channelModel = null;
     private SpinnerCountAdapter dayAdapter;
     private List<String> dayList;
+    private String like_num = "0";
 
 
 
@@ -56,6 +61,9 @@ public class GetLikesFragment extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         dayList = new ArrayList<>();
+        binding.setCost("0");
+        binding.tvCalc.setPaintFlags(binding.tvCalc.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
         for (int index=1;index<9;index++)
         {
             if (index==1){
@@ -72,6 +80,40 @@ public class GetLikesFragment extends Fragment {
         dayAdapter = new SpinnerCountAdapter(dayList,activity);
         binding.spinnerDays.setAdapter(dayAdapter);
 
+
+        binding.edtNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().isEmpty()){
+                    like_num =s.toString();
+                    binding.tvCalc.setVisibility(View.VISIBLE);
+
+                }else{
+                    like_num = "0";
+                    binding.tvCalc.setVisibility(View.GONE);
+                    binding.setCost("0");
+                }
+
+            }
+        });
+
+        binding.tvCalc.setOnClickListener(v -> {
+            if (!like_num.equals("0")){
+                Log.e("Ddd", like_num);
+                calculateCost();
+            }
+        });
+
         binding.btnAdd.setOnClickListener(v -> {
             String url = binding.edtUrl.getText().toString();
             String vidId = extractYTId(url);
@@ -79,6 +121,7 @@ public class GetLikesFragment extends Fragment {
                 getVideoById(vidId);
             }
         });
+
 
 
     }
@@ -110,11 +153,7 @@ public class GetLikesFragment extends Fragment {
                 });
     }
 
-    private void addViews() {
 
-
-
-    }
 
 
     private String extractYTId(String ytUrl) {
@@ -126,5 +165,41 @@ public class GetLikesFragment extends Fragment {
             vId = matcher.group(1);
         }
         return vId;
+    }
+
+
+    private void calculateCost(){
+        Api.getService(Tags.base_url)
+                .calculateLikeCost("Bearer "+userModel.getToken(),like_num+"")
+                .enqueue(new Callback<CostResultModel>() {
+                    @Override
+                    public void onResponse(Call<CostResultModel> call, Response<CostResultModel> response) {
+
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getData() != null ) {
+                                binding.setCost(response.body().getData());
+                            }
+                        }else {
+                            try {
+                                Log.e("error",response.code()+"__"+response.errorBody().string()+"_");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CostResultModel> call, Throwable t) {
+
+                        Log.e("failed", t.getMessage()+"__");
+
+                    }
+                });
+    }
+
+    private void addViews() {
+
+
+
     }
 }

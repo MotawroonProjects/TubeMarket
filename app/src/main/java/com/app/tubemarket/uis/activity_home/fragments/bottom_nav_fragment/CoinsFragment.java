@@ -68,10 +68,17 @@ public class CoinsFragment extends Fragment {
 
             }
         });
+
         binding.cardGoldenAccount.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.goldProfileFragment);
         });
+        binding.cardWithdraw.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.withdrawFragment);
+        });
 
+        binding.cardBuyCoin.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.buyCoinFragment);
+        });
 
         binding.cardCoupon.setOnClickListener(v -> {
             binding.flDialog.clearAnimation();

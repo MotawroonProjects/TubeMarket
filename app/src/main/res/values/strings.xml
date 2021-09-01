@@ -128,4 +128,6 @@
     <string name="camp_details">Campaign details</string>
     <string name="viewers_list">Viewers list</string>
     <string name="open_app">Open app</string>
+    <string name="get_total">Get total</string>
+
 </resources>

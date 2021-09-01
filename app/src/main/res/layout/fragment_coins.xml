@@ -27,6 +27,7 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardBuyCoin"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_margin="5dp"
@@ -174,6 +175,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardWithdraw"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_margin="5dp"

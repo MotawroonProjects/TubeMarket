@@ -100,4 +100,14 @@
         android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.CampaignDetailsFragment"
         android:label="@string/camp_details"
         tools:layout="@layout/fragment_campaign_details" />
+    <fragment
+        android:id="@+id/buyCoinFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.BuyCoinFragment"
+        android:label="@string/buy_coin"
+        tools:layout="@layout/fragment_buy_coin" />
+    <fragment
+        android:id="@+id/withdrawFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.WithdrawFragment"
+        android:label="@string/withdrawal"
+        tools:layout="@layout/fragment_withdraw" />
 </navigation>

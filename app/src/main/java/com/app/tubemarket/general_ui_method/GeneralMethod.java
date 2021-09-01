@@ -34,6 +34,31 @@ public class GeneralMethod {
 
 
 
+    @BindingAdapter("image")
+    public static void image(View view, String url) {
+        if (view instanceof CircleImageView) {
+            CircleImageView imageView = (CircleImageView) view;
+            if (url != null) {
+
+                Picasso.get().load(Uri.parse(url)).into(imageView);
+            }
+        } else if (view instanceof RoundedImageView) {
+            RoundedImageView imageView = (RoundedImageView) view;
+
+            if (url != null) {
+
+                Picasso.get().load(Uri.parse(url)).into(imageView);
+            }
+        } else if (view instanceof ImageView) {
+            ImageView imageView = (ImageView) view;
+
+            if (url != null) {
+
+                Picasso.get().load(Uri.parse(url)).into(imageView);
+            }
+        }
+
+    }
 
 
 

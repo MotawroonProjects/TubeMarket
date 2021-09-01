@@ -127,5 +127,6 @@
     <string name="camp_details">تفاصيل الحملة</string>
     <string name="viewers_list">قائمة المشاهدين</string>
     <string name="open_app">فتح التطبيق</string>
+    <string name="get_total">إحسب الاجمالي</string>
 
 </resources>
