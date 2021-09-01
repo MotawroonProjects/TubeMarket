@@ -324,35 +324,30 @@ public class ProfileFragment extends Fragment {
 
                                 }
 
-                                if (interests_id != 0) {
-                                    String interests = "";
-                                    switch (model.getData().getInterested()) {
-                                        case 1:
-                                            interests = getString(R.string.sports);
-                                            break;
-                                        case 2:
-                                            interests = getString(R.string.games);
+                                String interests = "";
+                                switch (model.getData().getInterested()) {
+                                    case 1:
+                                        interests = getString(R.string.sports);
+                                        break;
+                                    case 2:
+                                        interests = getString(R.string.games);
 
-                                            break;
-                                        case 3:
-                                            interests = getString(R.string.cooks);
+                                        break;
+                                    case 3:
+                                        interests = getString(R.string.cooks);
 
-                                            break;
-                                        case 4:
-                                            interests = getString(R.string.writes);
+                                        break;
+                                    case 4:
+                                        interests = getString(R.string.writes);
 
-                                            break;
-                                        default:
-                                            interests = getString(R.string.un_defined);
-                                            break;
-
-                                    }
-                                    interestsModel = new InterestsModel(model.getData().getInterested(), interests);
-
-                                }else {
-                                    interestsModel = new InterestsModel(model.getData().getInterested(), getString(R.string.un_defined));
+                                        break;
+                                    default:
+                                        interests = getString(R.string.un_defined);
+                                        break;
 
                                 }
+                                interestsModel = new InterestsModel(model.getData().getInterested(), interests);
+
 
 
                                 userModel = new UserModel(model.getData().getId(), model.getData().getGoogle_id(), model.getData().getEmail(), model.getData().getName(), model.getData().getImage(), model.getData().getCoins(), model.getData().getCode(), model.getData().getUser_type(), model.getData().getIs_vip(), model.getData().getToken(), channelModel, videoModel, interestsModel);
