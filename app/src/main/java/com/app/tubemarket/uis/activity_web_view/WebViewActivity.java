@@ -147,24 +147,21 @@ public class WebViewActivity extends AppCompatActivity {
             public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
                 if (url.contains("https://m.youtube.com/youtubei/v1/subscription/unsubscribe")) {
                     Log.e("response", "UnSubscribed");
-                    subscribe();
+                    runOnUiThread(() -> subscribe());
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/subscription/subscribe")) {
                     Log.e("response", "Subscribed");
-                    subscribe();
-
+                    runOnUiThread(() -> subscribe());
 
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/like/like")) {
                     Log.e("response", "like");
-                    likeDislike("like");
-
+                    runOnUiThread(() -> likeDislike("like"));
 
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/like/removelike")) {
                     Log.e("response", "removeLike");
-                    likeDislike("dislike");
-
+                    runOnUiThread(() -> likeDislike("dislike"));
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/like/dislike")) {
                     Log.e("response", "disLike");
-                    likeDislike("remove_like");
+                    runOnUiThread(() -> likeDislike("remove_like"));
 
                 }
                 return null;
