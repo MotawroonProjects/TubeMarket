@@ -1,10 +1,15 @@
 package com.app.tubemarket.uis.activity_splash;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.Person;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -15,6 +20,10 @@ import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.preferences.Preferences;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
 import com.app.tubemarket.uis.activity_login.LoginActivity;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import io.paperdb.Paper;
 
@@ -36,6 +45,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         new Handler().postDelayed(() -> {

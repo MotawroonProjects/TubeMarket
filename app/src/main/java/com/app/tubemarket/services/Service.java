@@ -251,6 +251,53 @@ public interface Service {
                                                  @Field("subscriptions_number") String subscriptions_number
     );
 
+    @FormUrlEncoded
+    @POST("api/get-views")
+    Call<StatusResponse> addViews(@Header("Authorization") String token,
+                                  @Field("user_id") String user_id,
+                                  @Field("views_number") String views_number,
+                                  @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
+                                  @Field("total_cost") String total_cost,
+                                  @Field("link") String link,
+                                  @Field("watch_time") String watch_time
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/get-subscriptions")
+    Call<StatusResponse> addSubscribes(@Header("Authorization") String token,
+                                       @Field("user_id") String user_id,
+                                       @Field("subscription_limit") String subscription_limit,
+                                       @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
+                                       @Field("total_cost") String total_cost,
+                                       @Field("link") String link
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/get-subscription-and-views")
+    Call<StatusResponse> addSubscribesViews(@Header("Authorization") String token,
+                                            @Field("user_id") String user_id,
+                                            @Field("subscription_limit") String subscription_limit,
+                                            @Field("views_number") String views_number,
+                                            @Field("watch_time") String watch_time,
+                                            @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
+                                            @Field("total_cost") String total_cost,
+                                            @Field("link") String link
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/get-likes")
+    Call<StatusResponse> addLikes(@Header("Authorization") String token,
+                                  @Field("user_id") String user_id,
+                                  @Field("likes_limit") String likes_limit,
+                                  @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
+                                  @Field("total_cost") String total_cost,
+                                  @Field("link") String link
+
+    );
 
 }
 

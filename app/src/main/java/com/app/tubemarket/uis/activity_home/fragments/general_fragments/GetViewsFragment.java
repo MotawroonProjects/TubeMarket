@@ -1,10 +1,12 @@
 package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
 
+import android.app.ProgressDialog;
 import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.app.tubemarket.R;
 import com.app.tubemarket.adapters.SpinnerAdCostAdapter;
@@ -24,10 +27,12 @@ import com.app.tubemarket.models.AdCostModel;
 import com.app.tubemarket.models.CampaignDataModel;
 import com.app.tubemarket.models.CoinsDataModel;
 import com.app.tubemarket.models.CostResultModel;
+import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.preferences.Preferences;
 import com.app.tubemarket.remote.Api;
+import com.app.tubemarket.share.Common;
 import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
 
@@ -53,7 +58,7 @@ public class GetViewsFragment extends Fragment {
     private List<String> dayList;
     private List<AdCostModel>secondsList;
     private SpinnerAdCostAdapter secondsAdapter;
-    private String second = "0",view_num = "0";
+    private String second = "0",view_num = "0",total="0",day="0";
 
 
 
@@ -90,6 +95,18 @@ public class GetViewsFragment extends Fragment {
 
         dayAdapter = new SpinnerCountAdapter(dayList,activity);
         binding.spinnerDays.setAdapter(dayAdapter);
+
+        binding.spinnerDays.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                day = dayList.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         binding.spinnerSeconds.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -151,7 +168,7 @@ public class GetViewsFragment extends Fragment {
         binding.btnAdd.setOnClickListener(v -> {
             String url = binding.edtUrl.getText().toString();
             String vidId = extractYTId(url);
-            if (vidId!=null){
+            if (vidId!=null&&!day.equals("0")&&!total.equals("0")&&!second.equals("0")&&!view_num.equals("0")){
                 getVideoById(vidId);
             }
         });
@@ -195,17 +212,25 @@ public class GetViewsFragment extends Fragment {
     }
 
     private void getVideoById(String vidId) {
-
+        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
         Api.getService(Tags.tube_base_url)
                 .getYouTubeVideoById("snippet,contentDetails", vidId, Tags.tubeKey)
                 .enqueue(new Callback<VideoModel>() {
                     @Override
                     public void onResponse(Call<VideoModel> call, Response<VideoModel> response) {
+                        dialog.dismiss();
                         if (response.isSuccessful()){
                             if (response.body()!=null&&response.body().getItems()!=null&&response.body().getItems().size()>0){
-                                addViews();
+                                addViews(vidId,dialog);
+                            }else {
+                                Toast.makeText(activity, R.string.in_url, Toast.LENGTH_SHORT).show();
+
                             }
                         }else {
+                            Toast.makeText(activity, R.string.in_url, Toast.LENGTH_SHORT).show();
+
                             try {
                                 Log.e("error", response.code()+"__"+response.errorBody().string());
                             } catch (IOException e) {
@@ -216,6 +241,8 @@ public class GetViewsFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<VideoModel> call, Throwable t) {
+                        dialog.dismiss();
+
                         Log.e("failed", t.getMessage()+"__");
                     }
                 });
@@ -230,6 +257,7 @@ public class GetViewsFragment extends Fragment {
 
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getData() != null ) {
+                                total = response.body().getData();
                                 binding.setCost(response.body().getData());
                             }
                         }else {
@@ -261,9 +289,34 @@ public class GetViewsFragment extends Fragment {
         return vId;
     }
 
-    private void addViews() {
+    private void addViews(String vidId,ProgressDialog dialog) {
 
 
+        Api.getService(Tags.base_url)
+                .addViews("Bearer "+userModel.getToken(),userModel.getId(),view_num,day,total,vidId,second)
+                .enqueue(new Callback<StatusResponse>() {
+                    @Override
+                    public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()){
+                            Toast.makeText(activity, R.string.suc, Toast.LENGTH_SHORT).show();
+                            Navigation.findNavController(binding.getRoot()).popBackStack();
+                        }else {
+                            try {
+                                Log.e("error", response.code()+"__"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<StatusResponse> call, Throwable t) {
+                        dialog.dismiss();
+
+                        Log.e("failed", t.getMessage()+"__");
+                    }
+                });
 
     }
 

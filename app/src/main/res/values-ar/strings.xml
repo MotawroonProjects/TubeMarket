@@ -130,5 +130,6 @@
     <string name="get_total">إحسب الاجمالي</string>
     <string name="to_create_campaign">لكي تستطيع انشاء حملة من فضلك قم بإنشاء القناة الخاصة بكم من صفحة حسابي.</string>
     <string name="un_defined">غير محدد</string>
+    <string name="in_url">الرابط غير صحيح</string>
 
 </resources>
