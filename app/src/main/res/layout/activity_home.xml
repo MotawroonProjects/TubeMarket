@@ -107,6 +107,7 @@
                 android:layout_gravity="start"
                 app:headerLayout="@layout/navigation_view_header"
                 app:itemIconTint="@color/gray12"
+                app:elevation="5dp"
                 app:menu="@menu/slide_menu" />
 
         </androidx.drawerlayout.widget.DrawerLayout>
