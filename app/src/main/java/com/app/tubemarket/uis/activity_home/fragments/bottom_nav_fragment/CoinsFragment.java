@@ -90,6 +90,10 @@ public class CoinsFragment extends Fragment {
            closeDialog();
 
         });
+
+        binding.cardAdsChannel.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.addAdsFragment);
+        });
     }
 
     public void closeDialog(){

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
@@ -129,6 +130,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        Paper.init(this);
+        lang = Paper.book().read("lang","ar");
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         View headerView = binding.navView.getHeaderView(0);
@@ -212,6 +215,31 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+
+        binding.drawerLayout.setScrimColor(getResources().getColor(R.color.transparent));
+        binding.drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                float slideX = drawerView.getWidth() * slideOffset;
+                float halfWidth = drawerView.getWidth()/2;
+                if (slideX<halfWidth){
+                    binding.cardAdAds.setVisibility(View.VISIBLE);
+
+                }else {
+                    binding.cardAdAds.setVisibility(View.INVISIBLE);
+
+                }
+
+                if (lang.equals("ar")){
+                    binding.consData.setTranslationX(-slideX);
+
+            }else {
+                    binding.consData.setTranslationX(slideX);            }
+
+            }
+        });
 
         updateFirebaseToken();
 
