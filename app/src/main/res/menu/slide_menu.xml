@@ -32,10 +32,7 @@
             android:title="@string/contact"
             >
             <menu>
-                <item android:id="@+id/faq"
-                    android:title="@string/faq"
-                    android:icon="@drawable/ic_faq"
-                    />
+               
                 <item android:id="@+id/rateApp"
                     android:title="@string/rate_app"
                     android:icon="@drawable/ic_star"

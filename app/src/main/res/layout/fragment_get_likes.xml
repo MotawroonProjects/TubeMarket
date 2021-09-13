@@ -58,16 +58,17 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/estimated_views_interval_time_per_day"
+                android:text="@string/estimated_reach_likes"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
-            <FrameLayout
+           <!-- <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="16dp"
+                android:visibility="gone"
                 android:background="@drawable/small_rounded_strokk_gray">
 
                 <Spinner
@@ -76,7 +77,7 @@
                     android:layout_height="match_parent"
                     app:backgroundTint="@color/black" />
 
-            </FrameLayout>
+            </FrameLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -94,6 +94,13 @@ public class CoinsFragment extends Fragment {
         binding.cardAdsChannel.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.addAdsFragment);
         });
+
+        binding.cardBuyMessage.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.messagesFragment);
+        });
+
+
+
     }
 
     public void closeDialog(){

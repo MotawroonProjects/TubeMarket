@@ -84,7 +84,7 @@ public class GetLikesFragment extends Fragment {
         }
 
         dayAdapter = new SpinnerCountAdapter(dayList,activity);
-        binding.spinnerDays.setAdapter(dayAdapter);
+      /*  binding.spinnerDays.setAdapter(dayAdapter);
 
         binding.spinnerDays.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -96,7 +96,7 @@ public class GetLikesFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
         binding.edtNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -133,7 +133,7 @@ public class GetLikesFragment extends Fragment {
         binding.btnAdd.setOnClickListener(v -> {
             String url = binding.edtUrl.getText().toString();
             String vidId = extractYTId(url);
-            if (vidId!=null&&!like_num.equals("0")&&!day.equals("0")&&!total.equals("0")){
+            if (vidId!=null&&!like_num.equals("0")&&!total.equals("0")){
                 getVideoById(vidId);
             }
         });

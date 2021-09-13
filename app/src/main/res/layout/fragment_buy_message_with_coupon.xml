@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".uis.activity_home.fragments.general_fragments.BuyMessageFragment"
+    >
+    <data>
+        <variable
+            name="model"
+            type="com.app.tubemarket.models.AddMessageModel" />
+        <variable
+            name="coupon"
+            type="String" />
+
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/gray17"
+                android:text="@string/coupon_code"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="@{coupon}"
+                />
+
+
+            <EditText
+                android:id="@+id/edtUrl"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/small_rounded_strokk_gray"
+                android:hint="@string/enter_link_here"
+                android:inputType="textUri"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="14sp"
+                android:text="@={model.link}"
+                error="@{model.error_link}"
+                />
+            <EditText
+                android:id="@+id/edtContent"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/small_rounded_strokk_gray"
+                android:inputType="textMultiLine"
+                android:padding="16dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/details"
+                android:gravity="top|start"
+                android:textSize="14sp"
+                android:text="@={model.content}"
+                error="@{model.error_content}"
+                />
+
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:minWidth="200dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/small_rounded_primary"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:text="@string/add"
+                android:layout_gravity="center_horizontal"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                />
+        </LinearLayout>
+
+    </ScrollView></layout>

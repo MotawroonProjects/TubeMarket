@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
@@ -161,30 +162,36 @@ public class HomeActivity extends AppCompatActivity {
             navController.navigate(R.id.addAdsFragment);
         });
 
+        binding.imgMessage.setOnClickListener(v -> {
+            navController.navigate(R.id.userMessagesFragment);
+        });
+
         binding.navView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
+            NavOptions navOptions = new NavOptions.Builder()
+                    .setEnterAnim(0)
+                    .setExitAnim(0)
+                    .setPopEnterAnim(0)
+                    .setPopExitAnim(0)
+                    .build();
             switch (id) {
                 case R.id.profileFragment:
-                    navController.navigate(R.id.profileFragment);
+
+                    navController.navigate(R.id.profileFragment,null,navOptions);
                     break;
 
                 case R.id.goldProfileFragment:
-                    navController.navigate(R.id.goldProfileFragment);
+                    navController.navigate(R.id.goldProfileFragment,null,navOptions);
 
                     break;
                 case R.id.invite:
-                    navController.navigate(R.id.inviteFragment);
+                    navController.navigate(R.id.inviteFragment,null,navOptions);
 
                     break;
                 case R.id.changeLang:
-                    navController.navigate(R.id.changeLang);
+                    navController.navigate(R.id.changeLang,null,navOptions);
+                    break;
 
-                    break;
-                case R.id.faq:
-                    Bundle bundle = new Bundle();
-                    bundle.putString("type", "1");
-                    navController.navigate(R.id.faqActivity, bundle);
-                    break;
 
                 case R.id.rateApp:
                     final String appPackageName = getPackageName();
@@ -196,9 +203,18 @@ public class HomeActivity extends AppCompatActivity {
                     break;
 
                 case R.id.policy:
-                    Bundle bundle2 = new Bundle();
-                    bundle2.putString("type", "2");
-                    navController.navigate(R.id.faqActivity, bundle2);
+
+
+                    new Handler()
+                            .postDelayed(()->{
+                                Bundle bundle2 = new Bundle();
+                                bundle2.putString("type", "2");
+
+                                navController.navigate(R.id.faqActivity, bundle2,navOptions);
+                                overridePendingTransition(0,0);
+                            },300);
+
+
                     break;
 
                 case R.id.logout:
@@ -212,8 +228,11 @@ public class HomeActivity extends AppCompatActivity {
 
         if (userModel == null) {
             Intent intent = new Intent(this, SplashActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
             finish();
+            overridePendingTransition(0,0);
+
         }
 
 
@@ -250,6 +269,7 @@ public class HomeActivity extends AppCompatActivity {
         tvName.setText(userModel.getName());
         tvEmail.setText(userModel.getEmail());
         tvCoins.setText(userModel.getCoins());
+        binding.setCoins(userModel.getCoins());
     }
 
     private void navigateToSignInActivity() {
@@ -305,8 +325,12 @@ public class HomeActivity extends AppCompatActivity {
                 .postDelayed(() -> {
 
                     Intent intent = getIntent();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     finish();
+                    overridePendingTransition(0,0);
                     startActivity(intent);
+                    overridePendingTransition(0,0);
+
                 }, 500);
 
 

@@ -1,15 +1,20 @@
 package com.app.tubemarket.services;
 
 import com.app.tubemarket.models.AdCostDataModel;
+import com.app.tubemarket.models.AddMessageDataModel;
+import com.app.tubemarket.models.BuyMessageDataModel;
 import com.app.tubemarket.models.CampaignDataModel;
 import com.app.tubemarket.models.CoinDataModel;
 import com.app.tubemarket.models.CoinsDataModel;
 import com.app.tubemarket.models.CostResultModel;
 import com.app.tubemarket.models.GoldCostDataModel;
 import com.app.tubemarket.models.LoginRegisterModel;
+import com.app.tubemarket.models.MessageResponseModel;
 import com.app.tubemarket.models.SingleCampaign;
 import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.SubscribeSecondsModel;
+import com.app.tubemarket.models.UserMessageModel;
+import com.app.tubemarket.models.UserMessagesDataModel;
 import com.app.tubemarket.models.VideoDataModel;
 import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.models.ViewsSecondsModel;
@@ -298,6 +303,48 @@ public interface Service {
                                   @Field("link") String link
 
     );
+
+    @GET("api/show-buy-messages")
+    Call<BuyMessageDataModel> showMessages(@Header("Authorization") String token
+    );
+
+    @FormUrlEncoded
+    @POST("api/create-normal-message")
+    Call<AddMessageDataModel> addMessage(@Header("Authorization") String token,
+                                         @Field("user_id") String user_id,
+                                         @Field("buy_message_id") String buy_message_id,
+                                         @Field("link") String link,
+                                         @Field("contents") String contents
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/create-with-coupon-message")
+    Call<MessageResponseModel> createMessageWithCoupon(@Header("Authorization") String token,
+                                                       @Field("user_id") String user_id,
+                                                       @Field("buy_message_id") String buy_message_id
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("api/update-with-coupon-message")
+    Call<MessageResponseModel> updateMessageWithCoupon(@Header("Authorization") String token,
+                                                       @Field("user_id") String user_id,
+                                                       @Field("id") String id,
+                                                       @Field("buy_message_id") String buy_message_id,
+                                                       @Field("link") String link,
+                                                       @Field("contents") String contents,
+                                                       @Field("coupon_code") String coupon_code
+
+
+    );
+
+    @GET("api/get-user-messages")
+    Call<UserMessagesDataModel> getUserMessages(@Header("Authorization") String token,
+                                                @Query("user_id") String user_id
+    );
+
 
 }
 

@@ -94,7 +94,7 @@ public class GetSubscribersViewsFragment extends Fragment {
         binding.spinnerSeconds.setAdapter(secondsAdapter);
 
         dayAdapter = new SpinnerCountAdapter(dayList,activity);
-        binding.spinnerDays.setAdapter(dayAdapter);
+    /*    binding.spinnerDays.setAdapter(dayAdapter);
 
         binding.spinnerDays.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -107,7 +107,7 @@ public class GetSubscribersViewsFragment extends Fragment {
 
             }
         });
-
+*/
         binding.spinnerSeconds.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -201,7 +201,7 @@ public class GetSubscribersViewsFragment extends Fragment {
         binding.btnAdd.setOnClickListener(v -> {
             String url = binding.edtUrl.getText().toString();
             String vidId = extractYTId(url);
-            if (vidId!=null&&!view_num.isEmpty()&&!subscription_num.isEmpty()&&!second.isEmpty()&&!day.isEmpty()&&!total.isEmpty()){
+            if (vidId!=null&&!view_num.isEmpty()&&!subscription_num.isEmpty()&&!second.isEmpty()&&!total.isEmpty()){
                 getVideoById(vidId);
             }
         });

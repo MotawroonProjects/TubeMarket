@@ -3,13 +3,22 @@ package com.app.tubemarket.interfaces;
 
 import android.view.View;
 
+import com.app.tubemarket.models.BuyMessageModel;
 import com.app.tubemarket.models.CampaignModel;
 import com.app.tubemarket.models.CoinsModel;
+import com.app.tubemarket.models.UserMessageModel;
 import com.app.tubemarket.models.VipModel;
 import com.app.tubemarket.models.WithdrawModel;
 
 public interface Listeners {
 
+    interface UserMessageListener {
+        void onUserMessage(UserMessageModel model, View itemView);
+    }
+
+    interface BuyMessageListener {
+        void onBuyMessage(BuyMessageModel model, View itemView);
+    }
     interface VipListener {
         void onVipPay(VipModel model);
     }

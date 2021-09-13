@@ -132,9 +132,11 @@ public class SubscriptionFragment extends Fragment {
     }
     private void getVideos(int newPage, int newIndex)
     {
+
         binding.setModel(null);
         binding.llNext.setVisibility(View.INVISIBLE);
         binding.flSubscribe.setVisibility(View.INVISIBLE);
+        binding.progBar.setVisibility(View.VISIBLE);
         Api.getService(Tags.base_url)
                 .getChannel("Bearer " + userModel.getToken(), userModel.getId(), "on", "20", "desc", newPage)
                 .enqueue(new Callback<VideoDataModel>() {
@@ -142,6 +144,8 @@ public class SubscriptionFragment extends Fragment {
                     public void onResponse(Call<VideoDataModel> call, Response<VideoDataModel> response) {
                         binding.llNext.setVisibility(View.VISIBLE);
                         binding.flSubscribe.setVisibility(View.VISIBLE);
+                        binding.progBar.setVisibility(View.GONE);
+
 
                         if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 200) {
                             if (response.body().getData() != null && response.body().getData().getData().size() > 0) {
@@ -164,6 +168,7 @@ public class SubscriptionFragment extends Fragment {
                     public void onFailure(Call<VideoDataModel> call, Throwable t) {
                         binding.llNext.setVisibility(View.VISIBLE);
                         binding.flSubscribe.setVisibility(View.INVISIBLE);
+                        binding.progBar.setVisibility(View.GONE);
 
                         Log.e("error", t.getMessage() + "_");
 
@@ -175,30 +180,7 @@ public class SubscriptionFragment extends Fragment {
         this.myVideosModel = myVideosModel;
         videoId = myVideosModel.getLink();
         binding.setModel(myVideosModel);
-        /*binding.tvCoins.setText(myVideosModel.getProfit_coins());
-        binding.tvCoins.measure(0,0);
 
-        int w =binding.tvCoins.getMeasuredWidth();
-
-        int width = (pxToDp(w)*2);
-        startAnimation(0,width);*/
-
-    }
-
-    private void startAnimation(int width,int reqWidth){
-        ValueAnimator animator = ValueAnimator.ofInt(width,reqWidth);
-        animator.addUpdateListener(animation -> {
-            int value = (int) animation.getAnimatedValue();
-            ViewGroup.LayoutParams params = binding.tvCoins.getLayoutParams();
-            params.width = value;
-            binding.tvCoins.requestLayout();
-        });
-        animator.setDuration(200);
-        animator.start();
-    }
-
-    private int pxToDp(int px){
-        return (int) (px/getResources().getDisplayMetrics().density);
     }
 
 

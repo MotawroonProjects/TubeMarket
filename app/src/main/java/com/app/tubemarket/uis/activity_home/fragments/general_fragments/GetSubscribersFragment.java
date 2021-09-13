@@ -81,7 +81,7 @@ public class GetSubscribersFragment extends Fragment {
             }
         }
         secondsAdapter = new SpinnerCountAdapter(secondsList, activity);
-        binding.spinnerSubscriptions.setAdapter(secondsAdapter);
+        /*binding.spinnerSubscriptions.setAdapter(secondsAdapter);
 
         binding.spinnerSubscriptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -94,7 +94,7 @@ public class GetSubscribersFragment extends Fragment {
 
             }
         });
-
+*/
         binding.edtNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -138,7 +138,7 @@ public class GetSubscribersFragment extends Fragment {
         });
 
         binding.btnAdd.setOnClickListener(v -> {
-            if (channelModel!=null&&!subscribe_num.equals("0")&&!seconds.equals("0")&&!total.equals("0")){
+            if (channelModel!=null&&!subscribe_num.equals("0")&&!total.equals("0")){
                 addSubscribes();
             }
         });
@@ -177,7 +177,6 @@ public class GetSubscribersFragment extends Fragment {
                 });
 
     }
-
 
     private void getChannelById(String channelId) {
         channel_id = channelId;

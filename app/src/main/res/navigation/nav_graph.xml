@@ -110,4 +110,24 @@
         android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.WithdrawFragment"
         android:label="@string/withdrawal"
         tools:layout="@layout/fragment_withdraw" />
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.MessagesFragment"
+        android:label="@string/buy_messages"
+        tools:layout="@layout/fragment_messages" />
+    <fragment
+        android:id="@+id/buyMessageFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.BuyMessageFragment"
+        android:label="@string/buy_messages"
+        tools:layout="@layout/fragment_buy_message" />
+    <fragment
+        android:id="@+id/buyMessageWithCouponFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.BuyMessageWithCouponFragment"
+        android:label="@string/buy_messages"
+        tools:layout="@layout/fragment_buy_message_with_coupon" />
+    <fragment
+        android:id="@+id/userMessagesFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.UserMessagesFragment"
+        android:label="@string/messages"
+        tools:layout="@layout/fragment_user_messages" />
 </navigation>

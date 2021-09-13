@@ -30,47 +30,6 @@
 
             >
 
-            <LinearLayout
-                android:id="@+id/llCoins"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_margin="5dp"
-                android:padding="3dp"
-                android:background="@drawable/rounded_white"
-
-                >
-
-                <TextView
-                    android:id="@+id/tvCoins"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text='@{model.profit_coins}'
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:singleLine="true"
-
-                    />
-
-
-
-
-                <ImageView
-                    android:id="@+id/imgCoin"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:src="@drawable/ic_dolar" />
-
-
-            </LinearLayout>
 
 
             <LinearLayout
@@ -165,10 +124,21 @@
 
         </FrameLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            android:text="@string/don_t_cancel_the_subscription_n_so_you_won_t_be_banned"
+            android:textStyle="bold"
+            />
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight=".6" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -178,8 +148,9 @@
                 android:id="@+id/llNext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:gravity="center"
+
                 android:orientation="horizontal">
 
 
@@ -211,12 +182,19 @@
                     app:tint="@color/black" />
 
             </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                />
 
         </FrameLayout>
 
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1.4" />
     </LinearLayout>
 </layout>

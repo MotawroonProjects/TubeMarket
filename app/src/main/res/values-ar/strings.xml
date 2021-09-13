@@ -131,5 +131,17 @@
     <string name="to_create_campaign">لكي تستطيع انشاء حملة من فضلك قم بإنشاء القناة الخاصة بكم من صفحة حسابي.</string>
     <string name="un_defined">غير محدد</string>
     <string name="in_url">الرابط غير صحيح</string>
+    <string name="don_t_cancel_the_subscription_n_so_you_won_t_be_banned">لا تلغي الاشتراك حتى لا يتم حظرك من التطبيق</string>
+    <string name="estimated_time_subscriber_day">الوقت المقدر للوصول لعدد المشتركين ١٠٠ مشترك او اكثر في اليوم</string>
+    <string name="estimated_reach_likes">الوقت المقدر للوصول الى ٥٠٠ إعجاب او اكثر في اليوم</string>
+    <string name="the_estimated_time_to_reach_the_number_of_subscribers_100_subscribers_and_200_views_or_more_on_the_day">الوقت المقدر للوصول الى عدد المشتركين ١٠٠ مشترك و٢٠٠ مشاهدة او اكثر في اليوم</string>
+    <string name="the_estimated_time_to_reach_200_views_or_more_on_the_day">الوقت المقدر للوصول الى ٢٠٠ مشاهدة او اكثر في اليوم</string>
+    <string name="message">رسالة</string>
+    <string name="no_messages_to_show">لا توجد رسائل لعرضها</string>
+    <string name="enter_link_here">أدخل الرابط هنا ...</string>
+    <string name="back">رجوع</string>
+    <string name="coupon_code">كود الخصم</string>
+    <string name="messages">الرسائل</string>
+    <string name="open_link">إفتح الرابط</string>
 
 </resources>
