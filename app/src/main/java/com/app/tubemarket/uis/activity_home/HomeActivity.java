@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.Manifest;
 import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
@@ -35,16 +36,22 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.tubemarket.R;
 import com.app.tubemarket.databinding.ActivityHomeBinding;
+import com.app.tubemarket.databinding.DialogCoinsBinding;
 import com.app.tubemarket.language.Language;
+import com.app.tubemarket.models.AdsViewModel;
 import com.app.tubemarket.models.InterestsModel;
 import com.app.tubemarket.models.LoginRegisterModel;
+import com.app.tubemarket.models.MyVideosModel;
 import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.preferences.Preferences;
@@ -52,6 +59,7 @@ import com.app.tubemarket.remote.Api;
 import com.app.tubemarket.share.Common;
 import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CoinsFragment;
+import com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.ViewsFragment;
 import com.app.tubemarket.uis.activity_login.LoginActivity;
 import com.app.tubemarket.uis.activity_splash.SplashActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -78,6 +86,9 @@ import com.google.api.services.youtube.YouTubeScopes;
 import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -87,6 +98,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
@@ -105,8 +118,16 @@ public class HomeActivity extends AppCompatActivity {
     private String lang;
     private CircleImageView imageView;
     private TextView tvName, tvEmail, tvCoins;
-
-
+    private AbstractYouTubePlayerListener listener;
+    private YouTubePlayer youTubePlayer;
+    private Timer timer,timerClose;
+    private TimerTask timerTask;
+    private TaskAds timerTaskClose;
+    private int seconds = 0;
+    private AdsViewModel adsViewModel;
+    private String videoId="";
+    private int adsSeconds = 20;//seconds
+    private boolean canCloseAds = true;
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
@@ -141,6 +162,34 @@ public class HomeActivity extends AppCompatActivity {
         tvEmail = headerView.findViewById(R.id.tvEmail);
         tvCoins = headerView.findViewById(R.id.tvCoins);
 
+        ////////////////////////////////////////////////////////////////////
+        binding.youtubePlayerView.enableBackgroundPlayback(true);
+        getLifecycle().addObserver(binding.youtubePlayerView);
+        listener = new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(YouTubePlayer youTubePlayer) {
+
+               HomeActivity.this.youTubePlayer = youTubePlayer;
+                youTubePlayer.loadVideo(videoId, 0);
+
+
+
+            }
+
+            @Override
+            public void onStateChange(YouTubePlayer youTubePlayer, PlayerConstants.PlayerState state) {
+                super.onStateChange(youTubePlayer, state);
+
+                if (state.name().equals(PlayerConstants.PlayerState.PLAYING.name())) {
+
+                    startTime();
+                } else {
+                    stopTimer();
+                }
+            }
+        };
+
+        ////////////////////////////////////////////////////////////////////
         updateUi();
         setSupportActionBar(binding.toolBar);
         navController = Navigation.findNavController(this, R.id.navHostFragment);
@@ -148,6 +197,9 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
         NavigationUI.setupWithNavController(binding.navView, navController);
         binding.bottomNav.getMenu().findItem(R.id.empty).setEnabled(false);
+
+
+
 
         binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.white), PorterDuff.Mode.SRC_ATOP);
 
@@ -260,6 +312,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        binding.cardClose.setOnClickListener(v -> {
+            if (canCloseAds){
+                slideDown();
+            }
+        });
         updateFirebaseToken();
 
     }
@@ -271,6 +328,211 @@ public class HomeActivity extends AppCompatActivity {
         tvCoins.setText(userModel.getCoins());
         binding.setCoins(userModel.getCoins());
     }
+
+    public void loadVideoAds(AdsViewModel adsViewModel) {
+        this.adsViewModel = adsViewModel;
+        adsSeconds = 20;
+        seconds = 0;
+        canCloseAds = false;
+        slideUp();
+
+        startTimeClose();
+
+        videoId = adsViewModel.getAdvertisement_fk().getLink();
+        binding.setVidCoins(adsViewModel.getAdvertisement_fk().getProfit_coins());
+        binding.setSecond(adsViewModel.getAdvertisement_fk().getWatch_time());
+        seconds = Integer.parseInt(adsViewModel.getAdvertisement_fk().getWatch_time());
+
+        if (youTubePlayer!=null){
+            listener.onReady(youTubePlayer);
+
+        }else {
+            binding.youtubePlayerView.addYouTubePlayerListener(listener);
+
+        }
+
+
+
+    }
+
+    private void slideUp() {
+        Animation animation = AnimationUtils.loadAnimation(this,R.anim.slide_up);
+        binding.scrollViewVideosAds.clearAnimation();
+        binding.scrollViewVideosAds.startAnimation(animation);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                binding.scrollViewVideosAds.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+    }
+
+    private void slideDown() {
+        stopTimer();
+        stopTimerClose();
+
+        if (youTubePlayer!=null){
+            youTubePlayer.pause();
+
+        }
+        Animation animation = AnimationUtils.loadAnimation(this,R.anim.slide_down);
+        binding.scrollViewVideosAds.clearAnimation();
+        binding.scrollViewVideosAds.startAnimation(animation);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                binding.scrollViewVideosAds.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+    }
+
+    private void stopTimer() {
+        if (timer!=null&&timerTask!=null){
+            timerTask.cancel();
+            timer.cancel();
+            timer.purge();
+            timer=null;
+            timerTask=null;
+        }
+
+    }
+
+    private void startTime() {
+        if (seconds>0){
+            timer = new Timer();
+            timerTask = new Task();
+            timer.scheduleAtFixedRate(timerTask,1000,1000);
+        }
+
+    }
+
+    private void stopTimerClose() {
+        if (timerClose!=null&&timerTaskClose!=null){
+            timerTaskClose.cancel();
+            timerClose.cancel();
+            timerClose.purge();
+            timerClose=null;
+            timerTaskClose=null;
+        }
+
+    }
+
+    private void startTimeClose() {
+        if (adsSeconds>0){
+            timerClose = new Timer();
+            timerTaskClose = new TaskAds();
+            timerClose.scheduleAtFixedRate(timerTaskClose,1000,1000);
+        }
+
+    }
+
+
+    private void viewAds(){
+        Api.getService(Tags.base_url)
+                .viewAds("Bearer "+userModel.getToken(), userModel.getId(),adsViewModel.getId(),adsViewModel.getAdvertisement_fk().getWatch_time())
+                .enqueue(new Callback<StatusResponse>() {
+                    @Override
+                    public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            Log.e("ddd", response.body().getStatus()+"__");
+                            if (response.body().getStatus() == 200) {
+                                getUserProfile();
+
+                                createDialog(adsViewModel.getAdvertisement_fk().getProfit_coins());
+                            }
+                        }else {
+                            try {
+                                Log.e("resCode", response.code()+"__"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<StatusResponse> call, Throwable t) {
+                        Log.e("ex", t.getMessage());
+                    }
+                });
+    }
+
+
+    private void createDialog (String coins){
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .create();
+
+        DialogCoinsBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_coins, null, false);
+
+        binding.tvMsg.setText(coins+" "+getString(R.string.currency));
+        binding.cardCancel.setOnClickListener(v -> dialog.dismiss());
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.inset_dialog);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
+
+        new Handler().postDelayed(() -> {
+            dialog.dismiss();
+        }, 3000);
+    }
+
+
+
+    public class Task extends TimerTask {
+
+        @Override
+        public void run() {
+            if (seconds>0){
+                seconds--;
+                binding.setSecond(seconds+"");
+            }else {
+                stopTimer();
+                viewAds();
+
+            }
+        }
+    }
+
+    public class TaskAds extends TimerTask {
+
+        @Override
+        public void run() {
+            if (adsSeconds>0){
+                adsSeconds--;
+                binding.setTimer(adsSeconds+" s");
+            }else {
+                canCloseAds = true;
+                binding.setTimer(getString(R.string.close));
+
+                stopTimer();
+
+            }
+        }
+    }
+
+
 
     private void navigateToSignInActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -286,36 +548,47 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        int currentFragmentId = navController.getCurrentDestination().getId();
-        if (currentFragmentId == R.id.coinsFragment) {
-            Fragment fragment = getSupportFragmentManager().getPrimaryNavigationFragment();
+        if (binding.scrollViewVideosAds.getVisibility()==View.VISIBLE){
+            if (canCloseAds){
+                slideDown();
 
-            Fragment childFragment = fragment.getChildFragmentManager().getFragments().get(0);
-            if (childFragment != null) {
-                if (childFragment instanceof CoinsFragment) {
-                    CoinsFragment coinsFragment = (CoinsFragment) childFragment;
-                    if (coinsFragment.getDialogVisibility()) {
-                        coinsFragment.closeDialog();
+            }
+        }else {
+            int currentFragmentId = navController.getCurrentDestination().getId();
+            if (currentFragmentId == R.id.coinsFragment) {
+                Fragment fragment = getSupportFragmentManager().getPrimaryNavigationFragment();
+
+                Fragment childFragment = fragment.getChildFragmentManager().getFragments().get(0);
+                if (childFragment != null) {
+                    if (childFragment instanceof CoinsFragment) {
+                        CoinsFragment coinsFragment = (CoinsFragment) childFragment;
+                        if (coinsFragment.getDialogVisibility()) {
+                            coinsFragment.closeDialog();
+                        } else {
+                            super.onBackPressed();
+
+                        }
                     } else {
                         super.onBackPressed();
 
                     }
+
+
                 } else {
                     super.onBackPressed();
 
                 }
-
-
+            } else if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             } else {
                 super.onBackPressed();
 
             }
-        } else if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-
         }
+
+
+
+
     }
 
     public void refreshActivity(String lang) {
@@ -490,6 +763,13 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTimer();
+        stopTimerClose();
     }
 
 

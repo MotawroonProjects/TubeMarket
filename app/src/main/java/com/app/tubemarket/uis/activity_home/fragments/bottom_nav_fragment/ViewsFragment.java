@@ -18,6 +18,8 @@ import com.app.tubemarket.R;
 import com.app.tubemarket.databinding.DialogAlertBinding;
 import com.app.tubemarket.databinding.DialogCoinsBinding;
 import com.app.tubemarket.databinding.FragmentViewsBinding;
+import com.app.tubemarket.models.AdsViewDataModel;
+import com.app.tubemarket.models.AdsViewModel;
 import com.app.tubemarket.models.InterestsModel;
 import com.app.tubemarket.models.LoginRegisterModel;
 import com.app.tubemarket.models.MyVideosModel;
@@ -54,13 +56,14 @@ public class ViewsFragment extends Fragment {
     private int index = 0;
     private int page =1;
     private List<MyVideosModel> list;
-    private int seconds = 0;
+    private int seconds = 0,secondsAds=0;
     private Timer timer;
     private TimerTask timerTask;
     private YouTubePlayer youTubePlayer;
     private AbstractYouTubePlayerListener listener;
-    private String videoId="";
+    private String videoId="",videoIdAds="";
     private MyVideosModel myVideosModel;
+    private AdsViewModel adsViewModel;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +95,9 @@ public class ViewsFragment extends Fragment {
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
         binding.youtubePlayerView.enableBackgroundPlayback(true);
+
         getLifecycle().addObserver(binding.youtubePlayerView);
+
         binding.llNext.setOnClickListener(view -> {
             int newIndex = index+1;
             if (newIndex < list.size()) {
@@ -111,6 +116,7 @@ public class ViewsFragment extends Fragment {
         listener = new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
+
                 ViewsFragment.this.youTubePlayer = youTubePlayer;
                 youTubePlayer.loadVideo(videoId, 0);
                 youTubePlayer.pause();
@@ -130,13 +136,15 @@ public class ViewsFragment extends Fragment {
                 }
             }
         };
-        getVideos(1, 0);
 
+        getVideosAds();
+        getVideos(1, 0);
 
 
     }
 
     private void getVideos(int newPage, int newIndex) {
+        Log.e("ss", newIndex+"__");
         binding.llNext.setVisibility(View.INVISIBLE);
         Api.getService(Tags.base_url)
                 .getViewsVideo("Bearer " + userModel.getToken(), userModel.getId(), "on", "20", "desc", newPage)
@@ -172,6 +180,7 @@ public class ViewsFragment extends Fragment {
     }
 
     private void loadVideo(MyVideosModel myVideosModel) {
+
         this.myVideosModel = myVideosModel;
         seconds = 0;
         videoId = myVideosModel.getLink();
@@ -190,6 +199,38 @@ public class ViewsFragment extends Fragment {
 
 
     }
+
+    private void getVideosAds() {
+        Api.getService(Tags.base_url)
+                .getAdsView("Bearer " + userModel.getToken(), userModel.getId(), "desc" )
+                .enqueue(new Callback<AdsViewDataModel>() {
+                    @Override
+                    public void onResponse(Call<AdsViewDataModel> call, Response<AdsViewDataModel> response) {
+                        if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 200) {
+                            if (response.body().getData() != null && response.body().getData().size() > 0) {
+
+                                activity.loadVideoAds(response.body().getData().get(0));
+
+                            }
+                        } else {
+                            try {
+                                Log.e("error", response.code() + "__" + response.errorBody().string() + "_");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AdsViewDataModel> call, Throwable t) {
+
+                        Log.e("error", t.getMessage() + "_");
+
+                    }
+                });
+    }
+
+
 
     private void view(){
         Api.getService(Tags.base_url)
@@ -240,6 +281,8 @@ public class ViewsFragment extends Fragment {
 
     }
 
+
+
     public class Task extends TimerTask {
 
         @Override
@@ -253,6 +296,7 @@ public class ViewsFragment extends Fragment {
             }
         }
     }
+
 
     private void createDialog (String coins){
         final AlertDialog dialog = new AlertDialog.Builder(activity)

@@ -146,5 +146,6 @@
     <string name="coupon_code">Coupon code</string>
     <string name="messages">Messages</string>
     <string name="open_link">Open link</string>
+    <string name="close">Close</string>
 
 </resources>

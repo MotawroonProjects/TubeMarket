@@ -130,4 +130,5 @@
         android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.UserMessagesFragment"
         android:label="@string/messages"
         tools:layout="@layout/fragment_user_messages" />
+
 </navigation>

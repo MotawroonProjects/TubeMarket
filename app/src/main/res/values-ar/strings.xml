@@ -143,5 +143,6 @@
     <string name="coupon_code">كود الخصم</string>
     <string name="messages">الرسائل</string>
     <string name="open_link">إفتح الرابط</string>
+    <string name="close">إغلاق الاعلان</string>
 
 </resources>

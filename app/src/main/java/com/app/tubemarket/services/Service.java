@@ -2,6 +2,7 @@ package com.app.tubemarket.services;
 
 import com.app.tubemarket.models.AdCostDataModel;
 import com.app.tubemarket.models.AddMessageDataModel;
+import com.app.tubemarket.models.AdsViewDataModel;
 import com.app.tubemarket.models.BuyMessageDataModel;
 import com.app.tubemarket.models.CampaignDataModel;
 import com.app.tubemarket.models.CoinDataModel;
@@ -345,6 +346,27 @@ public interface Service {
                                                 @Query("user_id") String user_id
     );
 
+    @GET("api/show-videos-advertisements")
+    Call<AdsViewDataModel> getAdsView(@Header("Authorization") String token,
+                                      @Query("user_id") String user_id,
+                                      @Query("orderBy") String orderBy
+    );
+
+    @FormUrlEncoded
+    @POST("api/view-advertisement")
+    Call<StatusResponse> viewAds(@Header("Authorization") String token,
+                                 @Field("user_id") String user_id,
+                                 @Field("advertisement_user_id") String advertisement_user_id,
+                                 @Field("seconds") String seconds
+
+
+    );
+
+    @GET("api/get-all-subscriptions-advertisements")
+    Call<AdsViewDataModel> getAllSubscriptions(@Header("Authorization") String token,
+                                               @Query("user_id") String user_id,
+                                               @Query("orderBy") String orderBy
+    );
 
 }
 

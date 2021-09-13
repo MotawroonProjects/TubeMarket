@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import com.app.tubemarket.R;
 import com.app.tubemarket.databinding.FragmentNewAdditionBinding;
 import com.app.tubemarket.databinding.FragmentSubscriptionBinding;
+import com.app.tubemarket.models.AdsViewDataModel;
 import com.app.tubemarket.models.MyVideosModel;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.models.VideoDataModel;
@@ -129,6 +130,7 @@ public class SubscriptionFragment extends Fragment {
         });
 
         getVideos(1, 0);
+        getSubscriptionAds();
     }
     private void getVideos(int newPage, int newIndex)
     {
@@ -182,6 +184,37 @@ public class SubscriptionFragment extends Fragment {
         binding.setModel(myVideosModel);
 
     }
+
+    private void getSubscriptionAds() {
+        Api.getService(Tags.base_url)
+                .getAllSubscriptions("Bearer " + userModel.getToken(), userModel.getId(), "desc" )
+                .enqueue(new Callback<AdsViewDataModel>() {
+                    @Override
+                    public void onResponse(Call<AdsViewDataModel> call, Response<AdsViewDataModel> response) {
+                        if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 200) {
+                            if (response.body().getData() != null && response.body().getData().size() > 0) {
+
+                                activity.loadVideoAds(response.body().getData().get(0));
+
+                            }
+                        } else {
+                            try {
+                                Log.e("error", response.code() + "__" + response.errorBody().string() + "_");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AdsViewDataModel> call, Throwable t) {
+
+                        Log.e("error", t.getMessage() + "_");
+
+                    }
+                });
+    }
+
 
 
 }
