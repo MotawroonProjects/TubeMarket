@@ -138,7 +138,7 @@ public class ProfileFragment extends Fragment {
         Log.e("ddd", userModel.getId()+"__"+userModel.getGoogle_id()+"__"+userModel.getToken());
 
         binding.btnUpdate.setOnClickListener(v -> {
-            if ((videoModel!=null&&channelModel!=null)|interests_id!=0){
+            if ((videoModel!=null&&channelModel!=null)||interests_id!=0){
                 updateProfile();
             }
 

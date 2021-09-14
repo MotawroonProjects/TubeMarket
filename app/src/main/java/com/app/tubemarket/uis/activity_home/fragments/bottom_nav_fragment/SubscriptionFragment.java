@@ -26,6 +26,7 @@ import com.app.tubemarket.R;
 import com.app.tubemarket.databinding.FragmentNewAdditionBinding;
 import com.app.tubemarket.databinding.FragmentSubscriptionBinding;
 import com.app.tubemarket.models.AdsViewDataModel;
+import com.app.tubemarket.models.GeneralAdsModel;
 import com.app.tubemarket.models.MyVideosModel;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.models.VideoDataModel;
@@ -104,8 +105,9 @@ public class SubscriptionFragment extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("url",url);
             bundle.putString("vidUrl",vidUrl);
-            bundle.putSerializable("data", myVideosModel);
 
+            GeneralAdsModel generalAdsModel = new GeneralAdsModel(myVideosModel.getId(), myVideosModel.getTimer_limit(), myVideosModel.getProfit_coins(),Tags.NORMAL_AD);
+            bundle.putSerializable("data", generalAdsModel);
 
             Intent intent = new Intent(activity, WebViewActivity.class);
             intent.putExtras(bundle);
@@ -194,7 +196,7 @@ public class SubscriptionFragment extends Fragment {
                         if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 200) {
                             if (response.body().getData() != null && response.body().getData().size() > 0) {
 
-                                activity.loadVideoAds(response.body().getData().get(0));
+                                activity.loadSubscriptionAds(response.body().getData().get(0));
 
                             }
                         } else {

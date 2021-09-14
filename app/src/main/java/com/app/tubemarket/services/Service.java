@@ -2,6 +2,7 @@ package com.app.tubemarket.services;
 
 import com.app.tubemarket.models.AdCostDataModel;
 import com.app.tubemarket.models.AddMessageDataModel;
+import com.app.tubemarket.models.AdminMessageDataModel;
 import com.app.tubemarket.models.AdsViewDataModel;
 import com.app.tubemarket.models.BuyMessageDataModel;
 import com.app.tubemarket.models.CampaignDataModel;
@@ -11,6 +12,8 @@ import com.app.tubemarket.models.CostResultModel;
 import com.app.tubemarket.models.GoldCostDataModel;
 import com.app.tubemarket.models.LoginRegisterModel;
 import com.app.tubemarket.models.MessageResponseModel;
+import com.app.tubemarket.models.PayModel;
+import com.app.tubemarket.models.SingleAdminMessageDataModel;
 import com.app.tubemarket.models.SingleCampaign;
 import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.SubscribeSecondsModel;
@@ -22,12 +25,16 @@ import com.app.tubemarket.models.ViewsSecondsModel;
 import com.app.tubemarket.models.VipDataModel;
 import com.app.tubemarket.models.WithdrawDataModel;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface Service {
@@ -277,7 +284,9 @@ public interface Service {
                                        @Field("subscription_limit") String subscription_limit,
                                        @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
                                        @Field("total_cost") String total_cost,
-                                       @Field("link") String link
+                                       @Field("link") String link,
+                                       @Field("channel_name") String channel_name,
+                                       @Field("channel_image") String channel_image
 
     );
 
@@ -368,5 +377,64 @@ public interface Service {
                                                @Query("orderBy") String orderBy
     );
 
+
+    @FormUrlEncoded
+    @POST("api/like-advertisement")
+    Call<StatusResponse> likeAdVideo(@Header("Authorization") String token,
+                                     @Field("user_id") String user_id,
+                                     @Field("advertisement_user_id") String advertisement_user_id,
+                                     @Field("type") String type
+    );
+
+    @FormUrlEncoded
+    @POST("api/subscription-advertisement")
+    Call<StatusResponse> subscribeAdChannel(@Header("Authorization") String token,
+                                            @Field("user_id") String user_id,
+                                            @Field("advertisement_user_id") String advertisement_user_id
+    );
+
+
+    @Multipart
+    @POST("api/send-admin-chat-message")
+    Call<SingleAdminMessageDataModel> sendAdminChatAttachment(@Header("Authorization") String bearer_token,
+                                                              @Part("user_id") RequestBody user_id,
+                                                              @Part("admin_room_id") RequestBody admin_room_id,
+                                                              @Part("admin_id") RequestBody admin_id,
+                                                              @Part("type") RequestBody type,
+                                                              @Part MultipartBody.Part attachment
+    );
+
+    @GET("api/admin-room-messages")
+    Call<AdminMessageDataModel> getAdminChatMessage(@Header("Authorization") String user_token,
+                                                    @Query("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("api/send-admin-chat-message")
+    Call<SingleAdminMessageDataModel> sendAdminChatMessage(@Header("Authorization") String bearer_token,
+                                                           @Field("user_id") String user_id,
+                                                           @Field("admin_room_id") String admin_room_id,
+                                                           @Field("admin_id") String admin_id,
+                                                           @Field("type") String type,
+                                                           @Field("message") String message
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/pay-subscribe-to-golden-account")
+    Call<PayModel> payGoldAccount(@Header("Authorization") String token,
+                                  @Field("user_id") String user_id,
+                                  @Field("vip_coin_id") String vip_coin_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/pay-buy-coins")
+    Call<PayModel> buyPayCoin(@Header("Authorization") String token,
+                              @Field("user_id") String user_id,
+                              @Field("buy_coin_id") String buy_coin_id
+    );
+
+
 }
+
 

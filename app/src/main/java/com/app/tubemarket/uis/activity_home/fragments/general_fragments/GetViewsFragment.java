@@ -112,7 +112,7 @@ public class GetViewsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 second = secondsList.get(position).getSeconds();
-                if (view_num.equals("0")){
+                if (!view_num.equals("0")){
                     binding.tvCalc.setVisibility(View.VISIBLE);
                     calculateCost();
                 }else {
@@ -144,7 +144,7 @@ public class GetViewsFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()){
                     view_num = s.toString();
-                    if (!second.equals("0")){
+                    if (!second.equals("0")&&!view_num.equals("0")){
                         binding.tvCalc.setVisibility(View.VISIBLE);
 
                     }else {

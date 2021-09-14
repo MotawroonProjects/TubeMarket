@@ -144,5 +144,9 @@
     <string name="messages">الرسائل</string>
     <string name="open_link">إفتح الرابط</string>
     <string name="close">إغلاق الاعلان</string>
+    <string name="not_enough_coins">عفوا! لا توجد نقاط كافية</string>
+    <string name="special_ad">إعلان مميز</string>
+    <string name="admin">الإدارة</string>
+    <string name="type_a_message">إكتب رسالتك ...</string>
 
 </resources>

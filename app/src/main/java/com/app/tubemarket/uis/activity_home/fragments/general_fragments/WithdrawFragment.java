@@ -1,7 +1,16 @@
 package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -20,13 +29,17 @@ import com.app.tubemarket.databinding.FragmentWithdrawBinding;
 import com.app.tubemarket.interfaces.Listeners;
 import com.app.tubemarket.models.CoinDataModel;
 import com.app.tubemarket.models.CoinsModel;
+import com.app.tubemarket.models.MessageResponseModel;
+import com.app.tubemarket.models.PayModel;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.models.WithdrawDataModel;
 import com.app.tubemarket.models.WithdrawModel;
 import com.app.tubemarket.preferences.Preferences;
 import com.app.tubemarket.remote.Api;
+import com.app.tubemarket.share.Common;
 import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
+import com.app.tubemarket.uis.activity_view.ViewActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,6 +67,7 @@ public class WithdrawFragment extends Fragment implements Listeners.WithdrawList
         initView();
         return binding.getRoot();
     }
+
 
     private void initView() {
         list = new ArrayList<>();
@@ -107,6 +121,7 @@ public class WithdrawFragment extends Fragment implements Listeners.WithdrawList
 
     @Override
     public void onWithdrawData(WithdrawModel withdrawModel, View view) {
+
 
     }
 }

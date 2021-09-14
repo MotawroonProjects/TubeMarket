@@ -1,10 +1,7 @@
 package com.app.tubemarket.uis.activity_web_view;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -12,47 +9,28 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Message;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.ClientCertRequest;
-import android.webkit.HttpAuthHandler;
-import android.webkit.JavascriptInterface;
-import android.webkit.JsPromptResult;
-import android.webkit.JsResult;
 import android.webkit.PermissionRequest;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.app.tubemarket.R;
-import com.app.tubemarket.databinding.ActivityLoginBinding;
 import com.app.tubemarket.databinding.ActivityWebViewBinding;
 import com.app.tubemarket.language.Language;
+import com.app.tubemarket.models.GeneralAdsModel;
 import com.app.tubemarket.models.MyVideosModel;
 import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.preferences.Preferences;
 import com.app.tubemarket.remote.Api;
 import com.app.tubemarket.tags.Tags;
-import com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.ViewsFragment;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.Task;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import io.paperdb.Paper;
 import retrofit2.Call;
@@ -65,7 +43,7 @@ public class WebViewActivity extends AppCompatActivity {
     private Preferences preferences;
     private UserModel userModel;
     private String url = "", vidUrl = "";
-    private MyVideosModel myVideosModel;
+    private GeneralAdsModel generalAdsModel;
     private int seconds = 0;
     private CountDownTimer timer;
 
@@ -87,7 +65,7 @@ public class WebViewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         url = intent.getExtras().getString("url");
         vidUrl = intent.getExtras().getString("vidUrl");
-        myVideosModel = (MyVideosModel) intent.getExtras().getSerializable("data");
+        generalAdsModel = (GeneralAdsModel) intent.getExtras().getSerializable("data");
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -98,10 +76,10 @@ public class WebViewActivity extends AppCompatActivity {
         binding.webView.getSettings().setJavaScriptEnabled(true);
         binding.webView.getSettings().setDomStorageEnabled(true);
         binding.webView.loadUrl(url);
-        seconds = Integer.parseInt(myVideosModel.getTimer_limit());
+        seconds = generalAdsModel.getTimer_limit()!=null?Integer.parseInt(generalAdsModel.getTimer_limit()):0;
 
-        binding.setSeconds(myVideosModel.getTimer_limit());
-        binding.setCoins(myVideosModel.getProfit_coins());
+        binding.setSeconds(generalAdsModel.getTimer_limit());
+        binding.setCoins(generalAdsModel.getProfit_coins());
 
         binding.webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -147,21 +125,48 @@ public class WebViewActivity extends AppCompatActivity {
             public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
                 if (url.contains("https://m.youtube.com/youtubei/v1/subscription/unsubscribe")) {
                     Log.e("response", "UnSubscribed");
-                    runOnUiThread(() -> subscribe());
+                    runOnUiThread(() -> {
+                        if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)){
+                            subscribe();
+                        }else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)){
+                            subscribeAdChannel();
+                        }
+                    });
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/subscription/subscribe")) {
                     Log.e("response", "Subscribed");
-                    runOnUiThread(() -> subscribe());
-
+                    if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)){
+                        subscribe();
+                    }else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)){
+                        subscribeAdChannel();
+                    }
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/like/like")) {
                     Log.e("response", "like");
-                    runOnUiThread(() -> likeDislike("like"));
+                    runOnUiThread(() -> {
+                        if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)){
+                            likeDislike("like");
+                        }else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)){
+                            likeDislikeAdVideo("like");
+                        }
+                    });
 
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/like/removelike")) {
                     Log.e("response", "removeLike");
-                    runOnUiThread(() -> likeDislike("dislike"));
+                    runOnUiThread(() ->{
+                        if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)){
+                            likeDislike("dislike");
+                        }else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)){
+                            likeDislikeAdVideo("dislike");
+                        }
+                    } );
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/like/dislike")) {
                     Log.e("response", "disLike");
-                    runOnUiThread(() -> likeDislike("remove_like"));
+                    runOnUiThread(() -> {
+                        if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)){
+                            likeDislike("remove_like");
+                        }else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)){
+                            likeDislikeAdVideo("remove_like");
+                        }
+                    });
 
                 }
                 return null;
@@ -202,7 +207,7 @@ public class WebViewActivity extends AppCompatActivity {
         binding.viewLayer.setFocusable(true);
         binding.llCounter.setVisibility(View.VISIBLE);
 
-        timer = new CountDownTimer(Long.parseLong(myVideosModel.getTimer_limit()) * 1000, 1000) {
+        timer = new CountDownTimer(Long.parseLong(generalAdsModel.getTimer_limit()) * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateSeconds();
@@ -228,7 +233,7 @@ public class WebViewActivity extends AppCompatActivity {
     private void likeDislike(String status)
     {
         Api.getService(Tags.base_url)
-                .like("Bearer "+userModel.getToken(), userModel.getId(),myVideosModel.getId(),myVideosModel.getProfit_coins(),status)
+                .like("Bearer "+userModel.getToken(), userModel.getId(), generalAdsModel.getId(), generalAdsModel.getProfit_coins(),status)
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
@@ -249,7 +254,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     private void subscribe(){
         Api.getService(Tags.base_url)
-                .subscribe("Bearer "+userModel.getToken(), userModel.getId(),myVideosModel.getId(),myVideosModel.getProfit_coins())
+                .subscribe("Bearer "+userModel.getToken(), userModel.getId(), generalAdsModel.getId(), generalAdsModel.getProfit_coins())
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
@@ -267,6 +272,51 @@ public class WebViewActivity extends AppCompatActivity {
                 });
 
     }
+
+
+    private void likeDislikeAdVideo(String status)
+    {
+        Api.getService(Tags.base_url)
+                .likeAdVideo("Bearer "+userModel.getToken(), userModel.getId(), generalAdsModel.getId(),status)
+                .enqueue(new Callback<StatusResponse>() {
+                    @Override
+                    public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getStatus() == 200) {
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<StatusResponse> call, Throwable t) {
+
+                    }
+                });
+
+    }
+
+    private void subscribeAdChannel(){
+        Api.getService(Tags.base_url)
+                .subscribeAdChannel("Bearer "+userModel.getToken(), userModel.getId(), generalAdsModel.getId())
+                .enqueue(new Callback<StatusResponse>() {
+                    @Override
+                    public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getStatus() == 200) {
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<StatusResponse> call, Throwable t) {
+
+                    }
+                });
+
+    }
+
 
     @Override
     protected void onDestroy() {

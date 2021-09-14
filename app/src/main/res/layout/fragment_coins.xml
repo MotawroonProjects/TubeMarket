@@ -422,6 +422,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSupport"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_margin="5dp"
@@ -483,7 +484,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/trans_black"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

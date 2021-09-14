@@ -119,7 +119,7 @@
     <string name="estimated_views_interval_time_per_day">Estimated views interval time per day</string>
     <string name="enter_number_of_likes">Enter number of likes</string>
     <string name="suc">Success!</string>
-    <string name="admin_review">PPlease wait for the admin to review your video</string>
+    <string name="admin_review">Please wait for the admin to review your video</string>
     <string name="alert">Alert</string>
     <string name="day">Day</string>
     <string name="should_view">You should view video first</string>
@@ -147,5 +147,9 @@
     <string name="messages">Messages</string>
     <string name="open_link">Open link</string>
     <string name="close">Close</string>
+    <string name="not_enough_coins">Not enough coins</string>
+    <string name="special_ad">Special Ad</string>
+    <string name="admin">Admin</string>
+    <string name="type_a_message">Type a message...</string>
 
 </resources>

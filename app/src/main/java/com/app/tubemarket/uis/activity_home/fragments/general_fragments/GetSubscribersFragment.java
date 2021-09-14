@@ -49,6 +49,7 @@ public class GetSubscribersFragment extends Fragment {
     private UserModel userModel;
     private Preferences preferences;
     private VideoModel channelModel = null;
+    private UserModel.ChannelModel userChannel;
     private SpinnerCountAdapter secondsAdapter;
     private List<String> secondsList;
     private String subscribe_num = "0",seconds="0",total="0",channel_id="";
@@ -151,7 +152,7 @@ public class GetSubscribersFragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .addSubscribes("Bearer "+userModel.getToken(),userModel.getId(),subscribe_num,seconds,total,channel_id)
+                .addSubscribes("Bearer "+userModel.getToken(),userModel.getId(),subscribe_num,seconds,total,channel_id,userChannel.getTitle(),userChannel.getUrl())
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
@@ -191,8 +192,8 @@ public class GetSubscribersFragment extends Fragment {
 
                                 if (response.body().getItems().size() > 0){
                                     channelModel = response.body();
-                                    UserModel.ChannelModel model = new UserModel.ChannelModel(channelModel.getItems().get(0).getId(), channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(), channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(), channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
-                                    binding.setModel(model);
+                                    userChannel = new UserModel.ChannelModel(channelModel.getItems().get(0).getId(), channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(), channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(), channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
+                                    binding.setModel(userChannel);
                                 }
 
 

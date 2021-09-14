@@ -33,8 +33,17 @@
         tools:ignore="AllowBackup"
         tools:targetApi="m">
         <activity
+            android:name=".uis.activity_chat_admin.ChatAdminActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="true"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            />
+        <activity
             android:name=".uis.activity_view.ViewActivity"
-            android:exported="true" />
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="true"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            />
         <activity
             android:name=".uis.activity_web_view.WebViewActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -78,6 +87,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".uis.activity_chat_admin.ServiceUploadAttachmentAdmin" />
+
     </application>
 
 </manifest>

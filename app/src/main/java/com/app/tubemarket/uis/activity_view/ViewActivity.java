@@ -77,6 +77,7 @@ public class ViewActivity extends AppCompatActivity {
 
                 if (data!=null){
                     String successLink = Tags.base_url+"success-payment";
+
                     if (url.contains(successLink)){
                         new Handler()
                                 .postDelayed(()->{

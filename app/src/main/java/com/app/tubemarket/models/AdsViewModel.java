@@ -52,6 +52,10 @@ public class AdsViewModel implements Serializable {
         private String profit_coins;
         private String created_at;
         private String updated_at;
+        private String channel_name;
+        private String channel_image;
+
+        private OperationModel user_operations_fk;
 
         public String getId() {
             return id;
@@ -119,6 +123,18 @@ public class AdsViewModel implements Serializable {
 
         public String getUpdated_at() {
             return updated_at;
+        }
+
+        public String getChannel_name() {
+            return channel_name;
+        }
+
+        public String getChannel_image() {
+            return channel_image;
+        }
+
+        public OperationModel getUser_operations_fk() {
+            return user_operations_fk;
         }
     }
 }

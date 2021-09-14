@@ -1,5 +1,6 @@
 package com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -19,6 +20,7 @@ import com.app.tubemarket.databinding.FragmentCampaignBinding;
 import com.app.tubemarket.databinding.FragmentCoinsBinding;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.preferences.Preferences;
+import com.app.tubemarket.uis.activity_chat_admin.ChatAdminActivity;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
 
 import io.paperdb.Paper;
@@ -99,6 +101,10 @@ public class CoinsFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.messagesFragment);
         });
 
+        binding.cardSupport.setOnClickListener(v -> {
+            Intent intent =new Intent(activity, ChatAdminActivity.class);
+            startActivity(intent);
+        });
 
 
     }

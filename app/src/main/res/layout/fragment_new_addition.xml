@@ -134,7 +134,7 @@
                 android:layout_marginTop="24dp"
                 android:textStyle="bold"
                 android:text="@string/previous_videos"
-
+                android:visibility="gone"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -149,6 +149,8 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginTop="8dp"
+                android:visibility="gone"
+
                 />
 
 

@@ -48,7 +48,9 @@ public class AddSubscriptionsFragment extends Fragment {
     private List<String> subscriptionsList,secondsList;
     private String subscribes="",seconds="";
     private CoinsDataModel.CoinsModel coinsModel;
-
+    private String have_discount ="no";
+    private int discount_coins =0;
+    private int total_coins =0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,7 +66,7 @@ public class AddSubscriptionsFragment extends Fragment {
         subscriptionsList =new ArrayList<>();
         secondsList = new ArrayList<>();
         binding.setModel(userModel.getChannelModel());
-
+        binding.setUserModel(userModel);
         if (userModel.getChannelModel()==null){
             binding.btnCreateCampaign.setEnabled(false);
             Toast.makeText(activity, R.string.to_create_campaign, Toast.LENGTH_SHORT).show();
@@ -109,6 +111,14 @@ public class AddSubscriptionsFragment extends Fragment {
                 addVideo(v);
             }
         });
+
+        binding.tvUpdate.setOnClickListener(v -> {
+            if (userModel.getIs_vip().equals("yes")){
+                have_discount="yes";
+                calculateCoins();
+            }
+        });
+
         getSubscribeSecond();
     }
 
@@ -166,8 +176,7 @@ public class AddSubscriptionsFragment extends Fragment {
 
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getData() != null ) {
-                                coinsModel = response.body().getData();;
-                                binding.setCoins(response.body().getData().getCampaign_coins());
+                                updateCoins(response.body());
                             }
                         }else {
                             try {
@@ -196,10 +205,16 @@ public class AddSubscriptionsFragment extends Fragment {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful() && response.body() != null&&response.body().getStatus()==200) {
+                        if (response.isSuccessful() && response.body() != null) {
 
-                            Navigation.findNavController(view).popBackStack();
-                            Common.CreateDialogAlert(activity,getString(R.string.admin_review));
+                            if (response.body().getStatus()==200){
+                                Navigation.findNavController(view).popBackStack();
+                                Common.CreateDialogAlert(activity,getString(R.string.admin_review));
+
+                            }else if (response.body().getStatus()==408){
+                                Toast.makeText(activity, R.string.not_enough_coins, Toast.LENGTH_SHORT).show();
+                            }
+
                         }else {
                             try {
                                 Log.e("error",response.code()+"__"+response.errorBody().string()+"_");
@@ -215,6 +230,19 @@ public class AddSubscriptionsFragment extends Fragment {
 
                     }
                 });
+    }
+
+    private void updateCoins(CoinsDataModel body) {
+        discount_coins = 0;
+        total_coins =0;
+        coinsModel = body.getData();
+        if (have_discount.equals("yes")){
+            discount_coins = (int) (Integer.parseInt(coinsModel.getProfit_coins())*.10);
+        }
+
+        total_coins = Integer.parseInt(coinsModel.getProfit_coins())-discount_coins;
+        binding.setCoins(total_coins+"");
+
     }
 
 }

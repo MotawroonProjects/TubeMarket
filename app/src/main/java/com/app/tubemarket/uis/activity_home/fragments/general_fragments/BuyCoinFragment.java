@@ -1,7 +1,16 @@
 package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -23,11 +32,15 @@ import com.app.tubemarket.models.CampaignDataModel;
 import com.app.tubemarket.models.CampaignModel;
 import com.app.tubemarket.models.CoinDataModel;
 import com.app.tubemarket.models.CoinsModel;
+import com.app.tubemarket.models.MessageResponseModel;
+import com.app.tubemarket.models.PayModel;
 import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.preferences.Preferences;
 import com.app.tubemarket.remote.Api;
+import com.app.tubemarket.share.Common;
 import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
+import com.app.tubemarket.uis.activity_view.ViewActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,6 +58,7 @@ public class BuyCoinFragment extends Fragment implements Listeners.CoinsListener
     private Preferences preferences;
     private List<CoinsModel> list;
     private CoinsAdapter adapter;
+    private ActivityResultLauncher<Intent> launcher;
 
 
     @Override
@@ -53,6 +67,19 @@ public class BuyCoinFragment extends Fragment implements Listeners.CoinsListener
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_buy_coin, container, false);
         initView();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode()== Activity.RESULT_OK){
+                    activity.getUserProfile();
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -107,6 +134,37 @@ public class BuyCoinFragment extends Fragment implements Listeners.CoinsListener
 
     @Override
     public void onCoinsData(CoinsModel coinsModel, View view) {
+        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .payGoldAccount("Bearer "+userModel.getToken(),userModel.getId(), coinsModel.getId())
+                .enqueue(new Callback<PayModel>() {
+                    @Override
+                    public void onResponse(Call<PayModel> call, Response<PayModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()){
+                            Intent intent = new Intent(activity, ViewActivity.class);
+                            intent.putExtra("url", response.body().getPay_link());
+                            intent.putExtra("data",new MessageResponseModel.Data());
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            launcher.launch(intent);
 
+                        }else {
+                            try {
+                                Log.e("error", response.code()+"__"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PayModel> call, Throwable t) {
+                        dialog.dismiss();
+
+                        Log.e("failed", t.getMessage()+"__");
+                    }
+                });
     }
 }

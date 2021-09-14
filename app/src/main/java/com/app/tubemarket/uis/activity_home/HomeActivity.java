@@ -1,5 +1,9 @@
 package com.app.tubemarket.uis.activity_home;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +53,7 @@ import com.app.tubemarket.databinding.ActivityHomeBinding;
 import com.app.tubemarket.databinding.DialogCoinsBinding;
 import com.app.tubemarket.language.Language;
 import com.app.tubemarket.models.AdsViewModel;
+import com.app.tubemarket.models.GeneralAdsModel;
 import com.app.tubemarket.models.InterestsModel;
 import com.app.tubemarket.models.LoginRegisterModel;
 import com.app.tubemarket.models.MyVideosModel;
@@ -62,6 +67,7 @@ import com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CoinsF
 import com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.ViewsFragment;
 import com.app.tubemarket.uis.activity_login.LoginActivity;
 import com.app.tubemarket.uis.activity_splash.SplashActivity;
+import com.app.tubemarket.uis.activity_web_view.WebViewActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -120,14 +126,18 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvName, tvEmail, tvCoins;
     private AbstractYouTubePlayerListener listener;
     private YouTubePlayer youTubePlayer;
-    private Timer timer,timerClose;
+    private Timer timer, timerClose;
     private TimerTask timerTask;
     private TaskAds timerTaskClose;
     private int seconds = 0;
     private AdsViewModel adsViewModel;
-    private String videoId="";
-    private int adsSeconds = 20;//seconds
+    private String videoId = "";
+    private int adsSeconds = 6;//seconds
     private boolean canCloseAds = true;
+    private AdsViewModel adsViewModelSubscription;
+    private ActivityResultLauncher<Intent> launcher;
+
+
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
@@ -144,7 +154,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
-        if (intent.getData()!=null){
+        if (intent.getData() != null) {
             String inviteCode = intent.getData().getLastPathSegment();
             Log.e("code", inviteCode);
 
@@ -153,7 +163,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initView() {
         Paper.init(this);
-        lang = Paper.book().read("lang","ar");
+        lang = Paper.book().read("lang", "ar");
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         View headerView = binding.navView.getHeaderView(0);
@@ -169,9 +179,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
 
-               HomeActivity.this.youTubePlayer = youTubePlayer;
+                HomeActivity.this.youTubePlayer = youTubePlayer;
                 youTubePlayer.loadVideo(videoId, 0);
-
 
 
             }
@@ -197,8 +206,6 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
         NavigationUI.setupWithNavController(binding.navView, navController);
         binding.bottomNav.getMenu().findItem(R.id.empty).setEnabled(false);
-
-
 
 
         binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.white), PorterDuff.Mode.SRC_ATOP);
@@ -229,19 +236,19 @@ public class HomeActivity extends AppCompatActivity {
             switch (id) {
                 case R.id.profileFragment:
 
-                    navController.navigate(R.id.profileFragment,null,navOptions);
+                    navController.navigate(R.id.profileFragment, null, navOptions);
                     break;
 
                 case R.id.goldProfileFragment:
-                    navController.navigate(R.id.goldProfileFragment,null,navOptions);
+                    navController.navigate(R.id.goldProfileFragment, null, navOptions);
 
                     break;
                 case R.id.invite:
-                    navController.navigate(R.id.inviteFragment,null,navOptions);
+                    navController.navigate(R.id.inviteFragment, null, navOptions);
 
                     break;
                 case R.id.changeLang:
-                    navController.navigate(R.id.changeLang,null,navOptions);
+                    navController.navigate(R.id.changeLang, null, navOptions);
                     break;
 
 
@@ -258,13 +265,13 @@ public class HomeActivity extends AppCompatActivity {
 
 
                     new Handler()
-                            .postDelayed(()->{
+                            .postDelayed(() -> {
                                 Bundle bundle2 = new Bundle();
                                 bundle2.putString("type", "2");
 
-                                navController.navigate(R.id.faqActivity, bundle2,navOptions);
-                                overridePendingTransition(0,0);
-                            },300);
+                                navController.navigate(R.id.faqActivity, bundle2, navOptions);
+                                overridePendingTransition(0, 0);
+                            }, 300);
 
 
                     break;
@@ -283,7 +290,7 @@ public class HomeActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
             finish();
-            overridePendingTransition(0,0);
+            overridePendingTransition(0, 0);
 
         }
 
@@ -294,27 +301,47 @@ public class HomeActivity extends AppCompatActivity {
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
                 float slideX = drawerView.getWidth() * slideOffset;
-                float halfWidth = drawerView.getWidth()/2;
-                if (slideX<halfWidth){
+                float halfWidth = drawerView.getWidth() / 2;
+                if (slideX < halfWidth) {
                     binding.cardAdAds.setVisibility(View.VISIBLE);
 
-                }else {
+                } else {
                     binding.cardAdAds.setVisibility(View.INVISIBLE);
 
                 }
 
-                if (lang.equals("ar")){
+                if (lang.equals("ar")) {
                     binding.consData.setTranslationX(-slideX);
 
-            }else {
-                    binding.consData.setTranslationX(slideX);            }
+                } else {
+                    binding.consData.setTranslationX(slideX);
+                }
 
             }
         });
 
         binding.cardClose.setOnClickListener(v -> {
-            if (canCloseAds){
+            if (canCloseAds) {
                 slideDown();
+            }
+        });
+        binding.flSubscribe.setOnClickListener(v -> {
+            String vidUrl ="https://youtu.be/"+adsViewModelSubscription.getAdvertisement_fk().getLink();
+            String url = "https://accounts.google.com/ServiceLogin?service=youtube";
+            Bundle bundle = new Bundle();
+            bundle.putString("url",url);
+            bundle.putString("vidUrl",vidUrl);
+
+            GeneralAdsModel generalAdsModel = new GeneralAdsModel(adsViewModelSubscription.getId(), adsViewModelSubscription.getAdvertisement_fk().getWatch_time(), adsViewModelSubscription.getAdvertisement_fk().getProfit_coins(),Tags.CUSTOM_AD);
+            bundle.putSerializable("data", generalAdsModel);
+
+            Intent intent = new Intent(this, WebViewActivity.class);
+            intent.putExtras(bundle);
+            launcher.launch(intent);
+        });
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode()==RESULT_OK){
+                getUserProfile();
             }
         });
         updateFirebaseToken();
@@ -330,8 +357,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void loadVideoAds(AdsViewModel adsViewModel) {
+        binding.llViewAds.setVisibility(View.VISIBLE);
+        binding.llSubscriptionAds.setVisibility(View.GONE);
         this.adsViewModel = adsViewModel;
-        adsSeconds = 20;
+        adsSeconds = 6;
+        binding.setTimer(adsSeconds+" s");
         seconds = 0;
         canCloseAds = false;
         slideUp();
@@ -341,22 +371,37 @@ public class HomeActivity extends AppCompatActivity {
         videoId = adsViewModel.getAdvertisement_fk().getLink();
         binding.setVidCoins(adsViewModel.getAdvertisement_fk().getProfit_coins());
         binding.setSecond(adsViewModel.getAdvertisement_fk().getWatch_time());
-        seconds = Integer.parseInt(adsViewModel.getAdvertisement_fk().getWatch_time());
+        seconds = adsViewModel.getAdvertisement_fk().getWatch_time() != null ? Integer.parseInt(adsViewModel.getAdvertisement_fk().getWatch_time()) : 0;
 
-        if (youTubePlayer!=null){
+        if (youTubePlayer != null) {
             listener.onReady(youTubePlayer);
 
-        }else {
+        } else {
             binding.youtubePlayerView.addYouTubePlayerListener(listener);
 
         }
 
 
+    }
+
+    public void loadSubscriptionAds(AdsViewModel adsViewModel) {
+        adsViewModelSubscription = adsViewModel;
+        binding.llViewAds.setVisibility(View.GONE);
+        binding.llSubscriptionAds.setVisibility(View.VISIBLE);
+        binding.setModel(adsViewModel);
+        adsSeconds = 6;
+        seconds = 0;
+        binding.setTimer(adsSeconds+" s");
+        canCloseAds = false;
+        slideUp();
+
+        startTimeClose();
+
 
     }
 
     private void slideUp() {
-        Animation animation = AnimationUtils.loadAnimation(this,R.anim.slide_up);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide_up);
         binding.scrollViewVideosAds.clearAnimation();
         binding.scrollViewVideosAds.startAnimation(animation);
         animation.setAnimationListener(new Animation.AnimationListener() {
@@ -382,11 +427,11 @@ public class HomeActivity extends AppCompatActivity {
         stopTimer();
         stopTimerClose();
 
-        if (youTubePlayer!=null){
+        if (youTubePlayer != null) {
             youTubePlayer.pause();
 
         }
-        Animation animation = AnimationUtils.loadAnimation(this,R.anim.slide_down);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide_down);
         binding.scrollViewVideosAds.clearAnimation();
         binding.scrollViewVideosAds.startAnimation(animation);
         animation.setAnimationListener(new Animation.AnimationListener() {
@@ -409,62 +454,61 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void stopTimer() {
-        if (timer!=null&&timerTask!=null){
+        if (timer != null && timerTask != null) {
             timerTask.cancel();
             timer.cancel();
             timer.purge();
-            timer=null;
-            timerTask=null;
+            timer = null;
+            timerTask = null;
         }
 
     }
 
     private void startTime() {
-        if (seconds>0){
+        if (seconds > 0) {
             timer = new Timer();
             timerTask = new Task();
-            timer.scheduleAtFixedRate(timerTask,1000,1000);
+            timer.scheduleAtFixedRate(timerTask, 1000, 1000);
         }
 
     }
 
     private void stopTimerClose() {
-        if (timerClose!=null&&timerTaskClose!=null){
+        if (timerClose != null && timerTaskClose != null) {
             timerTaskClose.cancel();
             timerClose.cancel();
             timerClose.purge();
-            timerClose=null;
-            timerTaskClose=null;
+            timerClose = null;
+            timerTaskClose = null;
         }
 
     }
 
     private void startTimeClose() {
-        if (adsSeconds>0){
+        if (adsSeconds > 0) {
             timerClose = new Timer();
             timerTaskClose = new TaskAds();
-            timerClose.scheduleAtFixedRate(timerTaskClose,1000,1000);
+            timerClose.scheduleAtFixedRate(timerTaskClose, 1000, 1000);
         }
 
     }
 
-
-    private void viewAds(){
+    private void viewAds() {
         Api.getService(Tags.base_url)
-                .viewAds("Bearer "+userModel.getToken(), userModel.getId(),adsViewModel.getId(),adsViewModel.getAdvertisement_fk().getWatch_time())
+                .viewAds("Bearer " + userModel.getToken(), userModel.getId(), adsViewModel.getId(), adsViewModel.getAdvertisement_fk().getWatch_time())
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Log.e("ddd", response.body().getStatus()+"__");
+                            Log.e("ddd", response.body().getStatus() + "__");
                             if (response.body().getStatus() == 200) {
                                 getUserProfile();
 
                                 createDialog(adsViewModel.getAdvertisement_fk().getProfit_coins());
                             }
-                        }else {
+                        } else {
                             try {
-                                Log.e("resCode", response.code()+"__"+response.errorBody().string());
+                                Log.e("resCode", response.code() + "__" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -478,14 +522,13 @@ public class HomeActivity extends AppCompatActivity {
                 });
     }
 
-
-    private void createDialog (String coins){
+    private void createDialog(String coins) {
         final AlertDialog dialog = new AlertDialog.Builder(this)
                 .create();
 
         DialogCoinsBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_coins, null, false);
 
-        binding.tvMsg.setText(coins+" "+getString(R.string.currency));
+        binding.tvMsg.setText(coins + " " + getString(R.string.currency));
         binding.cardCancel.setOnClickListener(v -> dialog.dismiss());
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.inset_dialog);
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
@@ -493,21 +536,18 @@ public class HomeActivity extends AppCompatActivity {
         dialog.setView(binding.getRoot());
         dialog.show();
 
-        new Handler().postDelayed(() -> {
-            dialog.dismiss();
-        }, 3000);
+        new Handler().postDelayed(dialog::dismiss, 3000);
     }
-
 
 
     public class Task extends TimerTask {
 
         @Override
         public void run() {
-            if (seconds>0){
+            if (seconds > 0) {
                 seconds--;
-                binding.setSecond(seconds+"");
-            }else {
+                binding.setSecond(seconds + "");
+            } else {
                 stopTimer();
                 viewAds();
 
@@ -519,10 +559,10 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            if (adsSeconds>0){
+            if (adsSeconds > 0) {
                 adsSeconds--;
-                binding.setTimer(adsSeconds+" s");
-            }else {
+                binding.setTimer(adsSeconds + " s");
+            } else {
                 canCloseAds = true;
                 binding.setTimer(getString(R.string.close));
 
@@ -531,8 +571,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
     private void navigateToSignInActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -548,12 +586,12 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (binding.scrollViewVideosAds.getVisibility()==View.VISIBLE){
-            if (canCloseAds){
+        if (binding.scrollViewVideosAds.getVisibility() == View.VISIBLE) {
+            if (canCloseAds) {
                 slideDown();
 
             }
-        }else {
+        } else {
             int currentFragmentId = navController.getCurrentDestination().getId();
             if (currentFragmentId == R.id.coinsFragment) {
                 Fragment fragment = getSupportFragmentManager().getPrimaryNavigationFragment();
@@ -587,8 +625,6 @@ public class HomeActivity extends AppCompatActivity {
         }
 
 
-
-
     }
 
     public void refreshActivity(String lang) {
@@ -600,9 +636,9 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = getIntent();
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     finish();
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     startActivity(intent);
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
 
                 }, 500);
 
@@ -624,7 +660,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Log.e("code", response.body().getStatus()+"_");
+                            Log.e("code", response.body().getStatus() + "_");
                             if (response.body().getStatus() == 200) {
                                 LoginRegisterModel model = response.body();
 
@@ -713,7 +749,6 @@ public class HomeActivity extends AppCompatActivity {
 
     public void logout() {
 
-        Log.e("ddd", "fff");
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
@@ -727,7 +762,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getStatus() == 200) {
                                 NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                                manager.cancel(Tags.not_tag,Tags.not_id);
+                                manager.cancel(Tags.not_tag, Tags.not_id);
                                 preferences.clear(HomeActivity.this);
                                 navigateToSignInActivity();
                             }

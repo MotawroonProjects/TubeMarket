@@ -12,11 +12,17 @@
         <entry key="..\:/works/Courses/work_android/FreeLancer/TubeMarket/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/works/Courses/work_android/FreeLancer/TubeMarket/app/src/main/res/layout/fragment_views.xml" value="0.22083333333333333" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/bottom_nav.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/circle_bg.xml" value="0.18541666666666667" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/horizontal_progress.xml" value="0.18425925925925926" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/ic_add.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/ic_dollar.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/ic_nav_menu.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/ic_pause_button.xml" value="0.18541666666666667" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/inset_dialog.xml" value="0.1921875" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/msg_left_bg.xml" value="0.18541666666666667" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/msg_left_image_bg.xml" value="0.18541666666666667" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/msg_right_bg.xml" value="0.18541666666666667" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/msg_right_image_bg.xml" value="0.18541666666666667" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/next_btn.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/rb_dialog.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_color4.xml" value="0.1843718079673136" />
@@ -27,6 +33,7 @@
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_strokk_gray.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_rounded_white.xml" value="0.1921875" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_stroke_primary.xml" value="0.25" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_admin_chat.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_faq.xml" value="0.1" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_home.xml" value="0.33" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_login.xml" value="0.18" />
@@ -35,6 +42,10 @@
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_web_view.xml" value="0.21" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/buy_message_row.xml" value="0.33" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/campaign_row.xml" value="0.25" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/chat_image_left_admin_row.xml" value="0.1" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/chat_image_right_admin_row.xml" value="0.16510416666666666" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/chat_message_left_admin_row.xml" value="0.16510416666666666" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/chat_message_right_admin_row.xml" value="0.1" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/coin_row.xml" value="0.33" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/dialog_coins.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/dialog_video.xml" value="0.22" />

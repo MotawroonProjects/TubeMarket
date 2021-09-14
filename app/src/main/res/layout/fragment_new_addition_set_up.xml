@@ -11,6 +11,9 @@
         <variable
             name="coins"
             type="String" />
+        <variable
+            name="userModel"
+            type="com.app.tubemarket.models.UserModel" />
 
     </data>
     <ScrollView
@@ -127,14 +130,15 @@
                     android:singleLine="true"
                     android:text="@string/gold_account_10_discount"
                     />
+
                 <TextView
+                    android:id="@+id/tvUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
                     android:text="@string/update"
-                    />
+                    android:textColor='@{userModel.is_vip.equals("yes")?@color/colorPrimary:@color/black}'
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
