@@ -12,6 +12,7 @@ import com.app.tubemarket.models.CostResultModel;
 import com.app.tubemarket.models.GoldCostDataModel;
 import com.app.tubemarket.models.LoginRegisterModel;
 import com.app.tubemarket.models.MessageResponseModel;
+import com.app.tubemarket.models.MyAdsDataModel;
 import com.app.tubemarket.models.PayModel;
 import com.app.tubemarket.models.SingleAdminMessageDataModel;
 import com.app.tubemarket.models.SingleCampaign;
@@ -272,7 +273,9 @@ public interface Service {
                                   @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
                                   @Field("total_cost") String total_cost,
                                   @Field("link") String link,
-                                  @Field("watch_time") String watch_time
+                                  @Field("watch_time") String watch_time,
+                                  @Field("channel_name") String channel_name,
+                                  @Field("channel_image") String channel_image
 
 
     );
@@ -299,7 +302,9 @@ public interface Service {
                                             @Field("watch_time") String watch_time,
                                             @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
                                             @Field("total_cost") String total_cost,
-                                            @Field("link") String link
+                                            @Field("link") String link,
+                                            @Field("channel_name") String channel_name,
+                                            @Field("channel_image") String channel_image
 
     );
 
@@ -310,7 +315,10 @@ public interface Service {
                                   @Field("likes_limit") String likes_limit,
                                   @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
                                   @Field("total_cost") String total_cost,
-                                  @Field("link") String link
+                                  @Field("link") String link,
+                                  @Field("channel_name") String channel_name,
+                                  @Field("channel_image") String channel_image
+
 
     );
 
@@ -433,6 +441,10 @@ public interface Service {
                               @Field("user_id") String user_id,
                               @Field("buy_coin_id") String buy_coin_id
     );
+
+    @GET("api/my-advertisement")
+    Call<MyAdsDataModel> getMyAds(@Header("Authorization") String user_token,
+                                  @Query("user_id") String user_id);
 
 
 }

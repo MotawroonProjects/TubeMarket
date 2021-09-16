@@ -148,5 +148,8 @@
     <string name="special_ad">إعلان مميز</string>
     <string name="admin">الإدارة</string>
     <string name="type_a_message">إكتب رسالتك ...</string>
+    <string name="my_ads">إعلاناتي</string>
+    <string name="subsc">مشترك</string>
+    <string name="likes">إعجاب</string>
 
 </resources>

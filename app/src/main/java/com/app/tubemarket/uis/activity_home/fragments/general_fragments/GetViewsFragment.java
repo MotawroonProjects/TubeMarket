@@ -223,7 +223,12 @@ public class GetViewsFragment extends Fragment {
                         dialog.dismiss();
                         if (response.isSuccessful()){
                             if (response.body()!=null&&response.body().getItems()!=null&&response.body().getItems().size()>0){
-                                addViews(vidId,dialog);
+
+                                String channel_id = response.body().getItems().get(0).getSnippet().getChannelId();
+                                if (channel_id!=null){
+                                    getChannelById(channel_id,vidId,dialog);
+
+                                }
                             }else {
                                 Toast.makeText(activity, R.string.in_url, Toast.LENGTH_SHORT).show();
 
@@ -244,6 +249,44 @@ public class GetViewsFragment extends Fragment {
                         dialog.dismiss();
 
                         Log.e("failed", t.getMessage()+"__");
+                    }
+                });
+    }
+
+    private void getChannelById(String channelId,String vidId,ProgressDialog dialog) {
+        Api.getService(Tags.tube_base_url)
+                .getYouTubeChannelById("snippet", channelId, Tags.tubeKey)
+                .enqueue(new Callback<VideoModel>() {
+                    @Override
+                    public void onResponse(Call<VideoModel> call, Response<VideoModel> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getItems() != null) {
+
+                                if (response.body().getItems().size() > 0){
+                                    channelModel = response.body();
+                                    UserModel.ChannelModel userChannel = new UserModel.ChannelModel(channelModel.getItems().get(0).getId(), channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(), channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(), channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
+
+                                    addViews(vidId,dialog,userChannel.getTitle(),userChannel.getUrl());
+
+                                }
+
+
+                            }else {
+                                dialog.dismiss();
+                                Toast.makeText(activity, R.string.in_url, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }else {
+                            dialog.dismiss();
+                            Toast.makeText(activity, R.string.in_url, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<VideoModel> call, Throwable t) {
+                        dialog.dismiss();
+
                     }
                 });
     }
@@ -289,11 +332,11 @@ public class GetViewsFragment extends Fragment {
         return vId;
     }
 
-    private void addViews(String vidId,ProgressDialog dialog) {
+    private void addViews(String vidId, ProgressDialog dialog, String channel_name, String channel_image) {
 
 
         Api.getService(Tags.base_url)
-                .addViews("Bearer "+userModel.getToken(),userModel.getId(),view_num,day,total,vidId,second)
+                .addViews("Bearer "+userModel.getToken(),userModel.getId(),view_num,day,total,vidId,second,channel_name,channel_image)
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {

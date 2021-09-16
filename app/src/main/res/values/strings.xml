@@ -151,5 +151,8 @@
     <string name="special_ad">Special Ad</string>
     <string name="admin">Admin</string>
     <string name="type_a_message">Type a message...</string>
+    <string name="my_ads">My ads</string>
+    <string name="subsc">Subscribe</string>
+    <string name="likes">likes</string>
 
 </resources>

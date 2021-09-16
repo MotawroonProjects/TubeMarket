@@ -247,6 +247,10 @@ public class HomeActivity extends AppCompatActivity {
                     navController.navigate(R.id.inviteFragment, null, navOptions);
 
                     break;
+                case R.id.myAdsFragment:
+                    navController.navigate(R.id.myAdsFragment, null, navOptions);
+
+                    break;
                 case R.id.changeLang:
                     navController.navigate(R.id.changeLang, null, navOptions);
                     break;

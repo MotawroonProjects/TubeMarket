@@ -15,6 +15,10 @@
                     android:title="@string/gold_profile"
                     android:icon="@drawable/ic_crown"
                     />
+                <item android:id="@+id/myAdsFragment"
+                    android:title="@string/my_ads"
+                    android:icon="@drawable/ic_megaphone"
+                    />
             </menu>
         </item>
         <item android:id="@+id/contact"

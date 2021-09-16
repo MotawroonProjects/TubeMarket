@@ -130,5 +130,10 @@
         android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.UserMessagesFragment"
         android:label="@string/messages"
         tools:layout="@layout/fragment_user_messages" />
+    <fragment
+        android:id="@+id/myAdsFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.MyAdsFragment"
+        android:label="@string/my_ads"
+        tools:layout="@layout/fragment_my_ads" />
 
 </navigation>

@@ -1,5 +1,6 @@
 package com.app.tubemarket.general_ui_method;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.databinding.BindingAdapter;
 
 import com.app.tubemarket.R;
+import com.app.tubemarket.models.MyAdsModel;
 import com.app.tubemarket.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -111,6 +113,38 @@ public class GeneralMethod {
     }
 
 
+    @BindingAdapter("ad_type")
+    public static void ad_type_count(TextView textView, MyAdsModel model) {
+        String count ="0";
+        String limit ="0";
+        String type ="";
+        Context context = textView.getContext();
+
+        if (model.getType().equals("get_subscription")){
+            count = model.getSubscriptions_count()+"/";
+            limit = model.getSubscription_limit()+" ";
+            type = context.getString(R.string.subsc);
+        }else if (model.getType().equals("get_views")){
+            count = model.getViews_count()+"/";
+            limit = model.getViews_number()+" ";
+            type = context.getString(R.string.views);
+        }else if (model.getType().equals("get_subscription_and_views")){
+            count = model.getSubscriptions_count()+"/";
+            limit = model.getSubscription_limit()+" ";
+            type = context.getString(R.string.subsc)+" - ";
+
+            count += model.getViews_count()+"/";
+            limit += model.getViews_number()+" ";
+            type += context.getString(R.string.views);
+
+        }else if (model.getType().equals("get_likes")){
+            count = model.getLikes_count();
+            limit = model.getLikes_limit()+" ";
+            type = context.getString(R.string.likes);
+        }
+        String data = count + limit + type;
+        textView.setText(data);
+    }
 
 
 

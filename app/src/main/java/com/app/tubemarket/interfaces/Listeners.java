@@ -6,6 +6,7 @@ import android.view.View;
 import com.app.tubemarket.models.BuyMessageModel;
 import com.app.tubemarket.models.CampaignModel;
 import com.app.tubemarket.models.CoinsModel;
+import com.app.tubemarket.models.MyAdsModel;
 import com.app.tubemarket.models.UserMessageModel;
 import com.app.tubemarket.models.VipModel;
 import com.app.tubemarket.models.WithdrawModel;
@@ -35,5 +36,8 @@ public interface Listeners {
         void onWithdrawData(WithdrawModel withdrawModel, View view);
     }
 
+    interface MyAdsListener {
+        void onMyAdsData(MyAdsModel model,int type, View view);
+    }
 
 }
