@@ -219,8 +219,6 @@ public class GetLikesFragment extends Fragment {
                 });
     }
 
-
-
     private String extractYTId(String ytUrl) {
         String vId = null;
         Pattern pattern = Pattern.compile("^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
@@ -231,7 +229,6 @@ public class GetLikesFragment extends Fragment {
         }
         return vId;
     }
-
 
     private void calculateCost(){
         Api.getService(Tags.base_url)
@@ -271,7 +268,7 @@ public class GetLikesFragment extends Fragment {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()&&response.body()!=null&&response.body().getStatus()==200){
                             Toast.makeText(activity, R.string.suc, Toast.LENGTH_SHORT).show();
                             Navigation.findNavController(binding.getRoot()).popBackStack();
                         }else {

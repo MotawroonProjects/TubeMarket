@@ -6,6 +6,7 @@ import com.app.tubemarket.models.AdminMessageDataModel;
 import com.app.tubemarket.models.AdsViewDataModel;
 import com.app.tubemarket.models.BuyMessageDataModel;
 import com.app.tubemarket.models.CampaignDataModel;
+import com.app.tubemarket.models.ChannelUrlModel;
 import com.app.tubemarket.models.CoinDataModel;
 import com.app.tubemarket.models.CoinsDataModel;
 import com.app.tubemarket.models.CostResultModel;
@@ -28,6 +29,7 @@ import com.app.tubemarket.models.WithdrawDataModel;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -36,7 +38,9 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface Service {
 
@@ -446,6 +450,25 @@ public interface Service {
     @GET("api/my-advertisement")
     Call<MyAdsDataModel> getMyAds(@Header("Authorization") String user_token,
                                   @Query("user_id") String user_id);
+
+
+    @GET("youtube/v3/search")
+    Call<ChannelUrlModel> getChannelIdFromUrl(@Query("part") String part,
+                                              @Query("q") String videoUrl,
+                                              @Query("key") String key
+    );
+
+    @GET("youtube/v3/playlists")
+    Call<VideoModel> getPlaylistByChannelId(@Query("part") String part,
+                                            @Query("channelId") String channelId,
+                                            @Query("key") String key
+    );
+
+    @GET("youtube/v3/playlistItems")
+    Call<VideoModel> getPlaylistItemByPlaylistId(@Query("part") String part,
+                                                 @Query("playlistId") String playlistId,
+                                                 @Query("key") String key
+    );
 
 
 }

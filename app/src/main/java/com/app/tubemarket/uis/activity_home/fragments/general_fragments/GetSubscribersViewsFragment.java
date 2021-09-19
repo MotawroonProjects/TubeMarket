@@ -370,7 +370,7 @@ public class GetSubscribersViewsFragment extends Fragment {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()&&response.body()!=null&&response.body().getStatus()==200){
                             Toast.makeText(activity, R.string.suc, Toast.LENGTH_SHORT).show();
                             Navigation.findNavController(binding.getRoot()).popBackStack();
                         }else {

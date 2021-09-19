@@ -53,12 +53,14 @@ import com.app.tubemarket.databinding.ActivityHomeBinding;
 import com.app.tubemarket.databinding.DialogCoinsBinding;
 import com.app.tubemarket.language.Language;
 import com.app.tubemarket.models.AdsViewModel;
+import com.app.tubemarket.models.ChannelUrlModel;
 import com.app.tubemarket.models.GeneralAdsModel;
 import com.app.tubemarket.models.InterestsModel;
 import com.app.tubemarket.models.LoginRegisterModel;
 import com.app.tubemarket.models.MyVideosModel;
 import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.UserModel;
+import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.preferences.Preferences;
 import com.app.tubemarket.remote.Api;
 import com.app.tubemarket.share.Common;
@@ -330,28 +332,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         binding.flSubscribe.setOnClickListener(v -> {
-            String vidUrl ="https://youtu.be/"+adsViewModelSubscription.getAdvertisement_fk().getLink();
-            String url = "https://accounts.google.com/ServiceLogin?service=youtube";
-            Bundle bundle = new Bundle();
-            bundle.putString("url",url);
-            bundle.putString("vidUrl",vidUrl);
-
-            String watchTime ="0";
-            if (adsViewModelSubscription.getAdvertisement_fk().getType().equals("get_subscription")){
-                watchTime = adsViewModelSubscription.getAdvertisement_fk().getTimer_limit();
-            }else if (adsViewModelSubscription.getAdvertisement_fk().getType().equals("get_subscription_and_views")){
-                watchTime = adsViewModelSubscription.getAdvertisement_fk().getWatch_time();
-            }
-
-            GeneralAdsModel generalAdsModel = new GeneralAdsModel(adsViewModelSubscription.getId(), watchTime, adsViewModelSubscription.getAdvertisement_fk().getProfit_coins(),Tags.CUSTOM_AD);
-            bundle.putSerializable("data", generalAdsModel);
-
-            Intent intent = new Intent(this, WebViewActivity.class);
-            intent.putExtras(bundle);
-            launcher.launch(intent);
+            String channelId =  adsViewModelSubscription.getAdvertisement_fk().getLink();
+            getPlaylistByChannelId(channelId);
         });
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode()==RESULT_OK){
+            if (result.getResultCode() == RESULT_OK) {
                 getUserProfile();
             }
         });
@@ -372,7 +357,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.llSubscriptionAds.setVisibility(View.GONE);
         this.adsViewModel = adsViewModel;
         adsSeconds = 6;
-        binding.setTimer(adsSeconds+" s");
+        binding.setTimer(adsSeconds + " s");
         seconds = 0;
         canCloseAds = false;
         slideUp();
@@ -402,13 +387,101 @@ public class HomeActivity extends AppCompatActivity {
         binding.setModel(adsViewModel);
         adsSeconds = 6;
         seconds = 0;
-        binding.setTimer(adsSeconds+" s");
+        binding.setTimer(adsSeconds + " s");
         canCloseAds = false;
         slideUp();
 
         startTimeClose();
 
 
+    }
+
+    private void getPlaylistByChannelId(String channel_id) {
+        Log.e("chaa", channel_id);
+        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.tube_search_base_url)
+                .getPlaylistByChannelId("snippet", channel_id, Tags.tubeKey)
+                .enqueue(new Callback<VideoModel>() {
+                    @Override
+                    public void onResponse(Call<VideoModel> call, Response<VideoModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+
+                            if (response.body().getItems().size() > 0) {
+
+                                String playListId = response.body().getItems().get(0).getId();
+                                getPlaylistItemByPlayListId(playListId,dialog);
+                            }
+                        } else {
+                            dialog.dismiss();
+                            try {
+                                Log.e("errr", response.code() + "__" + response.errorBody().string() + "__");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<VideoModel> call, Throwable t) {
+                        dialog.dismiss();
+
+                        Log.e("sdada", t.getMessage() + "_");
+                    }
+                });
+    }
+
+    private void getPlaylistItemByPlayListId(String playListId,ProgressDialog dialog) {
+
+        Api.getService(Tags.tube_search_base_url)
+                .getPlaylistItemByPlaylistId("snippet", playListId, Tags.tubeKey)
+                .enqueue(new Callback<VideoModel>() {
+                    @Override
+                    public void onResponse(Call<VideoModel> call, Response<VideoModel> response) {
+                        dialog.dismiss();
+
+                        if (response.isSuccessful()) {
+                            if (response.body().getItems().size() > 0) {
+
+                                String videId = response.body().getItems().get(0).getContentDetails().getVideoId();
+                                String url = "https://accounts.google.com/ServiceLogin?service=youtube";
+                                Bundle bundle = new Bundle();
+                                bundle.putString("url", url);
+                                bundle.putString("vidUrl", videId);
+
+                                String watchTime = "0";
+                                if (adsViewModelSubscription.getAdvertisement_fk().getType().equals("get_subscription")) {
+                                    watchTime = adsViewModelSubscription.getAdvertisement_fk().getTimer_limit();
+                                } else if (adsViewModelSubscription.getAdvertisement_fk().getType().equals("get_subscription_and_views")) {
+                                    watchTime = adsViewModelSubscription.getAdvertisement_fk().getWatch_time();
+                                }
+
+                                GeneralAdsModel generalAdsModel = new GeneralAdsModel(adsViewModelSubscription.getId(), watchTime, adsViewModelSubscription.getAdvertisement_fk().getProfit_coins(), Tags.CUSTOM_AD);
+                                bundle.putSerializable("data", generalAdsModel);
+
+                                Intent intent = new Intent(HomeActivity.this, WebViewActivity.class);
+                                intent.putExtras(bundle);
+                                launcher.launch(intent);
+
+                            }
+                        } else {
+                            dialog.dismiss();
+                            try {
+                                Log.e("errr", response.code() + "__" + response.errorBody().string() + "__");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<VideoModel> call, Throwable t) {
+                        dialog.dismiss();
+                        Log.e("sdada", t.getMessage() + "_");
+                    }
+                });
     }
 
     private void slideUp() {

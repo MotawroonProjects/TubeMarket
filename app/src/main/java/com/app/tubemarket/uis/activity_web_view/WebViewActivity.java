@@ -89,6 +89,7 @@ public class WebViewActivity extends AppCompatActivity {
                 if (url.contains("https://myaccount.google.com/")) {
                     binding.webView.setVisibility(View.INVISIBLE);
                     view.loadUrl(vidUrl);
+                    Log.e("ff", "1");
                 }
             }
 
@@ -107,12 +108,20 @@ public class WebViewActivity extends AppCompatActivity {
                     binding.webView.setVisibility(View.INVISIBLE);
                     webview.loadUrl(vidUrl);
 
+
                 } else if (url.contains("https://m.youtube.com/watch")) {
                     binding.webView.setVisibility(View.VISIBLE);
                     binding.flLoading.setVisibility(View.GONE);
                     startCounter();
-                } else {
+                }else if (url.contains("https://accounts.google.com/ServiceLogin?service=youtube")){
+                    binding.webView.setVisibility(View.VISIBLE);
                     binding.flLoading.setVisibility(View.GONE);
+                    binding.viewLayer.setVisibility(View.GONE);
+                    binding.viewLayer.setClickable(false);
+                    binding.viewLayer.setFocusable(false);
+                }else {
+                    binding.flLoading.setVisibility(View.GONE);
+                    Log.e("ff", "3");
 
                     binding.webView.setVisibility(View.VISIBLE);
 
@@ -191,6 +200,7 @@ public class WebViewActivity extends AppCompatActivity {
             finish();
         });
 
+        Log.e("vidurl", vidUrl);
     }
 
     private void updateSeconds() {

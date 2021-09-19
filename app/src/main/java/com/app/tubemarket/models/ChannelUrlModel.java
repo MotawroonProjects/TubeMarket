@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class VideoModel implements Serializable {
+public class ChannelUrlModel implements Serializable {
     private String kind;
     private String etag;
     private String id;
@@ -47,29 +47,29 @@ public class VideoModel implements Serializable {
 
     public static class Thumbnails implements Serializable {
         @SerializedName("default")
-        private Default def;
-        private Default medium;
-        private Default high;
-        private Default standard;
-        private Default maxres;
+        private VideoModel.Default def;
+        private VideoModel.Default medium;
+        private VideoModel.Default high;
+        private VideoModel.Default standard;
+        private VideoModel.Default maxres;
 
-        public Default getDef() {
+        public VideoModel.Default getDef() {
             return def;
         }
 
-        public Default getMedium() {
+        public VideoModel.Default getMedium() {
             return medium;
         }
 
-        public Default getHigh() {
+        public VideoModel.Default getHigh() {
             return high;
         }
 
-        public Default getStandard() {
+        public VideoModel.Default getStandard() {
             return standard;
         }
 
-        public Default getMaxres() {
+        public VideoModel.Default getMaxres() {
             return maxres;
         }
     }
@@ -92,11 +92,11 @@ public class VideoModel implements Serializable {
         private String channelId;
         private String title;
         private String description;
-        private Thumbnails thumbnails;
+        private VideoModel.Thumbnails thumbnails;
         private String channelTitle;
         private String categoryId;
         private String liveBroadcastContent;
-        private Localized localized;
+        private VideoModel.Localized localized;
 
         public String getPublishedAt() {
             return publishedAt;
@@ -114,7 +114,7 @@ public class VideoModel implements Serializable {
             return description;
         }
 
-        public Thumbnails getThumbnails() {
+        public VideoModel.Thumbnails getThumbnails() {
             return thumbnails;
         }
 
@@ -130,7 +130,7 @@ public class VideoModel implements Serializable {
             return liveBroadcastContent;
         }
 
-        public Localized getLocalized() {
+        public VideoModel.Localized getLocalized() {
             return localized;
         }
     }
@@ -143,7 +143,7 @@ public class VideoModel implements Serializable {
         private String caption;
         private boolean licensedContent;
         private String projection;
-        private String videoId;
+
         public String getDuration() {
             return duration;
         }
@@ -167,19 +167,14 @@ public class VideoModel implements Serializable {
         public String getProjection() {
             return projection;
         }
-
-        public String getVideoId() {
-            return videoId;
-        }
     }
 
 
     public static class Item implements Serializable {
         private String kind;
         private String etag;
-        private String id;
-        private Snippet snippet;
-        private ContentDetails contentDetails;
+        private VideoModel.Snippet snippet;
+        private VideoModel.ContentDetails contentDetails;
 
         public String getKind() {
             return kind;
@@ -189,18 +184,14 @@ public class VideoModel implements Serializable {
             return etag;
         }
 
-        public String getId() {
-            return id;
-        }
 
-        public Snippet getSnippet() {
+        public VideoModel.Snippet getSnippet() {
             return snippet;
         }
 
-        public ContentDetails getContentDetails() {
+        public VideoModel.ContentDetails getContentDetails() {
             return contentDetails;
         }
     }
-
 
 }

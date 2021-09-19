@@ -22,10 +22,12 @@ import com.app.tubemarket.adapters.SpinnerCountAdapter;
 import com.app.tubemarket.adapters.SpinnerInterestsAdapter;
 import com.app.tubemarket.databinding.FragmentGetSubscribersBinding;
 import com.app.tubemarket.databinding.FragmentProfileBinding;
+import com.app.tubemarket.models.ChannelUrlModel;
 import com.app.tubemarket.models.CostResultModel;
 import com.app.tubemarket.models.InterestsModel;
 import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.UserModel;
+import com.app.tubemarket.models.VideoDataModel;
 import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.preferences.Preferences;
 import com.app.tubemarket.remote.Api;
@@ -39,6 +41,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -130,12 +133,20 @@ public class GetSubscribersFragment extends Fragment {
 
         binding.btnConfirm.setOnClickListener(v -> {
             String url = binding.edtUrl.getText().toString().trim();
-            String channelId = extractChannelId(url);
-            if (channelId != null) {
-                binding.btnConfirm.setEnabled(false);
-                getChannelById(channelId);
+            Log.e("dsaf", url+"__");
 
+            if (isChannelUrl(url)){
+                Log.e("xx","xxx");
+                getChannelIdFromUrl(url);
+            }else {
+                String channelId = extractChannelId(url);
+                if (channelId != null) {
+                    binding.btnConfirm.setEnabled(false);
+                    getChannelById(channelId);
+
+                }
             }
+
         });
 
         binding.btnAdd.setOnClickListener(v -> {
@@ -145,7 +156,6 @@ public class GetSubscribersFragment extends Fragment {
                 addSubscribes();
             }
         });
-
 
     }
 
@@ -176,6 +186,7 @@ public class GetSubscribersFragment extends Fragment {
                     public void onFailure(Call<StatusResponse> call, Throwable t) {
                         dialog.dismiss();
 
+                        //yusufseries
                         Log.e("failed", t.getMessage()+"__");
                     }
                 });
@@ -183,6 +194,7 @@ public class GetSubscribersFragment extends Fragment {
     }
 
     private void getChannelById(String channelId) {
+        binding.btnConfirm.setEnabled(false);
         channel_id = channelId;
         Api.getService(Tags.tube_base_url)
                 .getYouTubeChannelById("snippet", channelId, Tags.tubeKey)
@@ -218,10 +230,47 @@ public class GetSubscribersFragment extends Fragment {
                 });
     }
 
+    private void getChannelIdFromUrl(String url) {
+        binding.btnConfirm.setEnabled(false);
+
+        Api.getService(Tags.tube_search_base_url)
+                .getChannelIdFromUrl("snippet",url,Tags.tubeKey)
+                .enqueue(new Callback<ChannelUrlModel>() {
+                    @Override
+                    public void onResponse(Call<ChannelUrlModel> call, Response<ChannelUrlModel> response) {
+                        binding.btnConfirm.setEnabled(true);
+
+                        if (response.isSuccessful()){
+                            Log.e("dd", "yyy");
+                            if (response.body().getItems().size()>0){
+                                Log.e("nn", "nn");
+
+                                String channelId = response.body().getItems().get(0).getSnippet().getChannelId();
+                                getChannelById(channelId);
+                            }
+                        }else {
+                            try {
+                                Log.e("errr", response.code()+"__"+response.errorBody().string()+"__");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ChannelUrlModel> call, Throwable t) {
+                        Log.e("sdada", t.getMessage()+"_");
+                    }
+                });
+    }
+
+
     private String extractChannelId(String url) {
         String channelId = null;
         Pattern pattern = Pattern.compile("^https?://.*(?:youtube\\.com/channel/)([^#&?]*)$",
                 Pattern.CASE_INSENSITIVE);
+
+
         Matcher matcher = pattern.matcher(url);
         if (matcher.matches()) {
             channelId = matcher.group(1);
@@ -230,6 +279,27 @@ public class GetSubscribersFragment extends Fragment {
         return channelId;
 
     }
+    private boolean isChannelUrl(String url) {
+        boolean isUrl = false;
+        Pattern pattern = Pattern.compile("^https?://.*(?:youtube\\.com/c/)([^#&?]*)$",
+                Pattern.CASE_INSENSITIVE);
+        Pattern pattern2 = Pattern.compile("^https?://.*(?:youtube\\.com/user/)([^#&?]*)$",
+                Pattern.CASE_INSENSITIVE);
+
+
+        Matcher matcher = pattern.matcher(url);
+        Matcher matcher2 = pattern2.matcher(url);
+
+        if (matcher.matches()) {
+            isUrl = true;
+        }else if (matcher2.matches()){
+            isUrl = true;
+        }
+
+        return isUrl;
+
+    }
+
 
     private void calculateCost(){
         Api.getService(Tags.base_url)
