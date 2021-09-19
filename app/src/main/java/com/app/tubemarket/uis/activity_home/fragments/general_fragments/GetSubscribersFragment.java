@@ -139,7 +139,9 @@ public class GetSubscribersFragment extends Fragment {
         });
 
         binding.btnAdd.setOnClickListener(v -> {
-            if (channelModel!=null&&!subscribe_num.equals("0")&&!total.equals("0")){
+            seconds = binding.edtSeconds.getText().toString();
+
+            if (channelModel!=null&&!subscribe_num.equals("0")&&!total.equals("0")&&!seconds.equals("0")){
                 addSubscribes();
             }
         });
@@ -152,15 +154,16 @@ public class GetSubscribersFragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .addSubscribes("Bearer "+userModel.getToken(),userModel.getId(),subscribe_num,seconds,total,channel_id,userChannel.getTitle(),userChannel.getUrl())
+                .addSubscribes("Bearer "+userModel.getToken(),userModel.getId(),subscribe_num,seconds,total,channel_id,userChannel.getTitle(),userChannel.getUrl(),seconds)
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()&&response.body()!=null&&response.body().getStatus()==200){
                             Toast.makeText(activity, R.string.suc, Toast.LENGTH_SHORT).show();
                             Navigation.findNavController(binding.getRoot()).popBackStack();
                         }else {
+                            Log.e("rasdasd", response.body().getStatus()+"__");
                             try {
                                 Log.e("error", response.code()+"__"+response.errorBody().string());
                             } catch (IOException e) {

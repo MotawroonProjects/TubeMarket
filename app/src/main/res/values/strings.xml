@@ -138,8 +138,6 @@
     <string name="the_estimated_time_to_reach_the_number_of_subscribers_100_subscribers_and_200_views_or_more_on_the_day">The estimated time to reach the number of subscribers 100 subscribers and 200 views or more on the day</string>
     <string name="the_estimated_time_to_reach_200_views_or_more_on_the_day">The estimated time to reach 200 views or more on the day</string>
     <string name="message">Message</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_messages_to_show">No messages to show</string>
     <string name="enter_link_here">Enter link here ...</string>
     <string name="back">Back</string>
@@ -154,5 +152,9 @@
     <string name="my_ads">My ads</string>
     <string name="subsc">Subscribe</string>
     <string name="likes">likes</string>
+    <string name="you_will_get_double_points_n_for_watching_the_video">You will get double points\n for watching the video</string>
+    <string name="you_will_get_double_points_for_watching_like_and_subscribe_channel">You will get double points for subscribe channel</string>
+    <string name="channel_profit">Channel profit</string>
+    <string name="watch_hours">4000 watch hours and 1000 subscribers are sent with a lifetime guarantee in a period of 7 to 10 days at a price of $80</string>
 
 </resources>

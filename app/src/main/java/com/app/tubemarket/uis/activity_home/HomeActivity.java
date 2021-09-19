@@ -336,7 +336,14 @@ public class HomeActivity extends AppCompatActivity {
             bundle.putString("url",url);
             bundle.putString("vidUrl",vidUrl);
 
-            GeneralAdsModel generalAdsModel = new GeneralAdsModel(adsViewModelSubscription.getId(), adsViewModelSubscription.getAdvertisement_fk().getWatch_time(), adsViewModelSubscription.getAdvertisement_fk().getProfit_coins(),Tags.CUSTOM_AD);
+            String watchTime ="0";
+            if (adsViewModelSubscription.getAdvertisement_fk().getType().equals("get_subscription")){
+                watchTime = adsViewModelSubscription.getAdvertisement_fk().getTimer_limit();
+            }else if (adsViewModelSubscription.getAdvertisement_fk().getType().equals("get_subscription_and_views")){
+                watchTime = adsViewModelSubscription.getAdvertisement_fk().getWatch_time();
+            }
+
+            GeneralAdsModel generalAdsModel = new GeneralAdsModel(adsViewModelSubscription.getId(), watchTime, adsViewModelSubscription.getAdvertisement_fk().getProfit_coins(),Tags.CUSTOM_AD);
             bundle.putSerializable("data", generalAdsModel);
 
             Intent intent = new Intent(this, WebViewActivity.class);

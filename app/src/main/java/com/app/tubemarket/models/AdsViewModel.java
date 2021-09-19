@@ -54,6 +54,7 @@ public class AdsViewModel implements Serializable {
         private String updated_at;
         private String channel_name;
         private String channel_image;
+        private String timer_limit;
 
         private OperationModel user_operations_fk;
 
@@ -131,6 +132,10 @@ public class AdsViewModel implements Serializable {
 
         public String getChannel_image() {
             return channel_image;
+        }
+
+        public String getTimer_limit() {
+            return timer_limit;
         }
 
         public OperationModel getUser_operations_fk() {

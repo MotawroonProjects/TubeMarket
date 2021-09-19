@@ -82,6 +82,11 @@ public class CoinsFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.buyCoinFragment);
         });
 
+        binding.cardActivateChannel.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.channelProfitFragment);
+        });
+
+
         binding.cardCoupon.setOnClickListener(v -> {
             binding.flDialog.clearAnimation();
             binding.flDialog.startAnimation(animation);

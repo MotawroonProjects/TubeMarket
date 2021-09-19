@@ -5,17 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
     <data>
-        <variable
-            name="model"
-            type="com.app.tubemarket.models.UserModel.ChannelModel" />
-        <variable
-            name="cost"
-            type="String" />
+    <variable
+        name="model"
+        type="com.app.tubemarket.models.UserModel.ChannelModel" />
+
     </data>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+
         >
 
         <LinearLayout
@@ -23,111 +22,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/enter_number_of_subscribers"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/edtNumber"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/small_rounded_strokk_gray"
-                android:inputType="number"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-
-                />
-
-
-
-
-            <EditText
-                android:id="@+id/edtSeconds"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/small_rounded_strokk_gray"
-                android:inputType="number"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:hint="@string/required_time_seconds"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/estimated_time_subscriber_day"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:orientation="horizontal"
+                android:background="@color/color7"
+                android:padding="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_amount"
-                    android:textColor="@color/gray12"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:text="@{cost}"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usd"
-                    android:textColor="@color/gray12"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                >
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_info2"
+                    app:tint="@color/color6"
+                    android:padding="3dp"
                     />
+                    <Space
+                        android:layout_width="8dp"
+                        android:layout_height="0dp"
+                        />
                 <TextView
-                    android:id="@+id/tvCalc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:text="@string/get_total"
-                    android:visibility="gone"
+
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="@string/watch_hours"
+                    android:lineHeight="25dp"
                     />
+
             </LinearLayout>
 
             <EditText
@@ -140,13 +65,12 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:singleLine="true"
-                android:textSize="14sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:textSize="14sp"
                 />
-
             <Button
                 android:id="@+id/btnConfirm"
                 android:layout_width="wrap_content"

@@ -275,13 +275,13 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardActivateChannel"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_margin="5dp"
                     app:cardBackgroundColor="@color/gray18"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="3dp"
-                    android:visibility="gone"
                     >
 
                     <LinearLayout

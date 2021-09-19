@@ -207,7 +207,7 @@ public class WebViewActivity extends AppCompatActivity {
         binding.viewLayer.setFocusable(true);
         binding.llCounter.setVisibility(View.VISIBLE);
 
-        timer = new CountDownTimer(Long.parseLong(generalAdsModel.getTimer_limit()) * 1000, 1000) {
+        timer = new CountDownTimer(Long.parseLong(generalAdsModel.getTimer_limit()!=null?generalAdsModel.getTimer_limit():"5") * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateSeconds();

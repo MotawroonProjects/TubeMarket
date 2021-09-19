@@ -135,5 +135,10 @@
         android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.MyAdsFragment"
         android:label="@string/my_ads"
         tools:layout="@layout/fragment_my_ads" />
+    <fragment
+        android:id="@+id/channelProfitFragment"
+        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.ChannelProfitFragment"
+        android:label="@string/channel_profit"
+        tools:layout="@layout/fragment_channel_profit" />
 
 </navigation>

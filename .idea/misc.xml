@@ -35,7 +35,7 @@
         <entry key="..\:/works/TubeMarket/app/src/main/res/drawable/small_stroke_primary.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_admin_chat.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_faq.xml" value="0.1" />
-        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_home.xml" value="0.18" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_login.xml" value="0.18" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_splash.xml" value="0.12092391304347826" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/activity_view.xml" value="0.22" />
@@ -57,9 +57,10 @@
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_campaign.xml" value="0.16" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_campaign_details.xml" value="0.22" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_campign.xml" value="0.1" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_channel_profit.xml" value="0.33438818565400846" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_coins.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_get_likes.xml" value="0.25" />
-        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_get_subscribers.xml" value="0.2" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_get_subscribers.xml" value="0.33" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_get_subscribers_views.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_get_views.xml" value="0.22" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_gold_profile.xml" value="0.2" />

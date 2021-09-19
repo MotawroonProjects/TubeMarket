@@ -289,7 +289,8 @@ public interface Service {
                                        @Field("total_cost") String total_cost,
                                        @Field("link") String link,
                                        @Field("channel_name") String channel_name,
-                                       @Field("channel_image") String channel_image
+                                       @Field("channel_image") String channel_image,
+                                       @Field("timer_limit") String timer_limit
 
     );
 

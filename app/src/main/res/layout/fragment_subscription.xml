@@ -83,9 +83,7 @@
             android:gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="@string/subscribe"
-            android:textColor="@color/white"
-            android:textSize="15sp">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -113,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/subscribes"
+                    android:text="@string/subscribe"
                     android:textColor="@color/white"
                     android:textSize="15sp"
 
