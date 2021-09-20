@@ -1,6 +1,7 @@
 package com.app.tubemarket.services;
 
 import com.app.tubemarket.models.AdCostDataModel;
+import com.app.tubemarket.models.AdPayModel;
 import com.app.tubemarket.models.AddMessageDataModel;
 import com.app.tubemarket.models.AdminMessageDataModel;
 import com.app.tubemarket.models.AdsViewDataModel;
@@ -271,58 +272,59 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("api/get-views")
-    Call<StatusResponse> addViews(@Header("Authorization") String token,
-                                  @Field("user_id") String user_id,
-                                  @Field("views_number") String views_number,
-                                  @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
-                                  @Field("total_cost") String total_cost,
-                                  @Field("link") String link,
-                                  @Field("watch_time") String watch_time,
-                                  @Field("channel_name") String channel_name,
-                                  @Field("channel_image") String channel_image
+    Call<AdPayModel> addViews(@Header("Authorization") String token,
+                              @Field("user_id") String user_id,
+                              @Field("views_number") String views_number,
+                              @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
+                              @Field("total_cost") String total_cost,
+                              @Field("link") String link,
+                              @Field("watch_time") String watch_time,
+                              @Field("channel_name") String channel_name,
+                              @Field("channel_image") String channel_image
 
 
     );
 
     @FormUrlEncoded
     @POST("api/get-subscriptions")
-    Call<StatusResponse> addSubscribes(@Header("Authorization") String token,
-                                       @Field("user_id") String user_id,
-                                       @Field("subscription_limit") String subscription_limit,
-                                       @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
-                                       @Field("total_cost") String total_cost,
-                                       @Field("link") String link,
-                                       @Field("channel_name") String channel_name,
-                                       @Field("channel_image") String channel_image,
-                                       @Field("timer_limit") String timer_limit
+    Call<AdPayModel> addSubscribes(@Header("Authorization") String token,
+                                   @Field("user_id") String user_id,
+                                   @Field("subscription_limit") String subscription_limit,
+                                   @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
+                                   @Field("total_cost") String total_cost,
+                                   @Field("link") String link,
+                                   @Field("channel_name") String channel_name,
+                                   @Field("channel_image") String channel_image,
+                                   @Field("timer_limit") String timer_limit
 
     );
 
     @FormUrlEncoded
     @POST("api/get-subscription-and-views")
-    Call<StatusResponse> addSubscribesViews(@Header("Authorization") String token,
-                                            @Field("user_id") String user_id,
-                                            @Field("subscription_limit") String subscription_limit,
-                                            @Field("views_number") String views_number,
-                                            @Field("watch_time") String watch_time,
-                                            @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
-                                            @Field("total_cost") String total_cost,
-                                            @Field("link") String link,
-                                            @Field("channel_name") String channel_name,
-                                            @Field("channel_image") String channel_image
+    Call<AdPayModel> addSubscribesViews(@Header("Authorization") String token,
+                                        @Field("user_id") String user_id,
+                                        @Field("subscription_limit") String subscription_limit,
+                                        @Field("views_number") String views_number,
+                                        @Field("watch_time") String watch_time,
+                                        @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
+                                        @Field("total_cost") String total_cost,
+                                        @Field("link") String link,
+                                        @Field("channel_name") String channel_name,
+                                        @Field("channel_image") String channel_image
 
     );
 
     @FormUrlEncoded
     @POST("api/get-likes")
-    Call<StatusResponse> addLikes(@Header("Authorization") String token,
-                                  @Field("user_id") String user_id,
-                                  @Field("likes_limit") String likes_limit,
-                                  @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
-                                  @Field("total_cost") String total_cost,
-                                  @Field("link") String link,
-                                  @Field("channel_name") String channel_name,
-                                  @Field("channel_image") String channel_image
+    Call<AdPayModel> addLikes(@Header("Authorization") String token,
+                              @Field("user_id") String user_id,
+                              @Field("likes_limit") String likes_limit,
+                              @Field("estimated_arrive_time_per_day") String estimated_arrive_time_per_day,
+                              @Field("total_cost") String total_cost,
+                              @Field("link") String link,
+                              @Field("watch_time") String watch_time,
+                              @Field("channel_name") String channel_name,
+                              @Field("channel_image") String channel_image
 
 
     );
@@ -468,6 +470,13 @@ public interface Service {
     Call<VideoModel> getPlaylistItemByPlaylistId(@Query("part") String part,
                                                  @Query("playlistId") String playlistId,
                                                  @Query("key") String key
+    );
+
+    @FormUrlEncoded
+    @POST("api/delete-advertisement")
+    Call<StatusResponse> deleteMyAds(@Header("Authorization") String token,
+                                     @Field("user_id") String user_id,
+                                     @Field("advertisement_id") String advertisement_id
     );
 
 

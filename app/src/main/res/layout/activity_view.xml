@@ -37,6 +37,7 @@
                         android:src="@drawable/ic_left_arrow"
                         app:tint="@color/white"
                         android:padding="3dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
                         />
                     <TextView
                         android:layout_width="wrap_content"

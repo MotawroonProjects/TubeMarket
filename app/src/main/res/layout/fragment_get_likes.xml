@@ -52,6 +52,7 @@
 
 
 
+<!--
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,6 +62,7 @@
                 android:text="@string/estimated_reach_likes"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
+-->
 
            <!-- <FrameLayout
                 android:layout_width="match_parent"

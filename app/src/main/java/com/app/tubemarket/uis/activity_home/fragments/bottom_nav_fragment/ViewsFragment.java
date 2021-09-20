@@ -94,9 +94,7 @@ public class ViewsFragment extends Fragment {
         Paper.init(activity);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
-        binding.youtubePlayerView.enableBackgroundPlayback(true);
 
-        getLifecycle().addObserver(binding.youtubePlayerView);
 
         binding.llNext.setOnClickListener(view -> {
             int newIndex = index+1;
@@ -113,32 +111,10 @@ public class ViewsFragment extends Fragment {
             }
 
         });
-        listener = new AbstractYouTubePlayerListener() {
-            @Override
-            public void onReady(YouTubePlayer youTubePlayer) {
-
-                ViewsFragment.this.youTubePlayer = youTubePlayer;
-                youTubePlayer.loadVideo(videoId, 0);
-                youTubePlayer.pause();
-
-
-            }
-
-            @Override
-            public void onStateChange(YouTubePlayer youTubePlayer, PlayerConstants.PlayerState state) {
-                super.onStateChange(youTubePlayer, state);
-
-                if (state.name().equals(PlayerConstants.PlayerState.PLAYING.name())) {
-
-                    startTime();
-                } else {
-                    stopTimer();
-                }
-            }
-        };
-
         getVideosAds();
-        getVideos(1, 0);
+
+        new Handler().postDelayed(()->getVideos(1, 0), 1000);
+
 
 
     }
@@ -187,7 +163,32 @@ public class ViewsFragment extends Fragment {
         binding.setCoins(myVideosModel.getProfit_coins());
         binding.setSecond(myVideosModel.getTimer_limit());
         seconds = Integer.parseInt(myVideosModel.getTimer_limit());
+        binding.youtubePlayerView.enableBackgroundPlayback(true);
 
+        getLifecycle().addObserver(binding.youtubePlayerView);
+        listener = new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(YouTubePlayer youTubePlayer) {
+
+                ViewsFragment.this.youTubePlayer = youTubePlayer;
+                youTubePlayer.loadVideo(videoId, 0);
+                youTubePlayer.pause();
+
+
+            }
+
+            @Override
+            public void onStateChange(YouTubePlayer youTubePlayer, PlayerConstants.PlayerState state) {
+                super.onStateChange(youTubePlayer, state);
+
+                if (state.name().equals(PlayerConstants.PlayerState.PLAYING.name())) {
+
+                    startTime();
+                } else {
+                    stopTimer();
+                }
+            }
+        };
 
         if (youTubePlayer!=null){
             listener.onReady(youTubePlayer);

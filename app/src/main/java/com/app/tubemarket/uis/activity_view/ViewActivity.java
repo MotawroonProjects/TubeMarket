@@ -33,6 +33,7 @@ public class ViewActivity extends AppCompatActivity {
     private ActivityViewBinding binding;
     private String url = "";
     private MessageResponseModel.Data data;
+    private String lang="ar";
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -58,10 +59,13 @@ public class ViewActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void initView() {
+        Paper.init(this);
+        lang = Paper.book().read("lang","ar");
+
         binding.webView.getSettings().setJavaScriptEnabled(true);
         binding.webView.getSettings().setDomStorageEnabled(true);
         binding.webView.loadUrl(url);
-
+        binding.setLang(lang);
         binding.llBack.setOnClickListener(v -> finish());
 
         binding.webView.setWebViewClient(new WebViewClient() {

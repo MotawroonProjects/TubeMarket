@@ -1,4 +1,4 @@
-package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
+package com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import com.app.tubemarket.R;
 import com.app.tubemarket.adapters.CampaignAdapter;
 import com.app.tubemarket.adapters.MyAdsAdapter;
-import com.app.tubemarket.databinding.FragmentCampaignBinding;
 import com.app.tubemarket.databinding.FragmentMyAdsBinding;
 import com.app.tubemarket.interfaces.Listeners;
 import com.app.tubemarket.models.CampaignDataModel;
@@ -121,7 +120,7 @@ public class MyAdsFragment extends Fragment implements Listeners.MyAdsListener {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .deleteCampaign("Bearer " + userModel.getToken(), model.getId())
+                .deleteMyAds("Bearer " + userModel.getToken(), userModel.getId(), model.getId())
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
@@ -165,13 +164,8 @@ public class MyAdsFragment extends Fragment implements Listeners.MyAdsListener {
 
     @Override
     public void onMyAdsData(MyAdsModel model, int type, View view) {
-        if (type == 1) {
-            /*Bundle bundle = new Bundle();
-            bundle.putSerializable("data", model);
-            Navigation.findNavController(root).navigate(R.id.campaignDetailsFragment, bundle);
-*/
-        } else if (type == 2) {
-            //delete(model);
+        if (type == 2) {
+            delete(model);
         }
     }
 }

@@ -89,7 +89,6 @@ public class MyAdsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         PopupMenu popupMenu = new PopupMenu(ctw, view);
         popupMenu.getMenu().add(Menu.NONE, 1, 1, R.string.delete);
-        popupMenu.getMenu().add(Menu.NONE, 2, 2, R.string.details);
         popupMenu.show();
 
         popupMenu.setOnMenuItemClickListener(item -> {
@@ -100,10 +99,6 @@ public class MyAdsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                     break;
 
-                case 2:
-                    listener.onMyAdsData(myAdsModel, 1, root);
-
-                    break;
 
             }
             popupMenu.dismiss();
