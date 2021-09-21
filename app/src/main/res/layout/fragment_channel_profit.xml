@@ -54,7 +54,6 @@
                     />
 
             </LinearLayout>
-
             <EditText
                 android:id="@+id/edtUrl"
                 android:layout_width="match_parent"
@@ -62,6 +61,23 @@
                 android:background="@drawable/small_rounded_strokk_gray"
                 android:hint="@string/enter_channel_link"
                 android:inputType="textUri"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="14sp"
+                />
+
+            <EditText
+                android:id="@+id/edtNumber"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/small_rounded_strokk_gray"
+                android:hint="@string/phone"
+                android:inputType="phone"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:singleLine="true"

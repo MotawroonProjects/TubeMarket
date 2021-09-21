@@ -479,6 +479,16 @@ public interface Service {
                                      @Field("advertisement_id") String advertisement_id
     );
 
+    @FormUrlEncoded
+    @POST("api/activate-channel-gain")
+    Call<AdPayModel> addProfitChannel(@Header("Authorization") String token,
+                                      @Field("user_id") String user_id,
+                                      @Field("contact_number") String contact_number,
+                                      @Field("channel_link") String channel_link,
+                                      @Field("channel_name") String channel_name,
+                                      @Field("channel_image") String channel_image
+
+    );
 
 }
 

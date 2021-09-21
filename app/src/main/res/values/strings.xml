@@ -3,7 +3,7 @@
     <string name="youtube_key">AIzaSyB1rTbRjOMvrI_20Fe2H1GpLMgQ91dsVJg</string>
     <string name="field_required">Field Required</string>
     <string name="inv_email">Invalid Email</string>
-    <string name="phone">Phone</string>
+    <string name="phone">Phone number</string>
     <string name="login">Login</string>
     <string name="confirm">Confirm</string>
     <string name="notifications">Notifications</string>
