@@ -74,7 +74,6 @@ public class UserMessagesFragment extends Fragment implements Listeners.UserMess
         binding.recView.setAdapter(adapter);
 
 
-
         getMessages();
     }
 
@@ -83,7 +82,7 @@ public class UserMessagesFragment extends Fragment implements Listeners.UserMess
         list.clear();
         adapter.notifyDataSetChanged();
         Api.getService(Tags.base_url)
-                .getUserMessages("Bearer " + userModel.getToken(),userModel.getId())
+                .getUserMessages("Bearer " + userModel.getToken(), userModel.getId())
                 .enqueue(new Callback<UserMessagesDataModel>() {
                     @Override
                     public void onResponse(Call<UserMessagesDataModel> call, Response<UserMessagesDataModel> response) {
@@ -91,13 +90,14 @@ public class UserMessagesFragment extends Fragment implements Listeners.UserMess
 
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getStatus() == 200) {
-                                if (response.body().getData().size()>0){
+                                if (response.body().getData().size() > 0) {
                                     list.clear();
                                     list.addAll(response.body().getData());
+
                                     adapter.notifyDataSetChanged();
                                     binding.tvNoMessage.setVisibility(View.GONE);
 
-                                }else {
+                                } else {
                                     binding.tvNoMessage.setVisibility(View.VISIBLE);
                                 }
 
@@ -121,10 +121,9 @@ public class UserMessagesFragment extends Fragment implements Listeners.UserMess
     }
 
 
-
     @Override
     public void onUserMessage(UserMessageModel model, View itemView) {
-        Intent intent = new Intent(activity,ViewActivity.class);
+        Intent intent = new Intent(activity, ViewActivity.class);
         intent.putExtra("url", model.getBuy_message().getLink());
         startActivity(intent);
     }

@@ -8,6 +8,7 @@ public class WithdrawModel implements Serializable {
     private String coins;
     private String cost;
     private String is_shown;
+    private String type;
     private String created_at;
     private String updated_at;
     private String full_image_url;
@@ -30,6 +31,10 @@ public class WithdrawModel implements Serializable {
 
     public String getIs_shown() {
         return is_shown;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getCreated_at() {

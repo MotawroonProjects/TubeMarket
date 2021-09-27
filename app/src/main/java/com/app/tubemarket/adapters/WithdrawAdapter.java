@@ -45,6 +45,9 @@ public class WithdrawAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         myHolder.binding.setModel(list.get(position));
         myHolder.itemView.setOnClickListener(v -> {
             listener.onWithdrawData(list.get(myHolder.getAdapterPosition()),myHolder.itemView);
+
+
+
         });
 
     }

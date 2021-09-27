@@ -155,5 +155,6 @@
     <string name="you_will_get_double_points_for_watching_like_and_subscribe_channel">سوف تحصل على ضعف النقاط عند الاشتراك في القناة</string>
     <string name="channel_profit">ربح القناة</string>
     <string name="watch_hours">يتم إرسال 4000 ساعة مشاهدة و 1000 مشترك بضمان مدى الحياة في فترة تتراوح من 7 إلى 10 أيام بسعر 80 دولار</string>
+    <string name="paypal_email">البريد الألكترونى (باى بال )</string>
 
 </resources>

@@ -227,10 +227,10 @@ public class NewAdditionSetUpFragment extends Fragment {
         total_coins =0;
         coinsModel = body.getData();
         if (have_discount.equals("yes")){
-            discount_coins = (int) (Integer.parseInt(coinsModel.getProfit_coins())*.10);
+            discount_coins = (int) (Integer.parseInt(coinsModel.getCampaign_coins())*.10);
         }
 
-        total_coins = Integer.parseInt(coinsModel.getProfit_coins())-discount_coins;
+        total_coins = Integer.parseInt(coinsModel.getCampaign_coins())-discount_coins;
         binding.setCoins(total_coins+"");
 
     }

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -60,7 +61,6 @@ public class ChannelProfitFragment extends Fragment {
     private ActivityResultLauncher<Intent> launcher;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class ChannelProfitFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode()== Activity.RESULT_OK){
+            if (result.getResultCode() == Activity.RESULT_OK) {
                 Navigation.findNavController(binding.getRoot()).popBackStack();
 
             }
@@ -96,9 +96,13 @@ public class ChannelProfitFragment extends Fragment {
             }
         });
 
+        binding.fab.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=+201090184189"));
+            startActivity(intent);
+        });
         binding.btnAdd.setOnClickListener(v -> {
             String phone = binding.edtNumber.getText().toString();
-            if (userChannel!=null&&!phone.isEmpty()){
+            if (userChannel != null && !phone.isEmpty()) {
                 addLink(phone);
             }
         });
@@ -111,22 +115,22 @@ public class ChannelProfitFragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .addProfitChannel("Bearer "+userModel.getToken(),userModel.getId(),phone,userChannel.getId(),userChannel.getTitle(),userChannel.getUrl())
+                .addProfitChannel("Bearer " + userModel.getToken(), userModel.getId(), phone, userChannel.getId(), userChannel.getTitle(), userChannel.getUrl())
                 .enqueue(new Callback<AdPayModel>() {
                     @Override
                     public void onResponse(Call<AdPayModel> call, Response<AdPayModel> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()&&response.body()!=null&&response.body().getStatus()==200){
+                        if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 200) {
                             Intent intent = new Intent(activity, ViewActivity.class);
                             intent.putExtra("url", response.body().getData().getPay_link());
-                            intent.putExtra("data",new MessageResponseModel.Data());
+                            intent.putExtra("data", new MessageResponseModel.Data());
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             launcher.launch(intent);
 
-                        }else {
-                            Log.e("rasdasd", response.body().getStatus()+"__");
+                        } else {
+                            Log.e("rasdasd", response.body().getStatus() + "__");
                             try {
-                                Log.e("error", response.code()+"__"+response.errorBody().string());
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -138,7 +142,7 @@ public class ChannelProfitFragment extends Fragment {
                         dialog.dismiss();
 
                         //yusufseries
-                        Log.e("failed", t.getMessage()+"__");
+                        Log.e("failed", t.getMessage() + "__");
                     }
                 });
 
@@ -155,18 +159,18 @@ public class ChannelProfitFragment extends Fragment {
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getItems() != null) {
 
-                                if (response.body().getItems().size() > 0){
+                                if (response.body().getItems().size() > 0) {
                                     VideoModel channelModel = response.body();
                                     userChannel = new UserModel.ChannelModel(channelModel.getItems().get(0).getId(), channelModel.getItems().get(0).getSnippet().getLocalized().getTitle(), channelModel.getItems().get(0).getSnippet().getLocalized().getDescription(), channelModel.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl());
                                     binding.setModel(userChannel);
                                 }
 
 
-                            }else {
+                            } else {
                                 Toast.makeText(activity, R.string.in_url, Toast.LENGTH_SHORT).show();
 
                             }
-                        }else {
+                        } else {
                             Toast.makeText(activity, R.string.in_url, Toast.LENGTH_SHORT).show();
 
                         }

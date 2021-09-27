@@ -7,6 +7,7 @@
         <variable
             name="model"
             type="com.app.tubemarket.models.UserMessageModel" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -54,6 +55,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/next_btn"
+                android:visibility='@{model.buy_message.link==null?View.GONE:View.VISIBLE,default=gone}'
                 >
                 <LinearLayout
                     android:layout_width="wrap_content"

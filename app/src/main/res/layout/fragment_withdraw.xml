@@ -24,6 +24,115 @@
             app:SpinKit_Color="@color/colorAccent"
             android:layout_marginTop="24dp"
             />
+        <FrameLayout
+            android:id="@+id/flDialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/trans_black"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="5dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvCode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/enter_code"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+
+                            />
+
+                        <EditText
+                            android:id="@+id/edtCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="20dp"
+                            android:background="@drawable/small_rounded_strokk_gray"
+                            android:hint="@string/enter_code"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray4"
+                            android:textSize="14sp"
+
+                            />
+
+                        <Button
+                            android:id="@+id/btnConfirm"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="@drawable/small_rounded_primary"
+                            android:text="@string/confirm"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardClose"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="3dp"
+                    app:cardBackgroundColor="@color/colorred"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintBottom_toTopOf="@id/cardDialog"
+                    app:layout_constraintEnd_toEndOf="@id/cardDialog"
+                    app:layout_constraintStart_toStartOf="@id/cardDialog"
+                    app:layout_constraintTop_toTopOf="@id/cardDialog"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_close2"
+                        app:tint="@color/white" />
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
 
     </FrameLayout>
 </layout>

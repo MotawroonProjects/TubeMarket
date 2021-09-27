@@ -175,9 +175,9 @@ public class GetSubscribersFragment extends Fragment {
         });
 
         binding.btnAdd.setOnClickListener(v -> {
-            seconds = binding.edtSeconds.getText().toString();
+          //  seconds = binding.edtSeconds.getText().toString();
 
-            if (channelModel!=null&&!subscribe_num.equals("0")&&!total.equals("0")&&!seconds.equals("0")){
+            if (channelModel!=null&&!subscribe_num.equals("0")&&!total.equals("0")){
                 addSubscribes();
             }
         });
@@ -189,7 +189,7 @@ public class GetSubscribersFragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .addSubscribes("Bearer "+userModel.getToken(),userModel.getId(),subscribe_num,seconds,total,channel_id,userChannel.getTitle(),userChannel.getUrl(),seconds)
+                .addSubscribes("Bearer "+userModel.getToken(),userModel.getId(),subscribe_num,"60",total,channel_id,userChannel.getTitle(),userChannel.getUrl(),"60")
                 .enqueue(new Callback<AdPayModel>() {
                     @Override
                     public void onResponse(Call<AdPayModel> call, Response<AdPayModel> response) {

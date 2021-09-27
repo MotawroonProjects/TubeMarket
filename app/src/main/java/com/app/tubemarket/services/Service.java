@@ -490,6 +490,14 @@ public interface Service {
 
     );
 
+    @FormUrlEncoded
+    @POST("api/exchange-coins")
+    Call<StatusResponse> exchangeCoins(@Header("Authorization") String token,
+                                       @Field("user_id") String user_id,
+                                       @Field("exchange_id") String exchange_id,
+                                       @Field("cost") String cost,
+                                       @Field("contact_data") String contact_data
+    );
 }
 
 
