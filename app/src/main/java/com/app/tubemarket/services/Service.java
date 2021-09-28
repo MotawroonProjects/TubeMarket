@@ -498,6 +498,14 @@ public interface Service {
                                        @Field("cost") String cost,
                                        @Field("contact_data") String contact_data
     );
+
+    @FormUrlEncoded
+    @POST("api/activate-coupon")
+    Call<StatusResponse> activateCoupon(@Header("Authorization") String token,
+                                       @Field("user_id") String user_id,
+                                       @Field("coupon_code") String coupon_code
+    );
+
 }
 
 

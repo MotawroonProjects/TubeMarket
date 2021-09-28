@@ -1,5 +1,6 @@
 package com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,21 +10,33 @@ import androidx.navigation.Navigation;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import com.app.tubemarket.R;
 import com.app.tubemarket.databinding.FragmentCampaignBinding;
 import com.app.tubemarket.databinding.FragmentCoinsBinding;
+import com.app.tubemarket.models.StatusResponse;
 import com.app.tubemarket.models.UserModel;
+import com.app.tubemarket.models.WithdrawModel;
 import com.app.tubemarket.preferences.Preferences;
+import com.app.tubemarket.remote.Api;
+import com.app.tubemarket.share.Common;
+import com.app.tubemarket.tags.Tags;
 import com.app.tubemarket.uis.activity_chat_admin.ChatAdminActivity;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
 
+import java.io.IOException;
+
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CoinsFragment extends Fragment {
@@ -93,6 +106,11 @@ public class CoinsFragment extends Fragment {
 
         });
 
+        binding.btnConfirm.setOnClickListener(v -> {
+            if (!binding.edtCode.getText().toString().isEmpty()){
+                activateCode();
+            }
+        });
         binding.cardClose.setOnClickListener(v -> {
            closeDialog();
 
@@ -127,4 +145,51 @@ public class CoinsFragment extends Fragment {
     }
 
 
+    private void activateCode() {
+        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .activateCoupon("Bearer " + userModel.getToken(), userModel.getId(), binding.edtCode.getText().toString())
+                .enqueue(new Callback<StatusResponse>() {
+                    @Override
+                    public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            if (response.body() != null && response.body().getStatus() == 200) {
+                                Toast.makeText(activity, activity.getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                            }
+
+                        } else {
+                            dialog.dismiss();
+                            try {
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (response.code() == 500) {
+                            } else {
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<StatusResponse> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+                                Log.e("error", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                } else {
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
 }
