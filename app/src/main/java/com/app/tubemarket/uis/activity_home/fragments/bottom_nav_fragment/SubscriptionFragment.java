@@ -64,6 +64,8 @@ public class SubscriptionFragment extends Fragment {
     private int page =1;
     private MyVideosModel myVideosModel;
     private ActivityResultLauncher<Intent> launcher;
+    private int subsCount=0;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,6 +85,7 @@ public class SubscriptionFragment extends Fragment {
                     index = 0;
                     page = 1;
                     getVideos(page, index);
+                    subsCount +=1;
                 }
             }
         });
@@ -100,18 +103,24 @@ public class SubscriptionFragment extends Fragment {
 
 
         binding.flSubscribe.setOnClickListener(v -> {
-            String vidUrl ="https://youtu.be/"+videoId;
-            String url = "https://accounts.google.com/ServiceLogin?service=youtube";
-            Bundle bundle = new Bundle();
-            bundle.putString("url",url);
-            bundle.putString("vidUrl",vidUrl);
 
-            GeneralAdsModel generalAdsModel = new GeneralAdsModel(myVideosModel.getId(), myVideosModel.getTimer_limit(), myVideosModel.getProfit_coins(),Tags.NORMAL_AD);
-            bundle.putSerializable("data", generalAdsModel);
+            if (subsCount<3){
+                String vidUrl ="https://youtu.be/"+videoId;
+                String url = "https://accounts.google.com/ServiceLogin?service=youtube";
+                Bundle bundle = new Bundle();
+                bundle.putString("url",url);
+                bundle.putString("vidUrl",vidUrl);
 
-            Intent intent = new Intent(activity, WebViewActivity.class);
-            intent.putExtras(bundle);
-            launcher.launch(intent);
+                GeneralAdsModel generalAdsModel = new GeneralAdsModel(myVideosModel.getId(), myVideosModel.getTimer_limit(), myVideosModel.getProfit_coins(),Tags.NORMAL_AD);
+                bundle.putSerializable("data", generalAdsModel);
+
+                Intent intent = new Intent(activity, WebViewActivity.class);
+                intent.putExtras(bundle);
+                launcher.launch(intent);
+            }else {
+                subsCount = 0;
+                activity.adMob();
+            }
 
         });
 

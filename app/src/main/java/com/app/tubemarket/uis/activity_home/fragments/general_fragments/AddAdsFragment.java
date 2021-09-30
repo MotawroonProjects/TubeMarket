@@ -2,6 +2,7 @@ package com.app.tubemarket.uis.activity_home.fragments.general_fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -18,6 +19,10 @@ import com.app.tubemarket.models.UserModel;
 import com.app.tubemarket.models.VideoModel;
 import com.app.tubemarket.preferences.Preferences;
 import com.app.tubemarket.uis.activity_home.HomeActivity;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
 
 public class AddAdsFragment extends Fragment {
     private FragmentAddAdsBinding binding;
@@ -56,7 +61,46 @@ public class AddAdsFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.getLikesFragment);
         });
 
+        adMob();
 
+    }
+
+    private void adMob() {
+        MobileAds.initialize(activity, initializationStatus -> {
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
+        binding.adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+            }
+        });
     }
 
 }

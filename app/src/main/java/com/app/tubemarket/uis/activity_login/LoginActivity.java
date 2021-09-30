@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
             try {
                 GoogleSignInAccount account = task.getResult();
+                Log.e("ff", account.getId()+"__");
                 login(account);
 
             } catch (Exception e) {
@@ -109,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.llLogin.setOnClickListener(v -> {
             account = GoogleSignIn.getLastSignedInAccount(this);
+            Log.e("ff", account.getId()+"__");
 
             if (account == null) {
                 googleSignIn();
@@ -142,6 +144,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
                         dialog.dismiss();
+                        Log.e("code", response.body().getStatus()+"__");
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getStatus() == 200) {
                                 LoginRegisterModel model = response.body();
@@ -170,12 +173,19 @@ public class LoginActivity extends AppCompatActivity {
                             } else if (response.body().getStatus() == 409) {
                                 Toast.makeText(LoginActivity.this, getString(R.string.user_blocked), Toast.LENGTH_SHORT).show();
                             }
+                        }else {
+                            try {
+                                Log.e("error", response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LoginRegisterModel> call, Throwable t) {
                         dialog.dismiss();
+                        Log.e("failed", t.getMessage()+"__");
 
                     }
                 });

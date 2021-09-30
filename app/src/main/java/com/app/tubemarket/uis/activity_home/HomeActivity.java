@@ -70,6 +70,13 @@ import com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.ViewsF
 import com.app.tubemarket.uis.activity_login.LoginActivity;
 import com.app.tubemarket.uis.activity_splash.SplashActivity;
 import com.app.tubemarket.uis.activity_web_view.WebViewActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd;
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -117,7 +124,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewardListener {
 
     private ActivityHomeBinding binding;
     private Preferences preferences;
@@ -165,6 +172,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
+
+
+
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         preferences = Preferences.getInstance();
@@ -345,7 +356,35 @@ public class HomeActivity extends AppCompatActivity {
         });
         updateFirebaseToken();
 
+
     }
+
+    public void adMob() {
+        RewardedInterstitialAd.load(this, "ca-app-pub-3940256099942544/5354046379", new AdRequest.Builder().build(), new RewardedInterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull RewardedInterstitialAd rewardedInterstitialAd) {
+                super.onAdLoaded(rewardedInterstitialAd);
+                rewardedInterstitialAd.show(HomeActivity.this,HomeActivity.this);
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                Log.e("failed", loadAdError.getMessage()+"__");
+            }
+        });
+    }
+
+    @Override
+    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+        Log.e("fff", rewardItem.getAmount()+"__"+rewardItem.getType());
+
+    }
+
+
+
+
+
 
     private void updateUi() {
         Picasso.get().load(Uri.parse(userModel.getImage())).into(imageView);
@@ -564,6 +603,8 @@ public class HomeActivity extends AppCompatActivity {
 
         new Handler().postDelayed(dialog::dismiss, 3000);
     }
+
+
 
 
     public class Task extends TimerTask {
@@ -786,6 +827,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         dialog.dismiss();
                         if (response.isSuccessful()) {
+                            Log.e("res", response.body().getStatus()+"_");
                             if (response.body() != null && response.body().getStatus() == 200) {
                                 NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                                 manager.cancel(Tags.not_tag, Tags.not_id);

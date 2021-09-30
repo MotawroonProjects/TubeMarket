@@ -3,12 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/android/Projects/TubeMarket/app/src/main/res/layout/buy_message_row.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Projects/TubeMarket/app/src/main/res/layout/fragment_channel_profit.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Projects/TubeMarket/app/src/main/res/layout/fragment_coins.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Projects/TubeMarket/app/src/main/res/layout/fragment_get_subscribers.xml" value="0.20102564102564102" />
-        <entry key="..\:/android/Projects/TubeMarket/app/src/main/res/layout/fragment_withdraw.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Projects/TubeMarket/app/src/main/res/layout/user_message_row.xml" value="0.20416666666666666" />
         <entry key="..\:/works/Courses/work_android/FreeLancer/TubeMarket/app/src/main/res/drawable/inset_dialog.xml" value="0.24114583333333334" />
         <entry key="..\:/works/Courses/work_android/FreeLancer/TubeMarket/app/src/main/res/drawable/rb_dialog.xml" value="0.24114583333333334" />
         <entry key="..\:/works/Courses/work_android/FreeLancer/TubeMarket/app/src/main/res/layout/dialog_alert.xml" value="0.3910355486862442" />
@@ -55,7 +49,7 @@
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/coin_row.xml" value="0.33" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/dialog_coins.xml" value="0.25" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/dialog_video.xml" value="0.22" />
-        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_add_ads.xml" value="0.15" />
+        <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_add_ads.xml" value="0.22" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_add_subscriptions.xml" value="0.33" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_buy_coin.xml" value="0.1" />
         <entry key="..\:/works/TubeMarket/app/src/main/res/layout/fragment_buy_message.xml" value="0.25" />
@@ -95,7 +89,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

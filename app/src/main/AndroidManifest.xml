@@ -90,6 +90,10 @@
 
         <service android:name=".uis.activity_chat_admin.ServiceUploadAttachmentAdmin" />
 
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4674117082406701~9513515711"/>
     </application>
 
 </manifest>

@@ -78,6 +78,7 @@ public class WithdrawFragment extends Fragment implements Listeners.WithdrawList
     private void initView() {
         list = new ArrayList<>();
         activity = (HomeActivity) getActivity();
+        activity.adMob();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         animation = AnimationUtils.loadAnimation(activity, R.anim.fade_in);
@@ -85,6 +86,7 @@ public class WithdrawFragment extends Fragment implements Listeners.WithdrawList
         binding.recView.setLayoutManager(new GridLayoutManager(activity, 2));
         adapter = new WithdrawAdapter(activity, list, this);
         binding.recView.setAdapter(adapter);
+
 
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override

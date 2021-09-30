@@ -64,6 +64,8 @@ public class ViewsFragment extends Fragment {
     private String videoId="",videoIdAds="";
     private MyVideosModel myVideosModel;
     private AdsViewModel adsViewModel;
+    private int viewCount=0;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,8 +244,9 @@ public class ViewsFragment extends Fragment {
                         if (response.isSuccessful() && response.body() != null) {
                             Log.e("ddd", response.body().getStatus()+"__");
                             if (response.body().getStatus() == 200) {
-                                activity.getUserProfile();
 
+                                viewCount +=1;
+                                activity.getUserProfile();
                                 createDialog(myVideosModel.getProfit_coins());
                             }
                         }else {
@@ -282,8 +285,6 @@ public class ViewsFragment extends Fragment {
 
     }
 
-
-
     public class Task extends TimerTask {
 
         @Override
@@ -292,7 +293,13 @@ public class ViewsFragment extends Fragment {
                 seconds--;
                 binding.setSecond(seconds+"");
             }else {
-                view();
+                if (viewCount<3){
+                    view();
+
+                }else {
+                    viewCount = 0;
+                    activity.adMob();
+                }
                 stopTimer();
             }
         }
