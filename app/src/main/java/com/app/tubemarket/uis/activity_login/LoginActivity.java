@@ -98,7 +98,6 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
             try {
                 GoogleSignInAccount account = task.getResult();
-                Log.e("ff", account.getId()+"__");
                 login(account);
 
             } catch (Exception e) {
@@ -110,8 +109,6 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.llLogin.setOnClickListener(v -> {
             account = GoogleSignIn.getLastSignedInAccount(this);
-            Log.e("ff", account.getId()+"__");
-
             if (account == null) {
                 googleSignIn();
             } else {
@@ -138,8 +135,11 @@ public class LoginActivity extends AppCompatActivity {
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
+
+        String photo_url = account.getPhotoUrl()!=null?account.getPhotoUrl().toString():"";
+
         Api.getService(Tags.base_url)
-                .login(account.getId(), account.getDisplayName(), account.getEmail(), account.getPhotoUrl().toString(), "0", "android")
+                .login(account.getId(), account.getDisplayName(), account.getEmail(), photo_url, "0", "android")
                 .enqueue(new Callback<LoginRegisterModel>() {
                     @Override
                     public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
@@ -166,7 +166,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 }
 
-                                UserModel userModel = new UserModel(model.getData().getId(), account.getId(), account.getEmail(), account.getDisplayName(), account.getPhotoUrl().toString(), model.getData().getCoins(), model.getData().getCode(), model.getData().getUser_type(), model.getData().getIs_vip(), model.getData().getToken(), channelModel, videoModel, interestsModel);
+                                UserModel userModel = new UserModel(model.getData().getId(), account.getId(), account.getEmail(), account.getDisplayName(), photo_url, model.getData().getCoins(), model.getData().getCode(), model.getData().getUser_type(), model.getData().getIs_vip(), model.getData().getToken(), channelModel, videoModel, interestsModel);
                                 preferences.create_update_userdata(LoginActivity.this, userModel);
                                 navigateToHomeActivity();
 

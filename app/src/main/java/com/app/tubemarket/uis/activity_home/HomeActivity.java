@@ -387,7 +387,10 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
 
 
     private void updateUi() {
-        Picasso.get().load(Uri.parse(userModel.getImage())).into(imageView);
+        if (userModel.getImage()!=null&&!userModel.getImage().isEmpty()){
+            Picasso.get().load(Uri.parse(userModel.getImage())).into(imageView);
+
+        }
         tvName.setText(userModel.getName());
         tvEmail.setText(userModel.getEmail());
         tvCoins.setText(userModel.getCoins());
@@ -780,10 +783,10 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
                                         @Override
                                         public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                                             if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 200) {
-                                                userModel.setFirebase_token(token);
+                                                userModel.setFirebase_token(task.getResult());
                                                 preferences.create_update_userdata(HomeActivity.this, userModel);
 
-                                                Log.e("token", "updated successfully");
+                                                Log.e("token",userModel.getFirebaseToken());
                                             } else {
                                                 try {
 

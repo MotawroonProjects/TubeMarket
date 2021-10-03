@@ -159,6 +159,8 @@ public class CoinsFragment extends Fragment {
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getStatus() == 200) {
                                 Toast.makeText(activity, activity.getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                                activity.getUserProfile();
+                                closeDialog();
                             }
 
                         } else {

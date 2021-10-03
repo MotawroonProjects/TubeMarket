@@ -133,7 +133,6 @@ public class SubscriptionFragment extends Fragment {
 
             }else {
                 int newPage = page+1;
-
                 getVideos(newPage,newIndex);
 
             }
@@ -166,6 +165,8 @@ public class SubscriptionFragment extends Fragment {
                                 list.addAll(response.body().getData().getData());
                                 index = newIndex;
                                 loadVideo(list.get(index));
+
+                                Log.e("size", list.size()+"_");
 
                             }
                         } else {
