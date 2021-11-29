@@ -10,7 +10,7 @@
 
        <variable
            name="model"
-           type="com.app.tubemarket.models.AdminMessageModel" />
+           type="com.tubemarket.models.AdminMessageModel" />
 
         <import type="android.view.View" />
 

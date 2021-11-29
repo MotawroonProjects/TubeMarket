@@ -7,10 +7,10 @@
     <data>
         <variable
             name="userModel"
-            type="com.app.tubemarket.models.UserModel" />
+            type="com.tubemarket.models.UserModel" />
         <variable
             name="model"
-            type="com.app.tubemarket.models.UserModel.ChannelModel" />
+            type="com.tubemarket.models.UserModel.ChannelModel" />
 
         <import type="android.view.View"/>
     </data>

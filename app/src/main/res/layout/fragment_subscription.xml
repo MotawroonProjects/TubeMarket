@@ -12,7 +12,7 @@
             type="String" />
         <variable
             name="model"
-            type="com.app.tubemarket.models.MyVideosModel" />
+            type="com.tubemarket.models.MyVideosModel" />
     </data>
 
     <LinearLayout

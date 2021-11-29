@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.app.tubemarket.models.UserMessageModel" />
+            type="com.tubemarket.models.UserMessageModel" />
         <import type="android.view.View"/>
     </data>
 

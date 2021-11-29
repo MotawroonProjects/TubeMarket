@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="com.app.tubemarket.models.UserModel.ChannelModel" />
+            type="com.tubemarket.models.UserModel.ChannelModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"

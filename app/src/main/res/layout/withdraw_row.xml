@@ -5,7 +5,7 @@
     <data>
         <variable
             name="model"
-            type="com.app.tubemarket.models.WithdrawModel" />
+            type="com.tubemarket.models.WithdrawModel" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

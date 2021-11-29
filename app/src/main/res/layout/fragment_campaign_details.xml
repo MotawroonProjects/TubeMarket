@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.app.tubemarket.models.CampaignModel" />
+            type="com.tubemarket.models.CampaignModel" />
     </data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -6,27 +6,27 @@
     app:startDestination="@id/subscriptionFragment">
     <fragment
         android:id="@+id/subscriptionFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.SubscriptionFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.SubscriptionFragment"
         android:label="@string/subscribes"
         tools:layout="@layout/fragment_subscription" />
     <fragment
         android:id="@+id/viewsFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.ViewsFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.ViewsFragment"
         android:label="@string/views"
         tools:layout="@layout/fragment_views" />
     <fragment
         android:id="@+id/coinsFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CoinsFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CoinsFragment"
         android:label="@string/currency"
         tools:layout="@layout/fragment_coins" />
     <fragment
         android:id="@+id/campaignFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CampaignFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CampaignFragment"
         android:label="@string/campaign"
         tools:layout="@layout/fragment_campaign" />
     <fragment
         android:id="@+id/addAdsFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.AddAdsFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.AddAdsFragment"
         android:label="@string/ads_channel"
         tools:layout="@layout/fragment_add_ads" />
 
@@ -34,110 +34,110 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.ProfileFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.slide_menu_fragment.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/goldProfileFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.GoldProfileFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.slide_menu_fragment.GoldProfileFragment"
         android:label="@string/gold_profile"
         tools:layout="@layout/fragment_gold_profile" />
     <fragment
         android:id="@+id/inviteFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.InviteFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.slide_menu_fragment.InviteFragment"
         android:label="@string/invite_friends"
         tools:layout="@layout/fragment_invite" />
 
     <activity
         android:id="@+id/faqActivity"
-        android:name="com.app.tubemarket.uis.activity_faq.FaqActivity"
+        android:name="com.tubemarket.uis.activity_faq.FaqActivity"
         android:label="@string/faq"
         />
     <fragment
         android:id="@+id/newAdditionFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.NewAdditionFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.NewAdditionFragment"
         android:label="@string/new_addition"
         tools:layout="@layout/fragment_new_addition" />
     <fragment
         android:id="@+id/addSubscriptionsFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.AddSubscriptionsFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.AddSubscriptionsFragment"
         android:label="@string/subscribes"
         tools:layout="@layout/fragment_add_subscriptions" />
     <fragment
         android:id="@+id/newAdditionSetUpFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.NewAdditionSetUpFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.NewAdditionSetUpFragment"
         android:label="@string/create_campaign"
         tools:layout="@layout/fragment_new_addition_set_up" />
 
 
     <fragment
         android:id="@+id/changeLang"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.LanguageFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.slide_menu_fragment.LanguageFragment"
         android:label="@string/ch_lang"
         tools:layout="@layout/fragment_language" />
     <fragment
         android:id="@+id/getSubscribersFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.GetSubscribersFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.GetSubscribersFragment"
         android:label="@string/get_subscribers"
         tools:layout="@layout/fragment_get_subscribers" />
     <fragment
         android:id="@+id/getViewsFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.GetViewsFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.GetViewsFragment"
         android:label="@string/get_views"
         tools:layout="@layout/fragment_get_views" />
     <fragment
         android:id="@+id/getSubscribersViewsFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.GetSubscribersViewsFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.GetSubscribersViewsFragment"
         android:label="@string/get_subscribers_abd_views"
         tools:layout="@layout/fragment_get_subscribers_views" />
     <fragment
         android:id="@+id/getLikesFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.GetLikesFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.GetLikesFragment"
         android:label="@string/get_likes"
         tools:layout="@layout/fragment_get_likes" />
     <fragment
         android:id="@+id/campaignDetailsFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.CampaignDetailsFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.CampaignDetailsFragment"
         android:label="@string/camp_details"
         tools:layout="@layout/fragment_campaign_details" />
     <fragment
         android:id="@+id/buyCoinFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.BuyCoinFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.BuyCoinFragment"
         android:label="@string/buy_coin"
         tools:layout="@layout/fragment_buy_coin" />
     <fragment
         android:id="@+id/withdrawFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.WithdrawFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.WithdrawFragment"
         android:label="@string/withdrawal"
         tools:layout="@layout/fragment_withdraw" />
     <fragment
         android:id="@+id/messagesFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.MessagesFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.MessagesFragment"
         android:label="@string/buy_messages"
         tools:layout="@layout/fragment_messages" />
     <fragment
         android:id="@+id/buyMessageFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.BuyMessageFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.BuyMessageFragment"
         android:label="@string/buy_messages"
         tools:layout="@layout/fragment_buy_message" />
     <fragment
         android:id="@+id/buyMessageWithCouponFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.BuyMessageWithCouponFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.BuyMessageWithCouponFragment"
         android:label="@string/buy_messages"
         tools:layout="@layout/fragment_buy_message_with_coupon" />
     <fragment
         android:id="@+id/userMessagesFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.UserMessagesFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.UserMessagesFragment"
         android:label="@string/messages"
         tools:layout="@layout/fragment_user_messages" />
     <fragment
         android:id="@+id/myAdsFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.slide_menu_fragment.MyAdsFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.slide_menu_fragment.MyAdsFragment"
         android:label="@string/my_ads"
         tools:layout="@layout/fragment_my_ads" />
     <fragment
         android:id="@+id/channelProfitFragment"
-        android:name="com.app.tubemarket.uis.activity_home.fragments.general_fragments.ChannelProfitFragment"
+        android:name="com.tubemarket.uis.activity_home.fragments.general_fragments.ChannelProfitFragment"
         android:label="@string/channel_profit"
         tools:layout="@layout/fragment_channel_profit" />
 

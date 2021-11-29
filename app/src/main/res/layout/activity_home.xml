@@ -27,7 +27,7 @@
             type="String" />
         <variable
             name="model"
-            type="com.app.tubemarket.models.AdsViewModel" />
+            type="com.tubemarket.models.AdsViewModel" />
 
 
     </data>

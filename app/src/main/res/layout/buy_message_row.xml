@@ -4,7 +4,7 @@
     <data>
         <variable
             name="model"
-            type="com.app.tubemarket.models.BuyMessageModel" />
+            type="com.tubemarket.models.BuyMessageModel" />
 
     </data>
     <androidx.cardview.widget.CardView

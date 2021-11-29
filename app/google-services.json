@@ -7,26 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:553396693662:android:246e73c554450a8a54a98f",
+        "mobilesdk_app_id": "1:553396693662:android:3ee5e77cf567e73d54a98f",
         "android_client_info": {
-          "package_name": "com.app.tubemarket"
+          "package_name": "com.tubemarket"
         }
       },
       "oauth_client": [
         {
-          "client_id": "553396693662-0g6k465tlh27euv4vv6jsm5840a1d99o.apps.googleusercontent.com",
+          "client_id": "553396693662-37e8mmf5670pk7iavj0srnifeq7ntfos.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.app.tubemarket",
-            "certificate_hash": "7b552dd45a17d41d57b3d3dedd9c4b6814f63960"
-          }
-        },
-        {
-          "client_id": "553396693662-iou8835t99bjqgfpqqpr6e587berf738.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.app.tubemarket",
-            "certificate_hash": "0b354f3a0c02eaba29510595124a7d68aea8edf3"
+            "package_name": "com.tubemarket",
+            "certificate_hash": "6d13c263734470606533f721d340d2a15b653a54"
           }
         }
       ],

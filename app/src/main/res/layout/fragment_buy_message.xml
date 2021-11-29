@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="com.app.tubemarket.models.AddMessageModel" />
+            type="com.tubemarket.models.AddMessageModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
