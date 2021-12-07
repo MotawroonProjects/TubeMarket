@@ -2,7 +2,7 @@ package com.tubemarket.tags;
 
 public class Tags {
 
-    public static String base_url = "http://tube-market.com/";
+    public static String base_url = "https://tube-market.com/";
     public static final String session_login = "login";
     public static final String session_logout = "logout";
     public static final String not_tag = "tube_not_tag";

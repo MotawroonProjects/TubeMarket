@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -94,6 +96,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        binding.tvPrivacy.setPaintFlags(binding.tvPrivacy.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        binding.tvPrivacy.setOnClickListener(v -> {
+            String url = "https://tube-market.com/privacy_policy.html";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+        });
     }
 
     private void googleSignIn() {

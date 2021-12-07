@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/TubeMarket/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/TubeMarket/app/src/main/res/layout/activity_login.xml" value="0.20102564102564102" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/TubeMarket/app/src/main/res/layout/fragment_views.xml" value="0.20416666666666666" />
         <entry key="..\:/works/Courses/work_android/FreeLancer/TubeMarket/app/src/main/res/drawable/inset_dialog.xml" value="0.24114583333333334" />
         <entry key="..\:/works/Courses/work_android/FreeLancer/TubeMarket/app/src/main/res/drawable/rb_dialog.xml" value="0.24114583333333334" />
         <entry key="..\:/works/Courses/work_android/FreeLancer/TubeMarket/app/src/main/res/layout/dialog_alert.xml" value="0.3910355486862442" />
@@ -90,7 +92,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
