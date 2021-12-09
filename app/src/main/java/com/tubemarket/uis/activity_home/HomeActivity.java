@@ -307,7 +307,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
     }
 
     public void adMob() {
-        RewardedInterstitialAd.load(this, "ca-app-pub-3940256099942544/5354046379", new AdRequest.Builder().build(), new RewardedInterstitialAdLoadCallback() {
+        RewardedInterstitialAd.load(this, "ca-app-pub-4674117082406701/2505254239", new AdRequest.Builder().build(), new RewardedInterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull RewardedInterstitialAd rewardedInterstitialAd) {
                 super.onAdLoaded(rewardedInterstitialAd);
