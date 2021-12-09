@@ -98,6 +98,7 @@ public class CoinsFragment extends Fragment {
 
 
         binding.cardCoupon.setOnClickListener(v -> {
+            activity.adMob();
             binding.flDialog.clearAnimation();
             binding.flDialog.startAnimation(animation);
 

@@ -88,7 +88,7 @@ public class MessagesFragment extends Fragment implements Listeners.BuyMessageLi
         adapter = new BuyMessageAdapter(activity, list, this);
         binding.recView.setAdapter(adapter);
 
-
+        activity.adMob();
         adMob();
         getMessages();
     }

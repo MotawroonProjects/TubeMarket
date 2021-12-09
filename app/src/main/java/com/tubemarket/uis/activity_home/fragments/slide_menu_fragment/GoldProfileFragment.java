@@ -90,6 +90,7 @@ public class GoldProfileFragment extends Fragment implements Listeners.VipListen
         vipAdapter = new VipAdapter(activity, list, this);
         binding.recView.setAdapter(vipAdapter);
 
+        activity.adMob();
         adMob();
         getVip();
 

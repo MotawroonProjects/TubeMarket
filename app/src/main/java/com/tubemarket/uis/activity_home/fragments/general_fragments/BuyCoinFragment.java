@@ -85,7 +85,7 @@ public class BuyCoinFragment extends Fragment implements Listeners.CoinsListener
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         adapter = new CoinsAdapter(activity, list, this);
         binding.recView.setAdapter(adapter);
-
+        activity.adMob();
 
 
         getCoins();
