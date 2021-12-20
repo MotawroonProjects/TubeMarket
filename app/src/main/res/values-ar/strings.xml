@@ -157,5 +157,6 @@
     <string name="channel_profit">ربح القناة</string>
     <string name="watch_hours">يتم إرسال 4000 ساعة مشاهدة و 1000 مشترك بضمان مدى الحياة في فترة تتراوح من 7 إلى 10 أيام بسعر 80 دولار</string>
     <string name="paypal_email">البريد الألكترونى (باى بال )</string>
+    <string name="no_more_channel">لا مزيد من القنوات</string>
 
 </resources>

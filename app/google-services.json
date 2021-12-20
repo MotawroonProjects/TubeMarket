@@ -20,6 +20,22 @@
             "package_name": "com.tubemarket",
             "certificate_hash": "6d13c263734470606533f721d340d2a15b653a54"
           }
+        },
+        {
+          "client_id": "553396693662-40nu1gj1geuc51fe2ib4mhp415lkpcph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tubemarket",
+            "certificate_hash": "a0b7c045b0e1b244072cae3ea5f91e9da27df159"
+          }
+        },
+        {
+          "client_id": "553396693662-dh27rbp7e4b007bj96cr466uqgfkm4hp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tubemarket",
+            "certificate_hash": "16816877122d69d343141eed3aac541aef476e2e"
+          }
         }
       ],
       "api_key": [

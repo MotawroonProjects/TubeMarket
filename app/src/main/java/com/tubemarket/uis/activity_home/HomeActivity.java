@@ -31,6 +31,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.tubemarket.R;
 import com.tubemarket.databinding.ActivityHomeBinding;
 import com.tubemarket.databinding.DialogCoinsBinding;
@@ -307,6 +308,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
     }
 
     public void adMob() {
+
         RewardedInterstitialAd.load(this, "ca-app-pub-4674117082406701/2505254239", new AdRequest.Builder().build(), new RewardedInterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull RewardedInterstitialAd rewardedInterstitialAd) {

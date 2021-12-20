@@ -122,6 +122,10 @@ public class LoginActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
+/*
+        Log.e("acc",account.getId()+"__"+account.getEmail());
+*/
+
         String photo_url = account.getPhotoUrl()!=null?account.getPhotoUrl().toString():"";
 
         Api.getService(Tags.base_url)

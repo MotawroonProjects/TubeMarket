@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.tubemarket.R;
 import com.tubemarket.databinding.FragmentNewAdditionBinding;
@@ -48,20 +49,20 @@ public class SubscriptionFragment extends Fragment {
     private HomeActivity activity;
     private UserModel userModel;
     private Preferences preferences;
-    private String videoId="";
+    private String videoId = "";
     private String lang;
     private List<MyVideosModel> list;
     private int index = 0;
-    private int page =1;
+    private int page = 1;
     private MyVideosModel myVideosModel;
     private ActivityResultLauncher<Intent> launcher;
-    private int subsCount=0;
+    private int subsCount = 0;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_subscription,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_subscription, container, false);
         initView();
         return binding.getRoot();
     }
@@ -72,43 +73,42 @@ public class SubscriptionFragment extends Fragment {
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode()== Activity.RESULT_OK){
+                if (result.getResultCode() == Activity.RESULT_OK) {
                     index = 0;
                     page = 1;
                     getVideos(page, index);
-                    subsCount +=1;
+                    subsCount += 1;
                 }
             }
         });
     }
 
-    private void initView()
-    {
-        list  = new ArrayList<>();
+    private void initView() {
+        list = new ArrayList<>();
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         Paper.init(activity);
-        lang = Paper.book().read("lang","ar");
+        lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
 
 
         binding.flSubscribe.setOnClickListener(v -> {
 
-            if (subsCount<3){
-                String vidUrl ="https://youtu.be/"+videoId;
+            if (subsCount < 3) {
+                String vidUrl = "https://youtu.be/" + videoId;
                 String url = "https://accounts.google.com/ServiceLogin?service=youtube";
                 Bundle bundle = new Bundle();
-                bundle.putString("url",url);
-                bundle.putString("vidUrl",vidUrl);
+                bundle.putString("url", url);
+                bundle.putString("vidUrl", vidUrl);
 
-                GeneralAdsModel generalAdsModel = new GeneralAdsModel(myVideosModel.getId(), myVideosModel.getTimer_limit(), myVideosModel.getProfit_coins(),Tags.NORMAL_AD);
+                GeneralAdsModel generalAdsModel = new GeneralAdsModel(myVideosModel.getId(), myVideosModel.getTimer_limit(), myVideosModel.getProfit_coins(), Tags.NORMAL_AD);
                 bundle.putSerializable("data", generalAdsModel);
 
                 Intent intent = new Intent(activity, WebViewActivity.class);
                 intent.putExtras(bundle);
                 launcher.launch(intent);
-            }else {
+            } else {
                 subsCount = 0;
                 activity.adMob();
             }
@@ -116,15 +116,15 @@ public class SubscriptionFragment extends Fragment {
         });
 
         binding.llNext.setOnClickListener(view -> {
-            int newIndex = index+1;
+            int newIndex = index + 1;
             if (newIndex < list.size()) {
-                index +=1;
+                index += 1;
                 loadVideo(list.get(newIndex));
 
 
-            }else {
-                int newPage = page+1;
-                getVideos(newPage,newIndex);
+            } else {
+                int newPage = page + 1;
+                getVideos(newPage, newIndex);
 
             }
 
@@ -133,8 +133,8 @@ public class SubscriptionFragment extends Fragment {
         getVideos(1, 0);
         getSubscriptionAds();
     }
-    private void getVideos(int newPage, int newIndex)
-    {
+
+    private void getVideos(int newPage, int newIndex) {
 
         binding.setModel(null);
         binding.llNext.setVisibility(View.INVISIBLE);
@@ -151,15 +151,17 @@ public class SubscriptionFragment extends Fragment {
 
 
                         if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 200) {
+
                             if (response.body().getData() != null && response.body().getData().getData().size() > 0) {
                                 page = newPage;
                                 list.addAll(response.body().getData().getData());
                                 index = newIndex;
-                                loadVideo(list.get(index));
 
-                                Log.e("size", list.size()+"_");
 
+                            }else {
+                                Toast.makeText(activity, R.string.no_more_channel, Toast.LENGTH_SHORT).show();
                             }
+                            loadVideo(list.get(index));
                         } else {
                             try {
                                 Log.e("error", response.code() + "__" + response.errorBody().string() + "_");
@@ -180,8 +182,8 @@ public class SubscriptionFragment extends Fragment {
                     }
                 });
     }
-    private void loadVideo(MyVideosModel myVideosModel)
-    {
+
+    private void loadVideo(MyVideosModel myVideosModel) {
         this.myVideosModel = myVideosModel;
         videoId = myVideosModel.getLink();
         binding.setModel(myVideosModel);
@@ -190,7 +192,7 @@ public class SubscriptionFragment extends Fragment {
 
     private void getSubscriptionAds() {
         Api.getService(Tags.base_url)
-                .getAllSubscriptions("Bearer " + userModel.getToken(), userModel.getId(), "desc" )
+                .getAllSubscriptions("Bearer " + userModel.getToken(), userModel.getId(), "desc")
                 .enqueue(new Callback<AdsViewDataModel>() {
                     @Override
                     public void onResponse(Call<AdsViewDataModel> call, Response<AdsViewDataModel> response) {
@@ -217,7 +219,6 @@ public class SubscriptionFragment extends Fragment {
                     }
                 });
     }
-
 
 
 }
