@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:background="@drawable/login_back"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <FrameLayout
@@ -23,10 +23,10 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view"
-            app:layout_constraintBottom_toBottomOf="@id/view"
 
             >
 
@@ -80,7 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv"
-            app:layout_constraintVertical_bias=".2" />
+            app:layout_constraintVertical_bias=".1" />
 
         <LinearLayout
             android:id="@+id/llLogin"
@@ -115,17 +115,29 @@
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/tvPrivacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/privacy_policy"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp"
-            android:text="@string/privacy_policy"
-            app:layout_constraintTop_toBottomOf="@id/llLogin"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llLogin" />
+
+        <TextView
+            android:id="@+id/tvTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/terms_and_conditions"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPrivacy" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

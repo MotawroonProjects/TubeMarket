@@ -1,28 +1,28 @@
 {
   "project_info": {
-    "project_number": "553396693662",
-    "project_id": "tubemarket-321811",
-    "storage_bucket": "tubemarket-321811.appspot.com"
+    "project_number": "905534656990",
+    "project_id": "mytubemarket",
+    "storage_bucket": "mytubemarket.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:553396693662:android:3ee5e77cf567e73d54a98f",
+        "mobilesdk_app_id": "1:905534656990:android:47bd3d316f3896c2c1cd4f",
         "android_client_info": {
           "package_name": "com.tubemarket"
         }
       },
       "oauth_client": [
         {
-          "client_id": "553396693662-37e8mmf5670pk7iavj0srnifeq7ntfos.apps.googleusercontent.com",
+          "client_id": "905534656990-13kptd08cpe2o9qhnsjcuramsssa8miv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tubemarket",
-            "certificate_hash": "6d13c263734470606533f721d340d2a15b653a54"
+            "certificate_hash": "16816877122d69d343141eed3aac541aef476e2e"
           }
         },
         {
-          "client_id": "553396693662-40nu1gj1geuc51fe2ib4mhp415lkpcph.apps.googleusercontent.com",
+          "client_id": "905534656990-1eqp1o7sq6b8qdfcqjk4ucmlmglusami.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tubemarket",
@@ -30,22 +30,31 @@
           }
         },
         {
-          "client_id": "553396693662-dh27rbp7e4b007bj96cr466uqgfkm4hp.apps.googleusercontent.com",
+          "client_id": "905534656990-3el17ten1gctrosojf78mu9n8bat4s5e.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tubemarket",
-            "certificate_hash": "16816877122d69d343141eed3aac541aef476e2e"
+            "certificate_hash": "6d39e57f3c880ad5ec12fe731d3e4a908fca8758"
           }
+        },
+        {
+          "client_id": "905534656990-p4pmevjv66sk7koj4fg6m3n69l97eh9m.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDkEpMyktZjHwDeK4jXOWhzo8Ju8xNwVbA"
+          "current_key": "AIzaSyCHvKTG-Zx7EW8undEwGQXP9Hh_QXAkv4s"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905534656990-p4pmevjv66sk7koj4fg6m3n69l97eh9m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

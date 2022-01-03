@@ -13,15 +13,14 @@ public class Tags {
     public static final int not_id = 3254;
     public static final String NORMAL_AD = "NORMAL_AD";
     public static final String CUSTOM_AD = "CUSTOM_AD";
-    public static final String adsKey = "ca-app-pub-4674117082406701~9513515711";
-    public static final String adUnit = "ca-app-pub-4674117082406701/2505254239";
-    public static final String adBannerUnit = "ca-app-pub-4674117082406701/2649897924";
+
 
 
     //01272378639
-    //email:tubemarket740@gmail.com
+    //firebase =: mohamedahmed42719@gmail.com
 
     //adsmob   mohamedahmed42719@gmail.com
     //01272378639
+
 
 }

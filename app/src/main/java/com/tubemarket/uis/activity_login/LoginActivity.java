@@ -92,13 +92,22 @@ public class LoginActivity extends AppCompatActivity {
             if (account == null) {
                 googleSignIn();
             } else {
+
                 login(account);
             }
         });
 
-        binding.tvPrivacy.setPaintFlags(binding.tvPrivacy.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        binding.tvPrivacy.setPaintFlags(binding.tvPrivacy.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        binding.tvTerms.setPaintFlags(binding.tvPrivacy.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         binding.tvPrivacy.setOnClickListener(v -> {
-            String url = "https://tube-market.com/privacy_policy.html";
+            String url = "https://tube-market.com/tube_policy";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+        });
+
+        binding.tvTerms.setOnClickListener(v -> {
+            String url = "https://tube-market.com/terms-conditions";
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
         });
@@ -122,11 +131,9 @@ public class LoginActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
-/*
-        Log.e("acc",account.getId()+"__"+account.getEmail());
-*/
+        Log.e("acc", account.getId() + "__" + account.getEmail());
 
-        String photo_url = account.getPhotoUrl()!=null?account.getPhotoUrl().toString():"";
+        String photo_url = account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : "";
 
         Api.getService(Tags.base_url)
                 .login(account.getId(), account.getDisplayName(), account.getEmail(), photo_url, "0", "android")
@@ -134,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
                         dialog.dismiss();
-                        Log.e("code", response.body().getStatus()+"__");
+                        Log.e("code", response.body().getStatus() + "__");
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getStatus() == 200) {
                                 LoginRegisterModel model = response.body();
@@ -163,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else if (response.body().getStatus() == 409) {
                                 Toast.makeText(LoginActivity.this, getString(R.string.user_blocked), Toast.LENGTH_SHORT).show();
                             }
-                        }else {
+                        } else {
                             try {
                                 Log.e("error", response.errorBody().string());
                             } catch (IOException e) {
@@ -175,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<LoginRegisterModel> call, Throwable t) {
                         dialog.dismiss();
-                        Log.e("failed", t.getMessage()+"__");
+                        Log.e("failed", t.getMessage() + "__");
 
                     }
                 });

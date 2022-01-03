@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Tube Market</string>
     <string name="youtube_key">AIzaSyB1rTbRjOMvrI_20Fe2H1GpLMgQ91dsVJg</string>
-    <string name="ad_banner_id">ca-app-pub-4674117082406701/2649897924</string>
+    <string name="ads_app_id">ca-app-pub-4674117082406701~3324833075</string>
+    <string name="ad_banner_id">ca-app-pub-4674117082406701/2750118007</string>
+    <string name="ad_video_id">ca-app-pub-4674117082406701/7789201008</string>
     <string name="field_required">Field Required</string>
     <string name="inv_email">Invalid Email</string>
     <string name="phone">Phone number</string>
@@ -159,5 +161,6 @@
     <string name="watch_hours">4000 watch hours and 1000 subscribers are sent with a lifetime guarantee in a period of 7 to 10 days at a price of $80</string>
     <string name="paypal_email">Email (Paypal)</string>
     <string name="no_more_channel">No more channels</string>
+    <string name="terms_and_conditions">Terms and conditions</string>
 
 </resources>

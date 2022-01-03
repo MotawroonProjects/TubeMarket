@@ -31,6 +31,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.tubemarket.R;
 import com.tubemarket.databinding.ActivityHomeBinding;
@@ -120,9 +121,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
     }
 
     private void initView() {
-
-
-
+        MobileAds.initialize(this);
 
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
@@ -309,7 +308,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
 
     public void adMob() {
 
-        RewardedInterstitialAd.load(this, "ca-app-pub-4674117082406701/2505254239", new AdRequest.Builder().build(), new RewardedInterstitialAdLoadCallback() {
+        RewardedInterstitialAd.load(this, getString(R.string.ad_video_id), new AdRequest.Builder().build(), new RewardedInterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull RewardedInterstitialAd rewardedInterstitialAd) {
                 super.onAdLoaded(rewardedInterstitialAd);
@@ -725,6 +724,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
                         String token = task.getResult();
+                        Log.e("token",token);
                         try {
                             Api.getService(Tags.base_url)
                                     .updateFirebaseToken("Bearer " + userModel.getToken(), userModel.getId(), token, "android")
@@ -756,10 +756,13 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
                                                 }
 
                                             } catch (Exception e) {
+                                                Log.e("errorToken3", e.getMessage());
+
                                             }
                                         }
                                     });
                         } catch (Exception e) {
+                            Log.e("errorToken4", e.getMessage());
 
                         }
                     }

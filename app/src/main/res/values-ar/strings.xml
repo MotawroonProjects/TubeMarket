@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">تيوب ماركت</string>
     <string name="youtube_key">AIzaSyB1rTbRjOMvrI_20Fe2H1GpLMgQ91dsVJg</string>
-    <string name="ad_banner_id">ca-app-pub-4674117082406701/2649897924</string>
+
+    <string name="ads_app_id">ca-app-pub-4674117082406701~3324833075</string>
+    <string name="ad_banner_id">ca-app-pub-4674117082406701/2750118007</string>
+    <string name="ad_video_id">ca-app-pub-4674117082406701/7789201008</string>
+
     <string name="field_required">الحقل مطلوب</string>
     <string name="inv_email">ايميل خاطئ</string>
     <string name="phone">رقم الجوال</string>
@@ -158,5 +162,6 @@
     <string name="watch_hours">يتم إرسال 4000 ساعة مشاهدة و 1000 مشترك بضمان مدى الحياة في فترة تتراوح من 7 إلى 10 أيام بسعر 80 دولار</string>
     <string name="paypal_email">البريد الألكترونى (باى بال )</string>
     <string name="no_more_channel">لا مزيد من القنوات</string>
+    <string name="terms_and_conditions">الشروط والاحكام</string>
 
 </resources>
