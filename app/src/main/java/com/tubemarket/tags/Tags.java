@@ -6,7 +6,7 @@ public class Tags {
     public static final String session_login = "login";
     public static final String session_logout = "logout";
     public static final String not_tag = "tube_not_tag";
-    public static final String tubeKey = "AIzaSyB1rTbRjOMvrI_20Fe2H1GpLMgQ91dsVJg";
+    public static final String tubeKey = "AIzaSyCHvKTG-Zx7EW8undEwGQXP9Hh_QXAkv4s";
     public static final String tube_base_url = "https://youtube.googleapis.com/";
     public static final String tube_search_base_url = "https://www.googleapis.com/";
 
