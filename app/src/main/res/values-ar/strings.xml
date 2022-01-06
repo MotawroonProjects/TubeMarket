@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">تيوب ماركت</string>
-    <string name="youtube_key">AIzaSyB1rTbRjOMvrI_20Fe2H1GpLMgQ91dsVJg</string>
+    <string name="youtube_key">AIzaSyCHvKTG-Zx7EW8undEwGQXP9Hh_QXAkv4s</string>
 
     <string name="ads_app_id">ca-app-pub-4674117082406701~3324833075</string>
-    <string name="ad_banner_id">ca-app-pub-4674117082406701/2750118007</string>
-    <string name="ad_video_id">ca-app-pub-4674117082406701/7789201008</string>
+    <string name="ad_banner_id">ca-app-pub-4674117082406701/1279062152</string>
+    <string name="ad_video_id">ca-app-pub-4674117082406701/5311351099</string>
 
     <string name="field_required">الحقل مطلوب</string>
     <string name="inv_email">ايميل خاطئ</string>
