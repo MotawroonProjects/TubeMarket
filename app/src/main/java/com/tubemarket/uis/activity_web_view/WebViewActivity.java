@@ -83,7 +83,7 @@ public class WebViewActivity extends AppCompatActivity {
         binding.webView.getSettings().setJavaScriptEnabled(true);
         binding.webView.getSettings().setDomStorageEnabled(true);
         binding.webView.loadUrl(url);
-        seconds = generalAdsModel.getTimer_limit()!=null?Integer.parseInt(generalAdsModel.getTimer_limit()):0;
+        seconds = generalAdsModel.getTimer_limit() != null ? Integer.parseInt(generalAdsModel.getTimer_limit()) : 0;
 
         binding.setSeconds(generalAdsModel.getTimer_limit());
         binding.setCoins(generalAdsModel.getProfit_coins());
@@ -110,26 +110,29 @@ public class WebViewActivity extends AppCompatActivity {
             public void onPageCommitVisible(WebView webview, String url) {
                 super.onPageCommitVisible(webview, url);
                 Log.e("ddd", url);
-                if (url.contains("https://myaccount.google.com/")) {
+                if (url.contains("https://myaccount.google.com/") ) {
                     binding.webView.setVisibility(View.INVISIBLE);
                     webview.loadUrl(vidUrl);
 
 
-                } else if (url.contains("https://m.youtube.com/watch")) {
+                }else if (url.contains("https://support.google.com/accounts/answer/")){
+                    binding.webView.setVisibility(View.INVISIBLE);
+                    webview.loadUrl(vidUrl);
+                }else if (url.contains("https://m.youtube.com/watch")) {
                     binding.webView.setVisibility(View.VISIBLE);
                     binding.flLoading.setVisibility(View.GONE);
                     startCounter();
-                }else if (url.contains("https://accounts.google.com/ServiceLogin?service=youtube")){
+                } else if (url.contains("https://accounts.google.com/ServiceLogin?service=youtube")) {
                     binding.webView.setVisibility(View.VISIBLE);
                     binding.flLoading.setVisibility(View.GONE);
                     binding.viewLayer.setVisibility(View.GONE);
                     binding.viewLayer.setClickable(false);
                     binding.viewLayer.setFocusable(false);
-                }else {
+                } else {
                     binding.flLoading.setVisibility(View.GONE);
                     binding.webView.setVisibility(View.VISIBLE);
 
-                    if (type.equals("channel")){
+                    if (type.equals("channel")) {
                         binding.viewLayer.setVisibility(View.GONE);
                         binding.viewLayer.setClickable(false);
                         binding.viewLayer.setFocusable(false);
@@ -158,11 +161,9 @@ public class WebViewActivity extends AppCompatActivity {
                     action = "subscribe";
 
 
-
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/like/like")) {
                     Log.e("response", "like");
                     action = "like";
-
 
 
                 } else if (url.contains("https://m.youtube.com/youtubei/v1/like/removelike")) {
@@ -191,35 +192,35 @@ public class WebViewActivity extends AppCompatActivity {
 
         });
 
-        binding.viewLayer.setOnClickListener(v->Toast.makeText(this, R.string.should_view, Toast.LENGTH_SHORT).show());
+        binding.viewLayer.setOnClickListener(v -> Toast.makeText(this, R.string.should_view, Toast.LENGTH_SHORT).show());
 
         binding.btnConfirm.setOnClickListener(v -> {
-            if (action.equals("like")){
-                if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)){
+            if (action.equals("like")) {
+                if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)) {
                     likeDislike("like");
-                }else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)){
+                } else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)) {
                     likeDislikeAdVideo("like");
                 }
-            }else if (action.equals("dislike")){
-                if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)){
+            } else if (action.equals("dislike")) {
+                if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)) {
                     likeDislike("remove_like");
-                }else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)){
+                } else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)) {
                     likeDislikeAdVideo("remove_like");
                 }
-            }else if (action.equals("remove_like")){
-                if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)){
+            } else if (action.equals("remove_like")) {
+                if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)) {
                     likeDislike("dislike");
-                }else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)){
+                } else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)) {
                     likeDislikeAdVideo("dislike");
                 }
-            }else if (action.equals("subscribe")){
+            } else if (action.equals("subscribe")) {
 
-                if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)){
+                if (generalAdsModel.getAdType().equals(Tags.NORMAL_AD)) {
                     subscribe();
-                }else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)){
+                } else if (generalAdsModel.getAdType().equals(Tags.CUSTOM_AD)) {
                     subscribeAdChannel();
                 }
-            }else {
+            } else {
                 finish();
             }
         });
@@ -241,7 +242,7 @@ public class WebViewActivity extends AppCompatActivity {
         binding.viewLayer.setFocusable(true);
         binding.llCounter.setVisibility(View.VISIBLE);
 
-        timer = new CountDownTimer(Long.parseLong(generalAdsModel.getTimer_limit()!=null?generalAdsModel.getTimer_limit():"5") * 1000, 1000) {
+        timer = new CountDownTimer(Long.parseLong(generalAdsModel.getTimer_limit() != null ? generalAdsModel.getTimer_limit() : "5") * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateSeconds();
@@ -264,13 +265,12 @@ public class WebViewActivity extends AppCompatActivity {
         binding.btnConfirm.setVisibility(View.VISIBLE);
     }
 
-    private void likeDislike(String status)
-    {
-        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+    private void likeDislike(String status) {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .like("Bearer "+userModel.getToken(), userModel.getId(), generalAdsModel.getId(), generalAdsModel.getProfit_coins(),status)
+                .like("Bearer " + userModel.getToken(), userModel.getId(), generalAdsModel.getId(), generalAdsModel.getProfit_coins(), status)
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
@@ -280,9 +280,9 @@ public class WebViewActivity extends AppCompatActivity {
                                 setResult(RESULT_OK);
                                 finish();
                             }
-                        }else {
+                        } else {
                             try {
-                                Log.e("error", response.code()+"__"+response.errorBody().string());
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -298,29 +298,29 @@ public class WebViewActivity extends AppCompatActivity {
                 });
 
     }
-    private void subscribe()
-    {
+
+    private void subscribe() {
         Log.e("cc", "bb");
-        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .subscribe("Bearer "+userModel.getToken(), userModel.getId(), generalAdsModel.getId(), generalAdsModel.getProfit_coins())
+                .subscribe("Bearer " + userModel.getToken(), userModel.getId(), generalAdsModel.getId(), generalAdsModel.getProfit_coins())
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         dialog.dismiss();
 
                         if (response.isSuccessful() && response.body() != null) {
-                            Log.e("ff", response.body().getStatus()+"_");
+                            Log.e("ff", response.body().getStatus() + "_");
                             if (response.body().getStatus() == 200) {
 
                                 setResult(RESULT_OK);
                                 finish();
                             }
-                        }else {
+                        } else {
                             try {
-                                Log.e("error", response.code()+"__"+response.errorBody().string());
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -335,13 +335,13 @@ public class WebViewActivity extends AppCompatActivity {
                 });
 
     }
-    private void likeDislikeAdVideo(String status)
-    {
-        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+
+    private void likeDislikeAdVideo(String status) {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .likeAdVideo("Bearer "+userModel.getToken(), userModel.getId(), generalAdsModel.getId(),status)
+                .likeAdVideo("Bearer " + userModel.getToken(), userModel.getId(), generalAdsModel.getId(), status)
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
@@ -351,9 +351,9 @@ public class WebViewActivity extends AppCompatActivity {
                                 setResult(RESULT_OK);
                                 finish();
                             }
-                        }else {
+                        } else {
                             try {
-                                Log.e("error", response.code()+"__"+response.errorBody().string());
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -368,28 +368,28 @@ public class WebViewActivity extends AppCompatActivity {
                 });
 
     }
-    private void subscribeAdChannel()
-    {
+
+    private void subscribeAdChannel() {
         Log.e("rr", "t");
-        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .subscribeAdChannel("Bearer "+userModel.getToken(), userModel.getId(), generalAdsModel.getId())
+                .subscribeAdChannel("Bearer " + userModel.getToken(), userModel.getId(), generalAdsModel.getId())
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
-                            Log.e("ff", response.body().getStatus()+"_");
+                            Log.e("ff", response.body().getStatus() + "_");
 
                             if (response.body().getStatus() == 200) {
                                 setResult(RESULT_OK);
                                 finish();
                             }
-                        }else {
+                        } else {
                             try {
-                                Log.e("error", response.code()+"__"+response.errorBody().string());
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -404,14 +404,15 @@ public class WebViewActivity extends AppCompatActivity {
                 });
 
     }
+
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
-        if (timer!=null){
+        if (timer != null) {
             timer.cancel();
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
