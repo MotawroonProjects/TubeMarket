@@ -21,6 +21,7 @@ public class MyVideosModel implements Serializable {
     private String campaign_coins;
     private LoginRegisterModel.Data user_fk;
     private OperationModel user_operations_fk;
+    private New_user_fk new_user_fk;
 
     public String getId() {
         return id;
@@ -93,5 +94,33 @@ public class MyVideosModel implements Serializable {
     public OperationModel getUser_operations_fk() {
         return user_operations_fk;
     }
+
+    public New_user_fk getNew_user_fk() {
+        return new_user_fk;
+    }
+
+    public static class New_user_fk implements Serializable{
+        private String id;
+        private String channel_name;
+        private String channel_image;
+
+
+        public String getId() {
+            return id;
+        }
+
+        public String getChannel_name() {
+            return channel_name;
+        }
+
+        public String getChannel_image() {
+            return channel_image;
+        }
+
+
+
+
+    }
+
 
 }
