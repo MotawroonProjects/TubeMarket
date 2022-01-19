@@ -101,7 +101,6 @@ public class SubscriptionFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("url", url);
                 bundle.putString("vidUrl", vidUrl);
-
                 GeneralAdsModel generalAdsModel = new GeneralAdsModel(myVideosModel.getId(), myVideosModel.getTimer_limit(), myVideosModel.getProfit_coins(), Tags.NORMAL_AD);
                 bundle.putSerializable("data", generalAdsModel);
 

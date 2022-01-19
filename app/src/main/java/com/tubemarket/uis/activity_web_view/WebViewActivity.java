@@ -73,6 +73,7 @@ public class WebViewActivity extends AppCompatActivity {
         vidUrl = intent.getExtras().getString("vidUrl");
         type = intent.getExtras().getString("type", "video");
         generalAdsModel = (GeneralAdsModel) intent.getExtras().getSerializable("data");
+        Log.e("vide", vidUrl);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -110,15 +111,15 @@ public class WebViewActivity extends AppCompatActivity {
             public void onPageCommitVisible(WebView webview, String url) {
                 super.onPageCommitVisible(webview, url);
                 Log.e("ddd", url);
-                if (url.contains("https://myaccount.google.com/") ) {
+                if (url.contains("https://myaccount.google.com/")) {
                     binding.webView.setVisibility(View.INVISIBLE);
                     webview.loadUrl(vidUrl);
 
 
-                }else if (url.contains("https://support.google.com/accounts/answer/")){
+                } else if (url.contains("https://support.google.com/accounts/answer/")) {
                     binding.webView.setVisibility(View.INVISIBLE);
                     webview.loadUrl(vidUrl);
-                }else if (url.contains("https://m.youtube.com/watch")) {
+                } else if (url.contains("https://m.youtube.com/watch")) {
                     binding.webView.setVisibility(View.VISIBLE);
                     binding.flLoading.setVisibility(View.GONE);
                     startCounter();

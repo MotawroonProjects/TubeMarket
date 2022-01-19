@@ -96,7 +96,6 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
     private ActivityResultLauncher<Intent> launcher;
 
 
-
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
@@ -269,7 +268,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
             }
         });
         binding.flSubscribe.setOnClickListener(v -> {
-            String channelId = "https://youtube.com/channel/"+ adsViewModelSubscription.getAdvertisement_fk().getLink();
+            String channelId = "https://youtube.com/channel/" + adsViewModelSubscription.getAdvertisement_fk().getLink();
             String url = "https://accounts.google.com/ServiceLogin?service=youtube";
             Bundle bundle = new Bundle();
             bundle.putString("url", url);
@@ -302,8 +301,6 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
             }
         });
         updateFirebaseToken();
-
-
     }
 
     public void adMob() {
@@ -312,30 +309,26 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
             @Override
             public void onAdLoaded(@NonNull RewardedInterstitialAd rewardedInterstitialAd) {
                 super.onAdLoaded(rewardedInterstitialAd);
-                rewardedInterstitialAd.show(HomeActivity.this,HomeActivity.this);
+                rewardedInterstitialAd.show(HomeActivity.this, HomeActivity.this);
             }
 
             @Override
             public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                 super.onAdFailedToLoad(loadAdError);
-                Log.e("failed", loadAdError.getMessage()+"__");
+                Log.e("failed", loadAdError.getMessage() + "__");
             }
         });
     }
 
     @Override
     public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-        Log.e("fff", rewardItem.getAmount()+"__"+rewardItem.getType());
+        Log.e("fff", rewardItem.getAmount() + "__" + rewardItem.getType());
 
     }
 
 
-
-
-
-
     private void updateUi() {
-        if (userModel.getImage()!=null&&!userModel.getImage().isEmpty()){
+        if (userModel.getImage() != null && !userModel.getImage().isEmpty()) {
             Picasso.get().load(Uri.parse(userModel.getImage())).into(imageView);
 
         }
@@ -556,8 +549,6 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
     }
 
 
-
-
     public class Task extends TimerTask {
 
         @Override
@@ -724,7 +715,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
                         String token = task.getResult();
-                        Log.e("token",token);
+                        Log.e("token", token);
                         try {
                             Api.getService(Tags.base_url)
                                     .updateFirebaseToken("Bearer " + userModel.getToken(), userModel.getId(), token, "android")
@@ -735,7 +726,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
                                                 userModel.setFirebase_token(task.getResult());
                                                 preferences.create_update_userdata(HomeActivity.this, userModel);
 
-                                                Log.e("token",userModel.getFirebaseToken());
+                                                Log.e("token", userModel.getFirebaseToken());
                                             } else {
                                                 try {
 
@@ -782,7 +773,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         dialog.dismiss();
                         if (response.isSuccessful()) {
-                            Log.e("res", response.body().getStatus()+"_");
+                            Log.e("res", response.body().getStatus() + "_");
                             if (response.body() != null && response.body().getStatus() == 200) {
                                 NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                                 manager.cancel(Tags.not_tag, Tags.not_id);
