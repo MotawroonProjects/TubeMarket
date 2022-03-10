@@ -371,7 +371,6 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
     private void subscribeAdChannel() {
-        Log.e("rr", "t");
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
