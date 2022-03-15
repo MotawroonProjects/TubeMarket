@@ -19,10 +19,7 @@ import com.tubemarket.models.UserModel;
 import com.tubemarket.models.VideoModel;
 import com.tubemarket.preferences.Preferences;
 import com.tubemarket.uis.activity_home.HomeActivity;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
+
 
 public class AddAdsFragment extends Fragment {
     private FragmentAddAdsBinding binding;
@@ -72,7 +69,9 @@ public class AddAdsFragment extends Fragment {
     }
 
     private void adMob() {
-        MobileAds.initialize(activity, initializationStatus -> {
+        binding.startAppBanner.loadAd();
+
+     /*   MobileAds.initialize(activity, initializationStatus -> {
         });
         AdRequest adRequest = new AdRequest.Builder().build();
         binding.adView.loadAd(adRequest);
@@ -106,7 +105,7 @@ public class AddAdsFragment extends Fragment {
             public void onAdImpression() {
                 super.onAdImpression();
             }
-        });
+        });*/
     }
 
 }

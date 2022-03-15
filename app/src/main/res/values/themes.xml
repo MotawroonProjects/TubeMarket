@@ -20,4 +20,9 @@
     <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
         <item name="android:itemBackground">@color/gray2</item>
     </style>
+
+    <style name="homeTheme" parent="appTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>

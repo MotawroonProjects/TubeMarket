@@ -4,8 +4,13 @@
     package="com.tubemarket">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.Ad_ID" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove"/>
+
 
 
     <application
@@ -46,7 +51,10 @@
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="true"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:theme="@style/homeTheme"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -78,9 +86,13 @@
 
         <service android:name=".uis.activity_chat_admin.ServiceUploadAttachmentAdmin" />
 
-        <meta-data
+       <!-- <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/ads_app_id" />
+            android:value="@string/ads_app_id" />-->
+
+        <meta-data android:name="com.startapp.sdk.APPLICATION_ID" android:value="202323521" />
+
+        <meta-data android:name="com.startapp.sdk.RETURN_ADS_ENABLED" android:value="true" />
 
         <meta-data
             android:name="com.google.android.gms.version"

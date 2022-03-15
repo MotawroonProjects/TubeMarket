@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.multidex.MultiDexApplication;
 
+import com.startapp.sdk.adsbase.StartAppAd;
 import com.tubemarket.language.Language;
 
 import io.paperdb.Paper;
@@ -19,6 +20,7 @@ public class App extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(Language.updateResources(newBase,"ar"));
+        StartAppAd.disableSplash();
     }
 
 

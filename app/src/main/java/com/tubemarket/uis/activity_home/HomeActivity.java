@@ -3,6 +3,7 @@ package com.tubemarket.uis.activity_home;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -27,12 +28,20 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.rewarded.RewardedAd;
+
+import com.startapp.sdk.adsbase.Ad;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.StartAppSDK;
+import com.startapp.sdk.adsbase.adlisteners.AdDisplayListener;
+import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
+import com.startapp.sdk.adsbase.adlisteners.VideoListener;
 import com.tubemarket.R;
 import com.tubemarket.databinding.ActivityHomeBinding;
 import com.tubemarket.databinding.DialogCoinsBinding;
@@ -51,12 +60,7 @@ import com.tubemarket.uis.activity_home.fragments.bottom_nav_fragment.CoinsFragm
 import com.tubemarket.uis.activity_login.LoginActivity;
 import com.tubemarket.uis.activity_splash.SplashActivity;
 import com.tubemarket.uis.activity_web_view.WebViewActivity;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.OnUserEarnedRewardListener;
-import com.google.android.gms.ads.rewarded.RewardItem;
-import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd;
-import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback;
+
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -73,7 +77,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewardListener {
+//implements OnUserEarnedRewardListener
+public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
     private Preferences preferences;
@@ -94,6 +99,7 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
     private boolean canCloseAds = true;
     private AdsViewModel adsViewModelSubscription;
     private ActivityResultLauncher<Intent> launcher;
+    private StartAppAd rewardedVideo = new StartAppAd(this);
 
 
     protected void attachBaseContext(Context newBase) {
@@ -103,7 +109,14 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        StartAppSDK.init(this,"202323521",false);
+
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setLifecycleOwner(this);
         getDataFromIntent();
@@ -120,8 +133,8 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
     }
 
     private void initView() {
-        MobileAds.initialize(this);
-
+        //MobileAds.initialize(this);
+        StartAppSDK.setTestAdsEnabled(false);
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         preferences = Preferences.getInstance();
@@ -301,11 +314,32 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
             }
         });
         updateFirebaseToken();
+
+
     }
 
     public void adMob() {
+        final StartAppAd rewardedVideo = new StartAppAd(this);
 
-        RewardedInterstitialAd.load(this, getString(R.string.ad_video_id), new AdRequest.Builder().build(), new RewardedInterstitialAdLoadCallback() {
+        rewardedVideo.setVideoListener(() -> {
+        });
+
+        rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+            @Override
+            public void onReceiveAd(Ad ad) {
+                rewardedVideo.showAd();
+            }
+
+            @Override
+            public void onFailedToReceiveAd(Ad ad) {
+            }
+        });
+
+
+
+
+
+      /*  RewardedInterstitialAd.load(this, getString(R.string.ad_video_id), new AdRequest.Builder().build(), new RewardedInterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull RewardedInterstitialAd rewardedInterstitialAd) {
                 super.onAdLoaded(rewardedInterstitialAd);
@@ -317,14 +351,14 @@ public class HomeActivity extends AppCompatActivity implements OnUserEarnedRewar
                 super.onAdFailedToLoad(loadAdError);
                 Log.e("failed", loadAdError.getMessage() + "__");
             }
-        });
+        });*/
     }
 
-    @Override
+  /*  @Override
     public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
         Log.e("fff", rewardItem.getAmount() + "__" + rewardItem.getType());
 
-    }
+    }*/
 
 
     private void updateUi() {

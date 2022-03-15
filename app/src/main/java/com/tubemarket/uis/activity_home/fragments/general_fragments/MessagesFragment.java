@@ -34,10 +34,7 @@ import com.tubemarket.share.Common;
 import com.tubemarket.tags.Tags;
 import com.tubemarket.uis.activity_home.HomeActivity;
 import com.tubemarket.uis.activity_view.ViewActivity;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -101,7 +98,9 @@ public class MessagesFragment extends Fragment implements Listeners.BuyMessageLi
     }
 
     private void adMob() {
-        MobileAds.initialize(activity, initializationStatus -> {
+        binding.startAppBanner.loadAd();
+
+       /* MobileAds.initialize(activity, initializationStatus -> {
         });
         AdRequest adRequest = new AdRequest.Builder().build();
         binding.adView.loadAd(adRequest);
@@ -135,7 +134,7 @@ public class MessagesFragment extends Fragment implements Listeners.BuyMessageLi
             public void onAdImpression() {
                 super.onAdImpression();
             }
-        });
+        });*/
     }
 
     private void getMessages() {

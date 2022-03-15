@@ -37,10 +37,7 @@ import com.tubemarket.share.Common;
 import com.tubemarket.tags.Tags;
 import com.tubemarket.uis.activity_home.HomeActivity;
 import com.tubemarket.uis.activity_view.ViewActivity;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,7 +55,7 @@ public class GoldProfileFragment extends Fragment implements Listeners.VipListen
     private UserModel userModel;
     private Preferences preferences;
     private VipAdapter vipAdapter;
-    private ActivityResultLauncher<Intent>launcher;
+    private ActivityResultLauncher<Intent> launcher;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,19 +63,21 @@ public class GoldProfileFragment extends Fragment implements Listeners.VipListen
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gold_profile, container, false);
         return binding.getRoot();
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
 
     }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode()== Activity.RESULT_OK){
+                if (result.getResultCode() == Activity.RESULT_OK) {
                     activity.getUserProfile();
                 }
             }
@@ -102,7 +101,9 @@ public class GoldProfileFragment extends Fragment implements Listeners.VipListen
     }
 
     private void adMob() {
-        MobileAds.initialize(activity, initializationStatus -> {
+        binding.startAppBanner.loadAd();
+
+       /* MobileAds.initialize(activity, initializationStatus -> {
         });
         AdRequest adRequest = new AdRequest.Builder().build();
         binding.adView.loadAd(adRequest);
@@ -136,13 +137,13 @@ public class GoldProfileFragment extends Fragment implements Listeners.VipListen
             public void onAdImpression() {
                 super.onAdImpression();
             }
-        });
+        });*/
     }
 
 
     private void getVip() {
         Api.getService(Tags.base_url)
-                .getVipPay("Bearer " + userModel.getToken(),"desc")
+                .getVipPay("Bearer " + userModel.getToken(), "desc")
                 .enqueue(new Callback<VipDataModel>() {
                     @Override
                     public void onResponse(Call<VipDataModel> call, Response<VipDataModel> response) {
@@ -168,21 +169,21 @@ public class GoldProfileFragment extends Fragment implements Listeners.VipListen
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .payGoldAccount("Bearer "+userModel.getToken(),userModel.getId(), model.getId())
+                .payGoldAccount("Bearer " + userModel.getToken(), userModel.getId(), model.getId())
                 .enqueue(new Callback<PayModel>() {
                     @Override
                     public void onResponse(Call<PayModel> call, Response<PayModel> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             Intent intent = new Intent(activity, ViewActivity.class);
                             intent.putExtra("url", response.body().getPay_link());
-                            intent.putExtra("data",new MessageResponseModel.Data());
+                            intent.putExtra("data", new MessageResponseModel.Data());
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             launcher.launch(intent);
 
-                        }else {
+                        } else {
                             try {
-                                Log.e("error", response.code()+"__"+response.errorBody().string());
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -193,7 +194,7 @@ public class GoldProfileFragment extends Fragment implements Listeners.VipListen
                     public void onFailure(Call<PayModel> call, Throwable t) {
                         dialog.dismiss();
 
-                        Log.e("failed", t.getMessage()+"__");
+                        Log.e("failed", t.getMessage() + "__");
                     }
                 });
 

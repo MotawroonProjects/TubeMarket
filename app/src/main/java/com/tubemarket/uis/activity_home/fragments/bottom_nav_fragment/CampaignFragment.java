@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.startapp.sdk.adsbase.StartAppAd;
 import com.tubemarket.R;
 import com.tubemarket.adapters.CampaignAdapter;
 import com.tubemarket.databinding.DialogAlertBinding;
@@ -30,10 +31,6 @@ import com.tubemarket.remote.Api;
 import com.tubemarket.share.Common;
 import com.tubemarket.tags.Tags;
 import com.tubemarket.uis.activity_home.HomeActivity;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -120,7 +117,10 @@ public class CampaignFragment extends Fragment implements Listeners.CampaignList
     }
 
     private void adMob() {
-        MobileAds.initialize(activity, initializationStatus -> {
+        //StartAppAd startAppAd = new StartAppAd(activity);
+        binding.startAppBanner.loadAd();
+
+        /*MobileAds.initialize(activity, initializationStatus -> {
         });
         AdRequest adRequest = new AdRequest.Builder().build();
         binding.adView.loadAd(adRequest);
@@ -154,7 +154,7 @@ public class CampaignFragment extends Fragment implements Listeners.CampaignList
             public void onAdImpression() {
                 super.onAdImpression();
             }
-        });
+        });*/
     }
 
     private void getCampaign() {
