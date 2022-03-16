@@ -20,6 +20,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.startapp.sdk.adsbase.Ad;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.tubemarket.R;
 import com.tubemarket.adapters.CoinsAdapter;
 import com.tubemarket.databinding.FragmentBuyCoinBinding;
@@ -69,7 +72,7 @@ public class BuyCoinFragment extends Fragment implements Listeners.CoinsListener
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode()== Activity.RESULT_OK){
+                if (result.getResultCode() == Activity.RESULT_OK) {
                     activity.getUserProfile();
                 }
             }
@@ -87,8 +90,51 @@ public class BuyCoinFragment extends Fragment implements Listeners.CoinsListener
         binding.recView.setAdapter(adapter);
         activity.adMob();
 
+        adMob();
 
         getCoins();
+
+    }
+
+    private void adMob() {
+        //StartAppAd startAppAd = new StartAppAd(activity);
+        binding.startAppBanner.loadAd();
+
+        /*MobileAds.initialize(activity, initializationStatus -> {
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
+        binding.adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+            }
+        });*/
     }
 
     private void getCoins() {
@@ -132,21 +178,21 @@ public class BuyCoinFragment extends Fragment implements Listeners.CoinsListener
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .payGoldAccount("Bearer "+userModel.getToken(),userModel.getId(), coinsModel.getId())
+                .payGoldAccount("Bearer " + userModel.getToken(), userModel.getId(), coinsModel.getId())
                 .enqueue(new Callback<PayModel>() {
                     @Override
                     public void onResponse(Call<PayModel> call, Response<PayModel> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             Intent intent = new Intent(activity, ViewActivity.class);
                             intent.putExtra("url", response.body().getPay_link());
-                            intent.putExtra("data",new MessageResponseModel.Data());
+                            intent.putExtra("data", new MessageResponseModel.Data());
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             launcher.launch(intent);
 
-                        }else {
+                        } else {
                             try {
-                                Log.e("error", response.code()+"__"+response.errorBody().string());
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -157,7 +203,7 @@ public class BuyCoinFragment extends Fragment implements Listeners.CoinsListener
                     public void onFailure(Call<PayModel> call, Throwable t) {
                         dialog.dismiss();
 
-                        Log.e("failed", t.getMessage()+"__");
+                        Log.e("failed", t.getMessage() + "__");
                     }
                 });
     }

@@ -15,6 +15,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.startapp.sdk.adsbase.Ad;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.tubemarket.R;
 import com.tubemarket.adapters.WithdrawAdapter;
 import com.tubemarket.databinding.FragmentBuyCoinBinding;
@@ -103,8 +106,28 @@ public class WithdrawFragment extends Fragment implements Listeners.WithdrawList
                 closeDialog();
             }
         });
+        adMob();
+
     }
 
+    public void adMob() {
+        final StartAppAd rewardedVideo = new StartAppAd(activity);
+
+        rewardedVideo.setVideoListener(() -> {
+        });
+
+        rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+            @Override
+            public void onReceiveAd(Ad ad) {
+                rewardedVideo.showAd();
+            }
+
+            @Override
+            public void onFailedToReceiveAd(Ad ad) {
+            }
+        });
+
+    }
     private void getWithdraw() {
         binding.loader.setVisibility(View.VISIBLE);
         list.clear();

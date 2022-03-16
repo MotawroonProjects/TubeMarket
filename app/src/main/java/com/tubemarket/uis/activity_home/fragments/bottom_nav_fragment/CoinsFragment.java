@@ -18,6 +18,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.startapp.sdk.adsbase.Ad;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.tubemarket.R;
 import com.tubemarket.databinding.FragmentCampaignBinding;
 import com.tubemarket.databinding.FragmentCoinsBinding;
@@ -106,9 +109,14 @@ public class CoinsFragment extends Fragment {
 
 
         binding.cardCoupon.setOnClickListener(v -> {
-            activity.adMob();
+            adMob();
             binding.flDialog.clearAnimation();
             binding.flDialog.startAnimation(animation);
+
+        });
+        binding.cardVideo.setOnClickListener(v -> {
+            adMob();
+
 
         });
 
@@ -135,6 +143,25 @@ public class CoinsFragment extends Fragment {
             startActivity(intent);
         });
 
+
+    }
+
+    public void adMob() {
+        final StartAppAd rewardedVideo = new StartAppAd(activity);
+
+        rewardedVideo.setVideoListener(() -> {
+        });
+
+        rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+            @Override
+            public void onReceiveAd(Ad ad) {
+                rewardedVideo.showAd();
+            }
+
+            @Override
+            public void onFailedToReceiveAd(Ad ad) {
+            }
+        });
 
     }
 

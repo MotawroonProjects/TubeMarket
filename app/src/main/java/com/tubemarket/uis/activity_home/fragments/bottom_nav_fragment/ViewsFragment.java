@@ -13,6 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.startapp.sdk.adsbase.Ad;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.tubemarket.R;
 import com.tubemarket.databinding.DialogAlertBinding;
 import com.tubemarket.databinding.DialogCoinsBinding;
@@ -51,17 +54,19 @@ public class ViewsFragment extends Fragment {
     private Preferences preferences;
     private String lang = "";
     private int index = 0;
-    private int page =1;
+    private int page = 1;
     private List<MyVideosModel> list;
-    private int seconds = 0,secondsAds=0;
+    private int seconds = 0, secondsAds = 0;
     private Timer timer;
     private TimerTask timerTask;
     private YouTubePlayer youTubePlayer;
     private AbstractYouTubePlayerListener listener;
-    private String videoId="",videoIdAds="";
+    private String videoId = "", videoIdAds = "";
     private MyVideosModel myVideosModel;
     private AdsViewModel adsViewModel;
-    private int viewCount=0;
+    private int viewCount = 0;
+    private int counter = 0;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,7 +89,6 @@ public class ViewsFragment extends Fragment {
     }
 
 
-
     private void initView() {
         list = new ArrayList<>();
         activity = (HomeActivity) getActivity();
@@ -96,30 +100,34 @@ public class ViewsFragment extends Fragment {
 
 
         binding.llNext.setOnClickListener(view -> {
-            int newIndex = index+1;
+            int newIndex = index + 1;
             if (newIndex < list.size()) {
-                index +=1;
+                index += 1;
                 loadVideo(list.get(newIndex));
+                if (counter < 3) {
+                    counter++;
+                } else {
+                    adMobVideo();
+                    counter = 0;
+                }
 
+            } else {
+                int newPage = page + 1;
 
-            }else {
-                int newPage = page+1;
-
-                getVideos(newPage,newIndex);
+                getVideos(newPage, newIndex);
 
             }
 
         });
         getVideosAds();
 
-        new Handler().postDelayed(()->getVideos(1, 0), 1000);
-
+        new Handler().postDelayed(() -> getVideos(1, 0), 1000);
 
 
     }
 
     private void getVideos(int newPage, int newIndex) {
-        Log.e("ss", newIndex+"__");
+        Log.e("ss", newIndex + "__");
         binding.llNext.setVisibility(View.INVISIBLE);
         Api.getService(Tags.base_url)
                 .getViewsVideo("Bearer " + userModel.getToken(), userModel.getId(), "on", "20", "desc", newPage)
@@ -132,7 +140,14 @@ public class ViewsFragment extends Fragment {
                                 page = newPage;
                                 list.addAll(response.body().getData().getData());
                                 index = newIndex;
+                                if (counter < 3) {
+                                    counter++;
+                                } else {
+                                    adMobVideo();
+                                    counter = 0;
+                                }
                                 loadVideo(list.get(index));
+
 
                             }
                         } else {
@@ -189,20 +204,38 @@ public class ViewsFragment extends Fragment {
             }
         };
 
-        if (youTubePlayer!=null){
+        if (youTubePlayer != null) {
             listener.onReady(youTubePlayer);
-        }else {
+        } else {
             binding.youtubePlayerView.addYouTubePlayerListener(listener);
         }
 
 
+    }
 
+    private void adMobVideo() {
+        final StartAppAd rewardedVideo = new StartAppAd(activity);
+
+        rewardedVideo.setVideoListener(() -> {
+        });
+
+        rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+            @Override
+            public void onReceiveAd(Ad ad) {
+                rewardedVideo.showAd();
+            }
+
+            @Override
+            public void onFailedToReceiveAd(Ad ad) {
+            }
+        });
 
     }
 
+
     private void getVideosAds() {
         Api.getService(Tags.base_url)
-                .getAdsView("Bearer " + userModel.getToken(), userModel.getId(), "desc" )
+                .getAdsView("Bearer " + userModel.getToken(), userModel.getId(), "desc")
                 .enqueue(new Callback<AdsViewDataModel>() {
                     @Override
                     public void onResponse(Call<AdsViewDataModel> call, Response<AdsViewDataModel> response) {
@@ -231,24 +264,23 @@ public class ViewsFragment extends Fragment {
     }
 
 
-
-    private void view(){
+    private void view() {
         Api.getService(Tags.base_url)
-                .view("Bearer "+userModel.getToken(), userModel.getId(),myVideosModel.getId(),myVideosModel.getProfit_coins(), myVideosModel.getTimer_limit())
+                .view("Bearer " + userModel.getToken(), userModel.getId(), myVideosModel.getId(), myVideosModel.getProfit_coins(), myVideosModel.getTimer_limit())
                 .enqueue(new Callback<StatusResponse>() {
                     @Override
                     public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Log.e("ddd", response.body().getStatus()+"__");
+                            Log.e("ddd", response.body().getStatus() + "__");
                             if (response.body().getStatus() == 200) {
 
-                                viewCount +=1;
+                                viewCount += 1;
                                 activity.getUserProfile();
                                 createDialog(myVideosModel.getProfit_coins());
                             }
-                        }else {
+                        } else {
                             try {
-                                Log.e("resCode", response.code()+"__"+response.errorBody().string());
+                                Log.e("resCode", response.code() + "__" + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -263,21 +295,21 @@ public class ViewsFragment extends Fragment {
     }
 
     private void stopTimer() {
-        if (timer!=null&&timerTask!=null){
+        if (timer != null && timerTask != null) {
             timerTask.cancel();
             timer.cancel();
             timer.purge();
-            timer=null;
-            timerTask=null;
+            timer = null;
+            timerTask = null;
         }
 
     }
 
     private void startTime() {
-        if (seconds>0){
+        if (seconds > 0) {
             timer = new Timer();
             timerTask = new Task();
-            timer.scheduleAtFixedRate(timerTask,1000,1000);
+            timer.scheduleAtFixedRate(timerTask, 1000, 1000);
         }
 
     }
@@ -286,14 +318,14 @@ public class ViewsFragment extends Fragment {
 
         @Override
         public void run() {
-            if (seconds>0){
+            if (seconds > 0) {
                 seconds--;
-                binding.setSecond(seconds+"");
-            }else {
-                if (viewCount<3){
+                binding.setSecond(seconds + "");
+            } else {
+                if (viewCount < 3) {
                     view();
 
-                }else {
+                } else {
                     viewCount = 0;
                     activity.adMob();
                 }
@@ -303,13 +335,13 @@ public class ViewsFragment extends Fragment {
     }
 
 
-    private void createDialog (String coins){
+    private void createDialog(String coins) {
         final AlertDialog dialog = new AlertDialog.Builder(activity)
                 .create();
 
         DialogCoinsBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.dialog_coins, null, false);
 
-        binding.tvMsg.setText(coins+" "+getString(R.string.currency));
+        binding.tvMsg.setText(coins + " " + getString(R.string.currency));
         binding.cardCancel.setOnClickListener(v -> dialog.dismiss());
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.inset_dialog);
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;

@@ -16,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.startapp.sdk.adsbase.Ad;
 import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.tubemarket.R;
 import com.tubemarket.adapters.CampaignAdapter;
 import com.tubemarket.databinding.DialogAlertBinding;
@@ -71,10 +73,12 @@ public class CampaignFragment extends Fragment implements Listeners.CampaignList
         binding.recView.setAdapter(adapter);
 
         binding.rbVideo.setOnClickListener(v -> {
+            adMobVideo();
             type = 1;
         });
 
         binding.rbSubscribe.setOnClickListener(v -> {
+            adMobVideo();
             type = 2;
         });
 
@@ -156,6 +160,26 @@ public class CampaignFragment extends Fragment implements Listeners.CampaignList
             }
         });*/
     }
+
+    public void adMobVideo() {
+        final StartAppAd rewardedVideo = new StartAppAd(activity);
+
+        rewardedVideo.setVideoListener(() -> {
+        });
+
+        rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+            @Override
+            public void onReceiveAd(Ad ad) {
+                rewardedVideo.showAd();
+            }
+
+            @Override
+            public void onFailedToReceiveAd(Ad ad) {
+            }
+        });
+
+    }
+
 
     private void getCampaign() {
         binding.loader.setVisibility(View.VISIBLE);

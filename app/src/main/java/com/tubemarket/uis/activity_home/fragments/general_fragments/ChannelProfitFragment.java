@@ -97,8 +97,50 @@ public class ChannelProfitFragment extends Fragment {
             }
         });
 
-
+        adMob();
     }
+
+    private void adMob() {
+        //StartAppAd startAppAd = new StartAppAd(activity);
+        binding.startAppBanner.loadAd();
+
+        /*MobileAds.initialize(activity, initializationStatus -> {
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
+        binding.adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+            }
+        });*/
+    }
+
 
     private void addLink(String phone) {
         ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));

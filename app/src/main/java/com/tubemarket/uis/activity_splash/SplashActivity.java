@@ -34,15 +34,17 @@ public class SplashActivity extends AppCompatActivity {
     private Preferences preferences;
     private UserModel userModel;
     private String lang;
-    private final int REQ_CODE=1332;
+    private final int REQ_CODE = 1332;
+
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_splash);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         binding.setLifecycleOwner(this);
         initView();
     }
@@ -56,34 +58,33 @@ public class SplashActivity extends AppCompatActivity {
         AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
         Task<AppUpdateInfo> appUpdateInfo = appUpdateManager.getAppUpdateInfo();
         appUpdateInfo.addOnSuccessListener(info -> {
-            if (info.updateAvailability()== UpdateAvailability.UPDATE_AVAILABLE){
-                if (info.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)){
+            if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                if (info.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
                     try {
-                        appUpdateManager.startUpdateFlowForResult(info,AppUpdateType.IMMEDIATE,this,REQ_CODE);
+                        appUpdateManager.startUpdateFlowForResult(info, AppUpdateType.IMMEDIATE, this, REQ_CODE);
                     } catch (IntentSender.SendIntentException e) {
                         e.printStackTrace();
                     }
                 }
-            }else {
-                Log.e("1","1");
+            } else {
+                Log.e("1", "1");
                 navigation();
             }
         }).addOnFailureListener(e -> {
-            Log.e("2","2");
+            Log.e("2", "2");
 
             navigation();
         });
 
 
-
     }
 
-    private void navigation(){
+    private void navigation() {
         new Handler().postDelayed(() -> {
-            if (userModel==null){
+            if (userModel == null) {
                 // navigateToHomeActivity();
                 navigateToLoginActivity();
-            }else {
+            } else {
                 navigateToHomeActivity();
             }
         }, 3000);
@@ -91,22 +92,22 @@ public class SplashActivity extends AppCompatActivity {
 
     private void navigateToHomeActivity() {
         Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent );
+        startActivity(intent);
         finish();
     }
 
     private void navigateToLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent );
+        startActivity(intent);
         finish();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==REQ_CODE){
-            if (resultCode==RESULT_OK){
-                Log.e("sss","ss");
+        if (requestCode == REQ_CODE) {
+            if (resultCode == RESULT_OK) {
+                Log.e("sss", "ss");
             }
         }
     }

@@ -134,7 +134,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initView() {
         //MobileAds.initialize(this);
-        StartAppSDK.setTestAdsEnabled(false);
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         preferences = Preferences.getInstance();

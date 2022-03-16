@@ -19,6 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.startapp.sdk.adsbase.Ad;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.tubemarket.R;
 import com.tubemarket.databinding.FragmentNewAdditionBinding;
 import com.tubemarket.databinding.FragmentSubscriptionBinding;
@@ -57,6 +60,7 @@ public class SubscriptionFragment extends Fragment {
     private MyVideosModel myVideosModel;
     private ActivityResultLauncher<Intent> launcher;
     private int subsCount = 0;
+    private int counter = 0;
 
 
     @Override
@@ -118,6 +122,12 @@ public class SubscriptionFragment extends Fragment {
             int newIndex = index + 1;
             if (newIndex < list.size()) {
                 index += 1;
+                if (counter < 3) {
+                    counter++;
+                } else {
+                    adMobVideo();
+                    counter = 0;
+                }
                 loadVideo(list.get(newIndex));
 
 
@@ -155,9 +165,15 @@ public class SubscriptionFragment extends Fragment {
                                 page = newPage;
                                 list.addAll(response.body().getData().getData());
                                 index = newIndex;
+                                if (counter < 3) {
+                                    counter++;
+                                } else {
+                                    adMobVideo();
+                                    counter = 0;
+                                }
 
 
-                            }else {
+                            } else {
                                 Toast.makeText(activity, R.string.no_more_channel, Toast.LENGTH_SHORT).show();
                             }
                             loadVideo(list.get(index));
@@ -180,6 +196,25 @@ public class SubscriptionFragment extends Fragment {
 
                     }
                 });
+    }
+
+    private void adMobVideo() {
+        final StartAppAd rewardedVideo = new StartAppAd(activity);
+
+        rewardedVideo.setVideoListener(() -> {
+        });
+
+        rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+            @Override
+            public void onReceiveAd(Ad ad) {
+                rewardedVideo.showAd();
+            }
+
+            @Override
+            public void onFailedToReceiveAd(Ad ad) {
+            }
+        });
+
     }
 
     private void loadVideo(MyVideosModel myVideosModel) {
